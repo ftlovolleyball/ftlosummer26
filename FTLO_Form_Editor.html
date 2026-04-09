@@ -9,16 +9,20 @@
 :root{--teal:#1F4049;--teal-dark:#162e35;--teal-mid:#2a5566;--teal-light:#e8f0f2;--orange:#F8BA44;--orange-dark:#d99a20;--orange-light:#fff4dc;--white:#FFF9F5;--black:#222;--g100:#f5f0eb;--g200:#ede8e2;--g300:#ccc7c0;--g500:#888078;--g700:#444040;--green:#2a6a30;--green-light:#e8f5ea;--red:#c0392b;--red-light:#fdf0ee;--r:10px;--rsm:6px;--rlg:14px}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Barlow',sans-serif;background:var(--g100);color:var(--black);font-size:15px;line-height:1.6}
+
+/* LOGIN */
 .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--teal-dark)}
 .login-box{background:var(--white);border-radius:var(--rlg);padding:2.5rem 2rem;width:100%;max-width:360px;text-align:center}
 .login-logo{background:var(--orange);display:inline-block;padding:6px 16px;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:24px;color:var(--teal-dark);margin-bottom:1.25rem}
-.login-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;text-transform:uppercase;color:var(--teal);margin-bottom:0.25rem}
+.login-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;text-transform:uppercase;color:var(--teal);margin-bottom:.25rem}
 .login-sub{font-size:13px;color:var(--g500);margin-bottom:1.5rem}
-.login-input{width:100%;padding:12px 14px;font-size:16px;font-family:'Barlow',sans-serif;border:2px solid var(--g200);border-radius:var(--rsm);outline:none;text-align:center;letter-spacing:0.1em;margin-bottom:1rem;transition:border-color .15s}
+.login-input{width:100%;padding:12px 14px;font-size:16px;font-family:'Barlow',sans-serif;border:2px solid var(--g200);border-radius:var(--rsm);outline:none;text-align:center;letter-spacing:.1em;margin-bottom:1rem;transition:border-color .15s}
 .login-input:focus{border-color:var(--teal)}
-.login-btn{width:100%;padding:13px;background:var(--teal);color:var(--white);border:none;border-radius:var(--rsm);font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer}
+.login-btn{width:100%;padding:13px;background:var(--teal);color:var(--white);border:none;border-radius:var(--rsm);font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;cursor:pointer}
 .login-btn:hover{background:var(--teal-mid)}
 .login-err{font-size:13px;color:var(--red);margin-top:8px;display:none}
+
+/* APP */
 .app{display:none}
 .topbar{background:var(--teal-dark);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;gap:12px;flex-wrap:wrap}
 .tb-left{display:flex;align-items:center;gap:12px}
@@ -27,7 +31,7 @@ body{font-family:'Barlow',sans-serif;background:var(--g100);color:var(--black);f
 .tb-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .tb-status{font-size:12px;font-weight:600;padding:5px 12px;border-radius:100px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.5)}
 .tb-status.ready{background:rgba(40,160,60,.2);color:#7fd48a}
-.tb-status.changed{background:rgba(248,186,68,.15);color:var(--orange)}
+.tb-status.unsaved{background:rgba(248,186,68,.15);color:var(--orange)}
 .btn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:8px 16px;border-radius:var(--rsm);cursor:pointer;border:none;transition:all .15s;white-space:nowrap}
 .btn-teal{background:var(--teal-mid);color:var(--white);border:1px solid rgba(255,255,255,.15)}
 .btn-teal:hover{background:var(--teal)}
@@ -35,65 +39,118 @@ body{font-family:'Barlow',sans-serif;background:var(--g100);color:var(--black);f
 .btn-orange:hover{background:var(--orange-dark)}
 .btn-green{background:var(--green);color:var(--white)}
 .btn-green:hover{background:#1e5024}
-.layout{display:grid;grid-template-columns:210px 1fr;min-height:calc(100vh - 50px)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 50px)}
 .sidebar{background:var(--teal);padding:1rem 0;position:sticky;top:50px;height:calc(100vh - 50px);overflow-y:auto}
 .sb-section{padding:.5rem 1rem .2rem;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:.75rem}
 .sb-section:first-child{margin-top:0}
-.nav-item{display:flex;align-items:center;gap:8px;padding:9px 16px;cursor:pointer;transition:all .15s;border-left:3px solid transparent}
+.nav-item{display:flex;align-items:center;gap:8px;padding:10px 16px;cursor:pointer;transition:all .15s;border-left:3px solid transparent}
 .nav-item:hover{background:rgba(255,255,255,.07)}
 .nav-item.active{background:rgba(248,186,68,.1);border-left-color:var(--orange)}
-.ni-icon{width:18px;height:18px;border-radius:3px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.ni-icon{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
 .nav-item.active .ni-icon{background:var(--orange);color:var(--teal-dark)}
-.ni-label{font-size:12px;font-weight:500;color:rgba(255,255,255,.65);line-height:1.3}
+.ni-label{font-size:13px;font-weight:500;color:rgba(255,255,255,.65);line-height:1.3}
 .nav-item.active .ni-label{color:var(--orange);font-weight:600}
-.content{padding:1.75rem;overflow-y:auto;max-width:900px}
+.nav-item .ni-badge{font-size:10px;font-weight:800;background:var(--orange);color:var(--teal-dark);padding:1px 6px;border-radius:100px;margin-left:auto}
+
+/* CONTENT */
+.content{padding:1.75rem;overflow-y:auto}
 .panel{display:none}
 .panel.active{display:block;animation:fi .2s ease}
 @keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.panel-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;text-transform:uppercase;color:var(--teal);margin-bottom:.2rem}
+.panel-title{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;text-transform:uppercase;color:var(--teal);margin-bottom:.2rem}
 .panel-sub{font-size:13px;color:var(--g500);margin-bottom:1.5rem;line-height:1.5}
-.card{background:var(--white);border-radius:var(--rlg);border:1px solid var(--g200);padding:1.5rem 1.75rem;margin-bottom:1.1rem}
+
+/* CARDS */
+.card{background:var(--white);border-radius:var(--rlg);border:1px solid var(--g200);padding:1.5rem 1.75rem;margin-bottom:1.25rem}
 .card-title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin-bottom:.9rem;padding-bottom:.65rem;border-bottom:1px solid var(--g200)}
+
+/* PREVIEW BOX */
+.preview-box{background:var(--g100);border:1px solid var(--g200);border-radius:var(--rsm);padding:14px 16px;margin-bottom:1.1rem;font-size:13px;color:var(--g700)}
+.preview-box-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--g500);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.preview-box-title::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--orange)}
+
+/* QUICK DASHBOARD - SPOT CARDS */
+.spot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:1.25rem}
+.spot-card{background:var(--white);border-radius:var(--r);border:2px solid var(--g200);padding:14px 16px;transition:border-color .15s}
+.spot-card:focus-within{border-color:var(--teal)}
+.spot-card-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.spot-tag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:3px;flex-shrink:0}
+.tag-dual{background:var(--orange);color:var(--teal-dark)}
+.tag-beg{background:var(--teal);color:var(--orange)}
+.tag-int{background:#c8860a;color:#fff}
+.tag-scrim{background:#1a6a8a;color:#fff}
+.spot-card-name{font-size:13px;font-weight:600;color:var(--black);line-height:1.3}
+.spot-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.spot-input-wrap{display:flex;flex-direction:column;gap:4px}
+.spot-lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--g500)}
+.spot-num-input{padding:9px 12px;font-size:18px;font-weight:800;font-family:'Barlow Condensed',sans-serif;border:2px solid var(--g200);border-radius:var(--rsm);color:var(--teal);text-align:center;outline:none;transition:border-color .15s;width:100%}
+.spot-num-input:focus{border-color:var(--teal)}
+.spot-status-select{padding:9px 12px;font-size:14px;font-family:'Barlow',sans-serif;border:2px solid var(--g200);border-radius:var(--rsm);color:var(--black);outline:none;cursor:pointer;transition:border-color .15s;background:var(--white);width:100%}
+.spot-status-select:focus{border-color:var(--teal)}
+.spot-status-select.is-wait{border-color:#f0d080;background:var(--orange-light);color:#7a5000}
+.spot-status-select.is-full{border-color:#f0b8b0;background:var(--red-light);color:var(--red)}
+.spot-status-select.is-avail{border-color:#a8d5ac;background:var(--green-light);color:var(--green)}
+
+/* CAPACITY QUICK EDIT */
+.cap-edit{background:var(--teal);border-radius:var(--r);padding:16px 18px;margin-bottom:1.25rem}
+.cap-edit-label{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+.cap-edit textarea{width:100%;padding:11px 14px;font-size:14px;font-family:'Barlow',sans-serif;border:2px solid rgba(255,255,255,.2);border-radius:var(--rsm);background:rgba(255,255,255,.1);color:var(--white);outline:none;resize:vertical;min-height:60px;transition:border-color .15s}
+.cap-edit textarea::placeholder{color:rgba(255,255,255,.4)}
+.cap-edit textarea:focus{border-color:var(--orange)}
+
+/* FIELDS */
 .field{margin-bottom:1rem}
 .field:last-child{margin-bottom:0}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem}
 label.lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--g700);margin-bottom:5px}
-input[type=text],input[type=password],textarea,select{width:100%;padding:9px 12px;font-size:14px;font-family:'Barlow',sans-serif;border:2px solid var(--g200);border-radius:var(--rsm);background:var(--white);color:var(--black);outline:none;transition:border-color .15s}
-input:focus,textarea:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(31,64,73,.1)}
+input[type=text],input[type=password],textarea,select.sel{width:100%;padding:9px 12px;font-size:14px;font-family:'Barlow',sans-serif;border:2px solid var(--g200);border-radius:var(--rsm);background:var(--white);color:var(--black);outline:none;transition:border-color .15s}
+input:focus,textarea:focus,select.sel:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(31,64,73,.1)}
 textarea{resize:vertical;min-height:65px;line-height:1.55}
+
+/* PROG ROWS */
 .prog-row{background:var(--g100);border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px;border:1px solid var(--g200)}
-.prog-row:last-child{margin-bottom:0}
 .prog-row-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.ptag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:3px}
-.ptag-dual{background:var(--orange);color:var(--teal-dark)}
-.ptag-beg{background:var(--teal);color:var(--orange)}
-.ptag-int{background:#c8860a;color:#fff}
-.ptag-scrim{background:#1a6a8a;color:#fff}
 .prog-name-lbl{font-size:13px;font-weight:600;color:var(--g700)}
-.prog-fields{display:grid;grid-template-columns:1fr 1fr 90px 110px;gap:8px;align-items:end}
+.prog-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+/* NOTICE */
 .notice{border-radius:var(--rsm);padding:11px 14px;margin-bottom:1rem;font-size:13px;line-height:1.6;display:flex;gap:9px}
 .notice.info{background:var(--teal-light);border:1px solid #b8cdd2;color:var(--teal-dark)}
 .notice.warn{background:var(--orange-light);border:1px solid #f0d080;color:#6a4a00}
+.notice.success{background:var(--green-light);border:1px solid #a8d5ac;color:var(--green)}
+
+/* TOURNAMENT */
 .tc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .tc{border-radius:var(--r);padding:14px 16px}
 .tc-reg{background:var(--teal)}
 .tc-feat{background:rgba(248,186,68,.12);border:2px solid var(--orange)}
-.tc label{color:rgba(255,255,255,.45)}
+.tc label{color:rgba(255,255,255,.5);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:5px}
 .tc-feat label{color:var(--g700)}
-.tc input{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:var(--white)}
+.tc input{width:100%;padding:9px 12px;font-size:14px;font-family:'Barlow',sans-serif;border:2px solid rgba(255,255,255,.2);border-radius:var(--rsm);background:rgba(255,255,255,.1);color:var(--white);outline:none;margin-bottom:8px;transition:border-color .15s}
 .tc-feat input{background:var(--white);border-color:var(--g200);color:var(--black)}
-.tc input:focus{border-color:var(--orange)}
+.tc input:last-child{margin-bottom:0}
+
+/* UPLOAD */
 .upload-zone{border:2px dashed var(--g300);border-radius:var(--r);padding:2rem;text-align:center;cursor:pointer;transition:all .15s;background:var(--g100)}
 .upload-zone:hover,.upload-zone.over{border-color:var(--teal);background:var(--teal-light)}
-.uz-icon{font-size:36px;margin-bottom:10px}
-.uz-title{font-size:15px;font-weight:600;color:var(--teal);margin-bottom:4px}
-.uz-sub{font-size:13px;color:var(--g500)}
 .howto{background:var(--teal);border-radius:var(--rlg);padding:1.25rem 1.5rem;margin-bottom:1.1rem}
 .howto h3{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:.6rem}
-.howto ol{padding-left:1.25rem;color:rgba(255,255,255,.75);font-size:13px;line-height:1.8}
+.howto ol{padding-left:1.25rem;color:rgba(255,255,255,.75);font-size:13px;line-height:1.9}
 .howto code{background:rgba(255,255,255,.15);padding:2px 7px;border-radius:3px;font-size:12px;color:var(--orange)}
-@media(max-width:640px){.layout{grid-template-columns:1fr}.sidebar{position:relative;height:auto;display:flex;flex-wrap:wrap;padding:.5rem}.nav-item{border-radius:6px;border-left:none;padding:6px 10px}.prog-fields{grid-template-columns:1fr 1fr}.grid2,.grid3,.tc-grid{grid-template-columns:1fr}}
+
+@media(max-width:640px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:relative;height:auto;display:flex;flex-wrap:wrap;padding:.5rem}
+  .nav-item{border-radius:6px;border-left:none;padding:7px 10px;flex-shrink:0}
+  .nav-item.active{border-bottom:2px solid var(--orange)}
+  .spot-grid{grid-template-columns:1fr}
+  .prog-fields,.grid2,.grid3,.tc-grid{grid-template-columns:1fr}
+  .content{padding:1rem}
+}
 </style>
 </head>
 <body>
@@ -118,7 +175,7 @@ textarea{resize:vertical;min-height:65px;line-height:1.55}
   <div class="tb-right">
     <span class="tb-status" id="tbStatus">No file loaded</span>
     <button class="btn btn-teal" onclick="document.getElementById('fi').click()">&#8593; Load Form</button>
-    <button class="btn btn-orange" onclick="applyAll()" id="applyBtn" disabled>&#10003; Apply</button>
+    <button class="btn btn-orange" onclick="applyAll()" id="applyBtn" disabled>&#10003; Apply Changes</button>
     <button class="btn btn-green" onclick="downloadForm()" id="dlBtn" disabled>&#8595; Download</button>
   </div>
 </div>
@@ -128,21 +185,35 @@ textarea{resize:vertical;min-height:65px;line-height:1.55}
 <nav class="sidebar">
   <div class="sb-section">Start</div>
   <div class="nav-item active" onclick="go('p-start',this)"><div class="ni-icon">&#9654;</div><div class="ni-label">Getting Started</div></div>
-  <div class="sb-section">Hero</div>
-  <div class="nav-item" onclick="go('p-hero',this)"><div class="ni-icon">&#9733;</div><div class="ni-label">Tag, Title &amp; Description</div></div>
+
+  <div class="sb-section">Most Used</div>
+  <div class="nav-item" onclick="go('p-spots',this)">
+    <div class="ni-icon" style="background:var(--orange);color:var(--teal-dark);">&#9679;</div>
+    <div class="ni-label">Spot Counts &amp; Waitlist</div>
+    <span class="ni-badge">&#9733;</span>
+  </div>
+  <div class="nav-item" onclick="go('p-capacity',this)">
+    <div class="ni-icon" style="background:var(--orange);color:var(--teal-dark);">!</div>
+    <div class="ni-label">Capacity Update</div>
+    <span class="ni-badge">&#9733;</span>
+  </div>
+
+  <div class="sb-section">Hero &amp; Page</div>
+  <div class="nav-item" onclick="go('p-hero',this)"><div class="ni-icon">&#9733;</div><div class="ni-label">Title &amp; Description</div></div>
   <div class="nav-item" onclick="go('p-stats',this)"><div class="ni-icon">&#35;</div><div class="ni-label">Stats Bar</div></div>
-  <div class="sb-section">Notices</div>
   <div class="nav-item" onclick="go('p-notice',this)"><div class="ni-icon">&#9432;</div><div class="ni-label">Top Notice</div></div>
-  <div class="nav-item" onclick="go('p-capacity',this)"><div class="ni-icon">&#9888;</div><div class="ni-label">Capacity Update</div></div>
   <div class="nav-item" onclick="go('p-locations',this)"><div class="ni-icon">&#128205;</div><div class="ni-label">Locations</div></div>
+
   <div class="sb-section">Programs</div>
   <div class="nav-item" onclick="go('p-dual',this)"><div class="ni-icon">2x</div><div class="ni-label">Dual Clinic Special</div></div>
   <div class="nav-item" onclick="go('p-beg',this)"><div class="ni-icon">B</div><div class="ni-label">Beginner Clinics</div></div>
   <div class="nav-item" onclick="go('p-int',this)"><div class="ni-icon">I</div><div class="ni-label">Intermediate Clinics</div></div>
   <div class="nav-item" onclick="go('p-scrim',this)"><div class="ni-icon">S</div><div class="ni-label">Scrimmage Night</div></div>
-  <div class="sb-section">Payment</div>
-  <div class="nav-item" onclick="go('p-etransfer',this)"><div class="ni-icon">$</div><div class="ni-label">E-Transfer Instructions</div></div>
+
+  <div class="sb-section">Payment &amp; Contact</div>
+  <div class="nav-item" onclick="go('p-etransfer',this)"><div class="ni-icon">$</div><div class="ni-label">E-Transfer Steps</div></div>
   <div class="nav-item" onclick="go('p-emails',this)"><div class="ni-icon">@</div><div class="ni-label">Email Addresses</div></div>
+
   <div class="sb-section">Thank You Page</div>
   <div class="nav-item" onclick="go('p-success',this)"><div class="ni-icon">&#10003;</div><div class="ni-label">Success Message</div></div>
   <div class="nav-item" onclick="go('p-tournaments',this)"><div class="ni-icon">&#127944;</div><div class="ni-label">Tournament Dates</div></div>
@@ -150,181 +221,238 @@ textarea{resize:vertical;min-height:65px;line-height:1.55}
 
 <main class="content">
 
+<!-- GETTING STARTED -->
 <div class="panel active" id="p-start">
   <div class="panel-title">Getting Started</div>
-  <div class="panel-sub">Edit every text field in your FTLO registration form — no code required. Access this from any device via GitHub.</div>
+  <div class="panel-sub">Edit your FTLO registration form from any device — no code required.</div>
   <div class="howto">
-    <h3>How to use</h3>
+    <h3>How to use this editor</h3>
     <ol>
       <li>Click <code>Load Form</code> in the top bar and select your <code>index.html</code></li>
-      <li>Use the left menu to navigate to any section</li>
-      <li>Make your edits — every field updates automatically</li>
-      <li>Click <code>Apply</code> then <code>Download</code> to save a new <code>index.html</code></li>
-      <li>Upload to GitHub — live in 1–2 minutes</li>
+      <li>Use the left menu — starred sections are the ones you update most often</li>
+      <li>Make your edits. The preview shows you exactly what registrants see</li>
+      <li>Click <code>Apply Changes</code> then <code>Download</code></li>
+      <li>Upload the downloaded <code>index.html</code> to GitHub — live in 1–2 minutes</li>
     </ol>
   </div>
   <div class="card">
-    <div class="card-title">Load Your Form</div>
+    <div class="card-title">Load Your Form File</div>
     <div class="upload-zone" id="uz" onclick="document.getElementById('fi').click()" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="dropFile(event)">
-      <div class="uz-icon">&#128196;</div>
-      <div class="uz-title">Click here or drag your index.html file</div>
-      <div class="uz-sub">Your file stays on your device — nothing is uploaded anywhere</div>
+      <div style="font-size:36px;margin-bottom:10px;">&#128196;</div>
+      <div style="font-size:15px;font-weight:600;color:var(--teal);margin-bottom:4px;">Click here or drag your index.html file</div>
+      <div style="font-size:13px;color:var(--g500);">Your file stays on your device — nothing is uploaded anywhere</div>
     </div>
   </div>
-  <div class="notice info"><span>&#9432;</span><div>Password: <strong>ftlo2026</strong> — Change it anytime by opening this file in Notepad and searching for <code>ftlo2026</code>.</div></div>
+  <div class="notice info"><span>&#9432;</span><div>Password: <strong>ftlo2026</strong>. Change it anytime by opening this file in Notepad and searching for <code>ftlo2026</code>.</div></div>
 </div>
 
-<div class="panel" id="p-hero">
-  <div class="panel-title">Tag, Title &amp; Description</div>
-  <div class="panel-sub">The eyebrow tag, main headline, and description paragraph in the teal hero section.</div>
+<!-- ★ SPOT COUNTS (MOST USED) -->
+<div class="panel" id="p-spots">
+  <div class="panel-title">&#9733; Spot Counts &amp; Waitlist</div>
+  <div class="panel-sub">The most frequently updated section. Change how many spots remain for any program, or flip a program to Waitlist or Full.</div>
+
+  <div class="preview-box">
+    <div class="preview-box-title">What registrants see on the form</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;" id="spot-preview-badges"></div>
+  </div>
+
+  <div id="spot-grid" class="spot-grid"></div>
+
+  <div class="notice info"><span>&#9432;</span><div>After making changes here, click <strong>Apply Changes</strong> then <strong>Download</strong> at the top. Upload to GitHub to go live.</div></div>
+</div>
+
+<!-- ★ CAPACITY UPDATE (MOST USED) -->
+<div class="panel" id="p-capacity">
+  <div class="panel-title">&#9733; Capacity Update</div>
+  <div class="panel-sub">The notice shown at the top of the Programs section. Update this every time spots change significantly.</div>
+
+  <div class="preview-box">
+    <div class="preview-box-title">What registrants see on the form</div>
+    <div id="cap-preview" style="font-size:13px;color:var(--teal-dark);line-height:1.6;padding:8px 10px;background:var(--teal-light);border:1px solid #b8cdd2;border-radius:6px;"></div>
+  </div>
+
+  <div class="cap-edit">
+    <div class="cap-edit-label">Edit Capacity Notice</div>
+    <textarea id="e-capacity" rows="2" placeholder="e.g. Capacity Update — April 7: All spots available." oninput="updateCapPreview()"></textarea>
+  </div>
+
   <div class="card">
-    <div class="card-title">Hero Content</div>
-    <div class="field"><label class="lbl">Season Tag (small text above title)</label><input type="text" id="e-eyebrow" /></div>
-    <div class="field"><label class="lbl">Title Line 1</label><input type="text" id="e-title1" /></div>
-    <div class="field"><label class="lbl">Title Line 2 (orange highlight)</label><input type="text" id="e-title2" /></div>
-    <div class="field"><label class="lbl">Description Paragraph</label><textarea id="e-herodesc" rows="3"></textarea></div>
+    <div class="card-title">Skill Level Reminder</div>
+    <div class="field"><label class="lbl">Text shown below capacity update</label><textarea id="e-skillavail" rows="3"></textarea></div>
   </div>
 </div>
 
+<!-- HERO -->
+<div class="panel" id="p-hero">
+  <div class="panel-title">Title &amp; Description</div>
+  <div class="panel-sub">The eyebrow tag, main headline, and description in the teal hero section at the top of the form.</div>
+  <div class="preview-box">
+    <div class="preview-box-title">What registrants see</div>
+    <div style="background:var(--teal);border-radius:8px;padding:16px 20px;">
+      <div id="prev-eyebrow" style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;"></div>
+      <div id="prev-title" style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;color:var(--white);line-height:1.1;margin-bottom:8px;"></div>
+      <div id="prev-desc" style="font-size:13px;color:rgba(255,249,245,0.7);line-height:1.6;"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Hero Content</div>
+    <div class="field"><label class="lbl">Season Tag (small text above title)</label><input type="text" id="e-eyebrow" oninput="updateHeroPreview()" /></div>
+    <div class="field"><label class="lbl">Title Line 1</label><input type="text" id="e-title1" oninput="updateHeroPreview()" /></div>
+    <div class="field"><label class="lbl">Title Line 2 (shown in orange)</label><input type="text" id="e-title2" oninput="updateHeroPreview()" /></div>
+    <div class="field"><label class="lbl">Description Paragraph</label><textarea id="e-herodesc" rows="3" oninput="updateHeroPreview()"></textarea></div>
+  </div>
+</div>
+
+<!-- STATS -->
 <div class="panel" id="p-stats">
   <div class="panel-title">Stats Bar</div>
-  <div class="panel-sub">The 5 numbers shown below the banner image.</div>
+  <div class="panel-sub">The 5 numbers shown below the banner image at the top.</div>
+  <div class="preview-box">
+    <div class="preview-box-title">What registrants see</div>
+    <div style="background:var(--teal);border-radius:8px;padding:14px 18px;display:flex;gap:24px;flex-wrap:wrap;">
+      <div><div id="pv-weeks" style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;color:var(--orange);"></div><div style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;">Weeks</div></div>
+      <div><div id="pv-progs" style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;color:var(--orange);"></div><div style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;">Programs</div></div>
+      <div><div id="pv-time" style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;color:var(--orange);"></div><div style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;">Start Time</div></div>
+      <div><div id="pv-from" style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;color:var(--orange);"></div><div style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;">From</div></div>
+      <div><div id="pv-tshirt" style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;color:var(--orange);"></div><div style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;">T-Shirt Incl.</div></div>
+    </div>
+  </div>
   <div class="card">
     <div class="card-title">Stats</div>
     <div class="grid3">
-      <div class="field"><label class="lbl">Weeks</label><input type="text" id="e-weeks" /></div>
-      <div class="field"><label class="lbl">Programs</label><input type="text" id="e-progs" /></div>
-      <div class="field"><label class="lbl">Start Time</label><input type="text" id="e-time" /></div>
-      <div class="field"><label class="lbl">Starting Price</label><input type="text" id="e-from" /></div>
-      <div class="field"><label class="lbl">T-Shirt Value ($)</label><input type="text" id="e-tshirtval" /></div>
+      <div class="field"><label class="lbl">Weeks</label><input type="text" id="e-weeks" oninput="updateStatsPreview()" /></div>
+      <div class="field"><label class="lbl">Programs</label><input type="text" id="e-progs" oninput="updateStatsPreview()" /></div>
+      <div class="field"><label class="lbl">Start Time</label><input type="text" id="e-time" oninput="updateStatsPreview()" /></div>
+      <div class="field"><label class="lbl">Starting Price</label><input type="text" id="e-from" oninput="updateStatsPreview()" /></div>
+      <div class="field"><label class="lbl">T-Shirt Value ($)</label><input type="text" id="e-tshirtval" oninput="updateStatsPreview()" /></div>
     </div>
   </div>
 </div>
 
+<!-- TOP NOTICE -->
 <div class="panel" id="p-notice">
   <div class="panel-title">Top Notice</div>
-  <div class="panel-sub">The info box shown at the top of the Contact section (Section 1).</div>
+  <div class="panel-sub">The info box shown at the top of the Contact section.</div>
+  <div class="preview-box">
+    <div class="preview-box-title">What registrants see</div>
+    <div style="background:var(--teal-light);border:1px solid #b8cdd2;border-radius:6px;padding:11px 14px;font-size:13px;color:var(--teal-dark);line-height:1.6;">
+      <strong id="pv-n1bold"></strong><span id="pv-n1rest"></span>
+    </div>
+  </div>
   <div class="card">
-    <div class="card-title">Spots Limited Notice</div>
-    <div class="field"><label class="lbl">Bold Opening Line</label><input type="text" id="e-n1bold" /></div>
-    <div class="field"><label class="lbl">Rest of Notice Text</label><textarea id="e-n1rest" rows="2"></textarea></div>
+    <div class="card-title">Notice Text</div>
+    <div class="field"><label class="lbl">Bold Opening Line</label><input type="text" id="e-n1bold" oninput="document.getElementById('pv-n1bold').textContent=this.value" /></div>
+    <div class="field"><label class="lbl">Rest of Text</label><textarea id="e-n1rest" rows="2" oninput="document.getElementById('pv-n1rest').textContent=' '+this.value"></textarea></div>
   </div>
 </div>
 
-<div class="panel" id="p-capacity">
-  <div class="panel-title">Capacity Update</div>
-  <div class="panel-sub">Update this whenever spot availability changes. Shown at the top of Section 2 (Programs).</div>
-  <div class="card">
-    <div class="card-title">Capacity Notice</div>
-    <div class="field"><label class="lbl">Capacity Update Message</label><textarea id="e-capacity" rows="2"></textarea></div>
-    <div class="field"><label class="lbl">Skill Level Reminder (below capacity)</label><textarea id="e-skillavail" rows="3"></textarea></div>
-  </div>
-  <div class="notice warn"><span>&#9888;</span><div>This is the most frequently updated section. Change it every time spots fill up or open.</div></div>
-</div>
-
+<!-- LOCATIONS -->
 <div class="panel" id="p-locations">
   <div class="panel-title">Training Locations</div>
   <div class="panel-sub">The 3 outdoor field locations shown in the Programs section.</div>
+  <div class="preview-box">
+    <div class="preview-box-title">What registrants see</div>
+    <div style="font-size:14px;color:var(--teal-dark);line-height:2;">
+      <div>&#128205; <span id="pv-loc1" style="font-weight:600;"></span></div>
+      <div>&#128205; <span id="pv-loc2" style="font-weight:600;"></span></div>
+      <div>&#128205; <span id="pv-loc3" style="font-weight:600;"></span></div>
+    </div>
+  </div>
   <div class="card">
     <div class="card-title">Locations</div>
-    <div class="field"><label class="lbl">Location 1 (with days)</label><input type="text" id="e-loc1" /></div>
-    <div class="field"><label class="lbl">Location 2 (with days)</label><input type="text" id="e-loc2" /></div>
-    <div class="field"><label class="lbl">Location 3 (with days)</label><input type="text" id="e-loc3" /></div>
+    <div class="field"><label class="lbl">Location 1</label><input type="text" id="e-loc1" oninput="document.getElementById('pv-loc1').textContent=this.value" /></div>
+    <div class="field"><label class="lbl">Location 2</label><input type="text" id="e-loc2" oninput="document.getElementById('pv-loc2').textContent=this.value" /></div>
+    <div class="field"><label class="lbl">Location 3</label><input type="text" id="e-loc3" oninput="document.getElementById('pv-loc3').textContent=this.value" /></div>
   </div>
 </div>
 
+<!-- DUAL PROGRAMS -->
 <div class="panel" id="p-dual">
   <div class="panel-title">Dual Clinic Special</div>
-  <div class="panel-sub">The 3 two-day combo deals. Update titles, dates, spot counts and status.</div>
+  <div class="panel-sub">The 3 two-day combo deals. Edit titles, dates, spot counts and status here (or use the quick Spot Counts page).</div>
   <div class="card">
     <div class="card-title">Accordion Description</div>
-    <div class="field"><label class="lbl">Description shown before expanding</label><textarea id="e-dual-desc" rows="2"></textarea></div>
+    <div class="field"><label class="lbl">Description shown before opening</label><textarea id="e-dual-desc" rows="2"></textarea></div>
   </div>
-  <div class="card">
-    <div class="card-title">Program Cards</div>
-    <div id="dual-cards"></div>
-  </div>
+  <div class="card"><div class="card-title">Program Cards</div><div id="dual-cards"></div></div>
 </div>
 
+<!-- BEGINNER -->
 <div class="panel" id="p-beg">
   <div class="panel-title">Beginner Clinics</div>
   <div class="panel-sub">4 individual Beginner Train &amp; Play programs.</div>
   <div class="card">
     <div class="card-title">Accordion Description</div>
-    <div class="field"><label class="lbl">Description shown before expanding</label><textarea id="e-beg-desc" rows="2"></textarea></div>
+    <div class="field"><label class="lbl">Description shown before opening</label><textarea id="e-beg-desc" rows="2"></textarea></div>
   </div>
-  <div class="card">
-    <div class="card-title">Program Cards</div>
-    <div id="beg-cards"></div>
-  </div>
+  <div class="card"><div class="card-title">Program Cards</div><div id="beg-cards"></div></div>
 </div>
 
+<!-- INTERMEDIATE -->
 <div class="panel" id="p-int">
   <div class="panel-title">Intermediate Clinics</div>
   <div class="panel-sub">3 Intermediate Train &amp; Play programs.</div>
   <div class="card">
     <div class="card-title">Accordion Description</div>
-    <div class="field"><label class="lbl">Description shown before expanding</label><textarea id="e-int-desc" rows="2"></textarea></div>
+    <div class="field"><label class="lbl">Description shown before opening</label><textarea id="e-int-desc" rows="2"></textarea></div>
   </div>
-  <div class="card">
-    <div class="card-title">Program Cards</div>
-    <div id="int-cards"></div>
-  </div>
+  <div class="card"><div class="card-title">Program Cards</div><div id="int-cards"></div></div>
 </div>
 
+<!-- SCRIMMAGE -->
 <div class="panel" id="p-scrim">
   <div class="panel-title">Scrimmage Night</div>
   <div class="panel-sub">Friday scrimmage program.</div>
   <div class="card">
     <div class="card-title">Accordion Description</div>
-    <div class="field"><label class="lbl">Description shown before expanding</label><textarea id="e-scrim-desc" rows="2"></textarea></div>
+    <div class="field"><label class="lbl">Description shown before opening</label><textarea id="e-scrim-desc" rows="2"></textarea></div>
   </div>
-  <div class="card">
-    <div class="card-title">Program Card</div>
-    <div id="scrim-cards"></div>
-  </div>
+  <div class="card"><div class="card-title">Program Card</div><div id="scrim-cards"></div></div>
 </div>
 
+<!-- ETRANSFER -->
 <div class="panel" id="p-etransfer">
-  <div class="panel-title">E-Transfer Instructions</div>
-  <div class="panel-sub">Payment steps shown in Section 4.</div>
+  <div class="panel-title">E-Transfer Steps</div>
+  <div class="panel-sub">The numbered payment instructions shown in Section 4.</div>
   <div class="card">
-    <div class="card-title">Payment Instructions</div>
-    <div class="field"><label class="lbl">Instruction 1</label><textarea id="e-et1" rows="2"></textarea></div>
-    <div class="field"><label class="lbl">Instruction 2 (comment format)</label><textarea id="e-et2" rows="2"></textarea></div>
-    <div class="field"><label class="lbl">Instruction 3</label><textarea id="e-et3" rows="2"></textarea></div>
-    <div class="field"><label class="lbl">Instruction 4</label><textarea id="e-et4" rows="2"></textarea></div>
-    <div class="field"><label class="lbl">Instruction 5</label><textarea id="e-et5" rows="2"></textarea></div>
+    <div class="card-title">Instructions</div>
+    <div class="field"><label class="lbl">Step 1</label><textarea id="e-et1" rows="2"></textarea></div>
+    <div class="field"><label class="lbl">Step 2 (comment format)</label><textarea id="e-et2" rows="2"></textarea></div>
+    <div class="field"><label class="lbl">Step 3</label><textarea id="e-et3" rows="2"></textarea></div>
+    <div class="field"><label class="lbl">Step 4</label><textarea id="e-et4" rows="2"></textarea></div>
+    <div class="field"><label class="lbl">Step 5</label><textarea id="e-et5" rows="2"></textarea></div>
   </div>
   <div class="card">
-    <div class="card-title">Waitlist Warning</div>
+    <div class="card-title">Waitlist Warning &amp; Timing</div>
     <div class="field"><label class="lbl">Waitlist Warning Text</label><textarea id="e-et-wait" rows="2"></textarea></div>
     <div class="field"><label class="lbl">Confirmation Timing Note</label><textarea id="e-et-timing" rows="2"></textarea></div>
   </div>
 </div>
 
+<!-- EMAILS -->
 <div class="panel" id="p-emails">
   <div class="panel-title">Email Addresses</div>
-  <div class="panel-sub">All FTLO emails shown to registrants.</div>
+  <div class="panel-sub">All FTLO emails shown to registrants on the form.</div>
   <div class="card">
     <div class="card-title">Email Addresses</div>
     <div class="field"><label class="lbl">E-Transfer Payment (reports@)</label><input type="text" id="e-em-reports" /></div>
     <div class="field"><label class="lbl">Screenshot / Operations (operations@)</label><input type="text" id="e-em-ops" /></div>
     <div class="field"><label class="lbl">General Inquiries (info@)</label><input type="text" id="e-em-info" /></div>
   </div>
-  <div class="notice warn"><span>&#9888;</span><div>Changing emails here updates what registrants see on the form. To change where notification emails are <strong>sent</strong>, you must also update the Apps Script.</div></div>
+  <div class="notice warn"><span>&#9888;</span><div>Changing emails here updates what registrants see. To change where notification emails are <strong>sent</strong>, you also need to update the Apps Script.</div></div>
 </div>
 
+<!-- SUCCESS -->
 <div class="panel" id="p-success">
   <div class="panel-title">Thank You Page</div>
-  <div class="panel-sub">What registrants see after submitting.</div>
+  <div class="panel-sub">What registrants see after submitting the form.</div>
   <div class="card">
     <div class="card-title">Success Message</div>
     <div class="field"><label class="lbl">Main Heading</label><input type="text" id="e-suc-h2" /></div>
     <div class="field"><label class="lbl">Confirmation Line (above email display)</label><textarea id="e-suc-p1" rows="2"></textarea></div>
   </div>
   <div class="card">
-    <div class="card-title">Next Steps (teal box)</div>
+    <div class="card-title">Next Steps (teal box — 4 steps)</div>
     <div class="field"><label class="lbl">Step 1</label><textarea id="e-suc-s1" rows="2"></textarea></div>
     <div class="field"><label class="lbl">Step 2</label><textarea id="e-suc-s2" rows="2"></textarea></div>
     <div class="field"><label class="lbl">Step 3</label><textarea id="e-suc-s3" rows="2"></textarea></div>
@@ -332,24 +460,58 @@ textarea{resize:vertical;min-height:65px;line-height:1.55}
   </div>
 </div>
 
+<!-- TOURNAMENTS -->
 <div class="panel" id="p-tournaments">
   <div class="panel-title">Tournament Dates</div>
-  <div class="panel-sub">Save the Dates shown on the thank you page.</div>
+  <div class="panel-sub">Save the Dates on the thank you page.</div>
+  <div class="preview-box">
+    <div class="preview-box-title">What registrants see</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div style="background:rgba(31,64,73,0.9);border-radius:8px;padding:12px 14px;">
+        <div id="pv-t0-label" style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:4px;"></div>
+        <div id="pv-t0-date" style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:#fff;"></div>
+      </div>
+      <div style="background:rgba(31,64,73,0.9);border-radius:8px;padding:12px 14px;">
+        <div id="pv-t1-label" style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:4px;"></div>
+        <div id="pv-t1-date" style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:#fff;"></div>
+      </div>
+      <div style="background:rgba(248,186,68,0.15);border:2px solid var(--orange);border-radius:8px;padding:12px 14px;">
+        <div id="pv-t2-label" style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:4px;"></div>
+        <div id="pv-t2-date" style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:var(--black);"></div>
+      </div>
+      <div style="background:rgba(31,64,73,0.9);border-radius:8px;padding:12px 14px;">
+        <div id="pv-t3-label" style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:4px;"></div>
+        <div id="pv-t3-date" style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:#fff;"></div>
+      </div>
+    </div>
+  </div>
   <div class="card">
     <div class="card-title">Header</div>
     <div class="grid2">
-      <div class="field"><label class="lbl">Section Title</label><input type="text" id="e-t-title" /></div>
-      <div class="field"><label class="lbl">Subtitle (Saturdays line)</label><input type="text" id="e-t-sub" /></div>
+      <div class="field"><label class="lbl">Title</label><input type="text" id="e-t-title" /></div>
+      <div class="field"><label class="lbl">Subtitle</label><input type="text" id="e-t-sub" /></div>
     </div>
     <div class="field"><label class="lbl">Call to Action</label><input type="text" id="e-t-cta" /></div>
   </div>
   <div class="card">
     <div class="card-title">Tournament Cards</div>
     <div class="tc-grid">
-      <div class="tc tc-reg"><div class="field"><label>Label</label><input type="text" id="e-t0-label" /></div><div class="field"><label>Date</label><input type="text" id="e-t0-date" /></div></div>
-      <div class="tc tc-reg"><div class="field"><label>Label</label><input type="text" id="e-t1-label" /></div><div class="field"><label>Date</label><input type="text" id="e-t1-date" /></div></div>
-      <div class="tc tc-feat"><div class="field"><label>Label</label><input type="text" id="e-t2-label" /></div><div class="field"><label>Date</label><input type="text" id="e-t2-date" /></div></div>
-      <div class="tc tc-reg"><div class="field"><label>Label</label><input type="text" id="e-t3-label" /></div><div class="field"><label>Date</label><input type="text" id="e-t3-date" /></div></div>
+      <div class="tc tc-reg">
+        <label>Pre-Season Label</label><input type="text" id="e-t0-label" oninput="syncTournPreview()" />
+        <label>Date</label><input type="text" id="e-t0-date" oninput="syncTournPreview()" />
+      </div>
+      <div class="tc tc-reg">
+        <label>Mid-Season Label</label><input type="text" id="e-t1-label" oninput="syncTournPreview()" />
+        <label>Date</label><input type="text" id="e-t1-date" oninput="syncTournPreview()" />
+      </div>
+      <div class="tc tc-feat">
+        <label class="lbl">Exclusive Label</label><input type="text" id="e-t2-label" oninput="syncTournPreview()" />
+        <label class="lbl">Date</label><input type="text" id="e-t2-date" oninput="syncTournPreview()" />
+      </div>
+      <div class="tc tc-reg">
+        <label>End-Season Label</label><input type="text" id="e-t3-label" oninput="syncTournPreview()" />
+        <label>Date</label><input type="text" id="e-t3-date" oninput="syncTournPreview()" />
+      </div>
     </div>
   </div>
 </div>
@@ -359,9 +521,10 @@ textarea{resize:vertical;min-height:65px;line-height:1.55}
 </div>
 
 <script>
-var PW = 'ftlo2026';
-var html = '';
-var loaded = false;
+var PW='ftlo2026';
+var html='';
+var loaded=false;
+var progData=[];
 
 function checkPw(){
   if(document.getElementById('pwInput').value===PW){
@@ -378,17 +541,13 @@ function go(id,el){
   document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
   document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active')});
   document.getElementById(id).classList.add('active');
-  if(el) el.classList.add('active');
+  if(el)el.classList.add('active');
 }
 
-function dropFile(e){
-  e.preventDefault();
-  document.getElementById('uz').classList.remove('over');
-  var f=e.dataTransfer.files[0];
-  if(f) readFile(f);
-}
+function dropFile(e){e.preventDefault();document.getElementById('uz').classList.remove('over');readFile(e.dataTransfer.files[0]);}
 function loadFile(ev){readFile(ev.target.files[0]);}
 function readFile(f){
+  if(!f)return;
   var r=new FileReader();
   r.onload=function(e){
     html=e.target.result;
@@ -396,46 +555,55 @@ function readFile(f){
     populate();
     document.getElementById('applyBtn').disabled=false;
     document.getElementById('dlBtn').disabled=false;
-    setStatus('Loaded — edit anything then download','ready');
+    setStatus('Loaded — edit and download','ready');
   };
   r.readAsText(f);
 }
 
-function esc(s){return (s||'').replace(/&amp;/g,'&').replace(/&mdash;/g,'—').replace(/&ndash;/g,'–').replace(/&middot;/g,'·').replace(/&bull;/g,'•').replace(/&nbsp;/g,' ').replace(/&#10003;/g,'✓').replace(/&lt;/g,'<').replace(/&gt;/g,'>');}
+function esc(s){return(s||'').replace(/&amp;/g,'&').replace(/&mdash;/g,'—').replace(/&ndash;/g,'–').replace(/&middot;/g,'·').replace(/&bull;/g,'•').replace(/&nbsp;/g,' ').replace(/&#10003;/g,'✓').replace(/&lt;/g,'<').replace(/&gt;/g,'>');}
 function sv(id,val){var el=document.getElementById(id);if(el)el.value=val?esc(val):'';}
 function gv(id){var el=document.getElementById(id);return el?el.value.trim():'';}
+function st(id,val){var el=document.getElementById(id);if(el)el.textContent=val?esc(val):'';}
 
 function populate(){
-  var c=html, m;
+  var c=html,m;
 
   // Hero
-  m=c.match(/class="hero-eyebrow">([^<]+)</);if(m)sv('e-eyebrow',m[1]);
-  m=c.match(/<span>([^<]+)<\/span>\s*<\/h1>/);if(m)sv('e-title2',m[1]);
-  sv('e-title1','Summer Program');
-  m=c.match(/rgba\(255,249,245,0\.65\)[^>]+>\s*([^<]+)\s*</);if(m)sv('e-herodesc',m[1].trim());
+  m=c.match(/class="hero-eyebrow">([^<]+)</);if(m){sv('e-eyebrow',m[1]);st('prev-eyebrow',m[1]);}
+  m=c.match(/<span>([^<]+)<\/span>\s*<\/h1>/);if(m){sv('e-title2',m[1]);sv('e-title1','Summer Program');}
+  m=c.match(/rgba\(255,249,245,0\.65\)[^>]+>\s*([^<]+)\s*</);
+  if(m){sv('e-herodesc',m[1].trim());st('prev-desc',m[1].trim());}
+  updateHeroPreview();
 
   // Stats
   var sn=c.match(/class="stat-num"[^>]*>([^<]+)</g)||[];
-  var vals=sn.map(function(x){return esc(x.replace(/class="stat-num"[^>]*>/,'').replace(/<span[^>]*>[^<]*<\/span>/,'').trim())});
-  if(vals[0])sv('e-weeks',vals[0]);
-  if(vals[1])sv('e-progs',vals[1]);
-  if(vals[2])sv('e-time',vals[2]);
-  if(vals[3])sv('e-from',vals[3]);
+  var sv2=sn.map(function(x){return esc(x.replace(/class="stat-num"[^>]*>/,'').replace(/<[^>]+>/g,'').trim())});
+  if(sv2[0])sv('e-weeks',sv2[0]);
+  if(sv2[1])sv('e-progs',sv2[1]);
+  if(sv2[2])sv('e-time',sv2[2]);
+  if(sv2[3])sv('e-from',sv2[3]);
   m=c.match(/\$(\d+) and GST/)||c.match(/shirt valued at \$(\d+)/);if(m)sv('e-tshirtval',m[1]);
+  updateStatsPreview();
 
   // Notice
-  m=c.match(/<strong>([^<]+)<\/strong>([^<]*Registration fills[^<]*)/i);
-  if(m){sv('e-n1bold',m[1]);sv('e-n1rest',m[2].trim());}
+  m=c.match(/<strong>([^<]+)<\/strong>([^<]*Registration[^<]*)/i);
+  if(m){
+    sv('e-n1bold',m[1]);sv('e-n1rest',m[2].trim());
+    st('pv-n1bold',m[1]);st('pv-n1rest',' '+esc(m[2].trim()));
+  }
 
   // Capacity
-  m=c.match(/Capacity Update[^<]{0,300}/);if(m)sv('e-capacity',m[0]);
+  m=c.match(/Capacity Update[^<]{0,300}/);
+  if(m){sv('e-capacity',m[0]);document.getElementById('cap-preview').textContent=esc(m[0]);}
   m=c.match(/FTLOers are encouraged to train[^<]{0,400}/);if(m)sv('e-skillavail',m[0].trim());
 
   // Locations
   var locs=c.match(/&#128205;[^<]{0,200}/g)||[];
-  locs.forEach(function(l,i){if(i<3)sv('e-loc'+(i+1),l.replace('&#128205;','').trim());});
+  locs.forEach(function(l,i){
+    if(i<3){var v=esc(l.replace('&#128205;','').trim());sv('e-loc'+(i+1),v);st('pv-loc'+(i+1),v);}
+  });
 
-  // Accordion descriptions
+  // Accordion descs
   var descs=c.match(/class="acc-subdesc">([^<]+)</g)||[];
   descs=descs.map(function(x){return esc(x.replace('class="acc-subdesc">',''))});
   if(descs[0])sv('e-dual-desc',descs[0]);
@@ -443,13 +611,8 @@ function populate(){
   if(descs[2])sv('e-int-desc',descs[2]);
   if(descs[3])sv('e-scrim-desc',descs[3]);
 
-  // Build program card editors
+  // Programs
   buildProgCards();
-
-  // E-transfer instructions
-  var instrs=c.match(/style="counter-increment:ns[^"]+">.*?<span[^>]+>\d+<\/span>\s*([^<]+)/g)||[];
-  instrs=instrs.map(function(x){var m2=x.match(/>\s*([A-Z][^<]{3,})/);return m2?m2[1].trim():'';}).filter(Boolean);
-  for(var i=0;i<5;i++){if(instrs[i])sv('e-et'+(i+1),instrs[i]);}
 
   // Emails
   m=c.match(/reports@[a-zA-Z0-9._-]+\.[a-z]+/);if(m)sv('e-em-reports',m[0]);
@@ -460,82 +623,167 @@ function populate(){
   m=c.match(/<h2>([^<]+)<\/h2>/);if(m)sv('e-suc-h2',m[1]);
   m=c.match(/A confirmation of your registration[^<]+/);if(m)sv('e-suc-p1',m[0].trim());
 
-  // Next steps
-  var steps=[];
-  var stepRe=/<span style="[^"]+>\d+<\/span>\s*<strong[^>]*>([^<]+)<\/strong>\s*([^<]*(?:<strong[^>]*>[^<]+<\/strong>[^<]*)*)/g;
-  var sm;
-  while((sm=stepRe.exec(c))!==null){
-    steps.push((sm[1]+' '+sm[2]).replace(/<strong[^>]*>/g,'').replace(/<\/strong>/g,'').trim());
-  }
-  for(var j=0;j<4;j++){if(steps[j])sv('e-suc-s'+(j+1),steps[j]);}
-
   // Tournaments
   var tDates=c.match(/font-size:34px[^>]+>([^<]+)</g)||[];
   tDates=tDates.map(function(x){return x.replace(/font-size:34px[^>]+>/,'')});
   for(var k=0;k<4;k++){if(tDates[k])sv('e-t'+k+'-date',tDates[k]);}
-
-  var tLabels=['Pre-Season','Mid-Season','FTLO Exclusive','End-Season'];
-  tLabels.forEach(function(lbl,i){
+  ['Pre-Season','Mid-Season','FTLO Exclusive','End-Season'].forEach(function(lbl,i){
     if(c.indexOf(lbl)!==-1)sv('e-t'+i+'-label',lbl);
   });
-
   m=c.match(/Summer R4s Tournaments/);if(m)sv('e-t-title','Summer R4s Tournaments');
   m=c.match(/Saturdays[^<]{0,80}Beginner[^<]+</);if(m)sv('e-t-sub',esc(m[0].replace('<','')));
   m=c.match(/Message your teammates[^<]+</);if(m)sv('e-t-cta',esc(m[0].replace('<','')));
-
-  setStatus('Loaded — edit anything then download','ready');
+  syncTournPreview();
 }
 
 function buildProgCards(){
   var c=html;
-  var re=/<label class="acc-prog[^"]*"[^>]*>([\s\S]{0,600}?)<\/label>/g;
-  var cards=[];var m;
+  var re=/<label class="acc-prog[^"]*"[^>]*>([\s\S]{0,800}?)<\/label>/g;
+  var m;
+  progData=[];
   while((m=re.exec(c))!==null){
     var block=m[1];
     var val=(block.match(/value="([^"]+)"/))||[];
     var price=(block.match(/data-price="(\d+)"/))||[];
     var title=(block.match(/class="acc-prog-title">([^<]+)/))||[];
     var desc=(block.match(/class="acc-prog-desc">([^<]+)/))||[];
-    var avBadge=(block.match(/class="acc-prog-badge badge-av">([^<]+)/))||[];
-    var wlBadge=(block.match(/class="acc-prog-badge badge-wl">([^<]+)/))||[];
-    var status=wlBadge[1]?'wait':'avail';
-    var spotText=avBadge[1]||wlBadge[1]||'';
-    var spotNum=spotText.replace(' spots rem.','').replace('Waitlist','').trim();
+    var av=block.match(/badge-av">([^<]+)</);
+    var wl=block.match(/badge-wl">([^<]+)</);
+    var fl=block.match(/badge-full">([^<]+)</);
+    var status=wl?'wait':(fl?'full':'avail');
+    var spotRaw=av?av[1]:(wl?wl[1]:(fl?fl[1]:''));
+    var spotNum=spotRaw.replace(' spots rem.','').replace('Waitlist','').replace('Full','').trim();
     if(!val[1])continue;
-    cards.push({val:val[1],price:price[1]||'',title:esc(title[1]||''),desc:esc(desc[1]||''),spot:spotNum,status:status});
+    progData.push({val:val[1],price:price[1]||'',title:esc(title[1]||''),desc:esc(desc[1]||''),spot:spotNum,status:status});
   }
 
-  var dual=cards.filter(function(p){return p.val.indexOf('Special_')===0;});
-  var beg=cards.filter(function(p){return p.val.indexOf('Beg_')===0;});
-  var int=cards.filter(function(p){return p.val.indexOf('Int_')===0;});
-  var scrim=cards.filter(function(p){return p.val.indexOf('Scrim_')===0;});
+  var dual=progData.filter(function(p){return p.val.indexOf('Special_')===0;});
+  var beg=progData.filter(function(p){return p.val.indexOf('Beg_')===0;});
+  var int=progData.filter(function(p){return p.val.indexOf('Int_')===0;});
+  var scrim=progData.filter(function(p){return p.val.indexOf('Scrim_')===0;});
 
   renderCards('dual-cards',dual,'dual');
   renderCards('beg-cards',beg,'beg');
   renderCards('int-cards',int,'int');
   renderCards('scrim-cards',scrim,'scrim');
+
+  buildSpotDashboard(progData);
 }
 
-function renderCards(containerId,progs,type){
-  var el=document.getElementById(containerId);if(!el)return;
-  var tagMap={dual:'ptag-dual',beg:'ptag-beg',int:'ptag-int',scrim:'ptag-scrim'};
-  var nameMap={dual:'Dual',beg:'Beginner',int:'Intermediate',scrim:'Scrimmage'};
+function renderCards(cid,progs,type){
+  var el=document.getElementById(cid);if(!el)return;
+  var tags={dual:'tag-dual',beg:'tag-beg',int:'tag-int',scrim:'tag-scrim'};
+  var names={dual:'Dual',beg:'Beginner',int:'Intermediate',scrim:'Scrimmage'};
   el.innerHTML=progs.map(function(p,i){
     var uid=type+'-'+i;
-    var spotLabel=p.status==='wait'?'Waitlist':(p.spot+' spots rem.');
     return '<div class="prog-row">'+
-      '<div class="prog-row-hdr"><span class="ptag '+tagMap[type]+'">'+nameMap[type]+'</span><span class="prog-name-lbl">'+p.val+'</span></div>'+
+      '<div class="prog-row-hdr"><span class="spot-tag '+tags[type]+'">'+names[type]+'</span><span class="prog-name-lbl">'+p.title+'</span></div>'+
       '<div class="prog-fields">'+
         '<div class="field"><label class="lbl">Title</label><input type="text" id="pt-'+uid+'" value="'+enc(p.title)+'" /></div>'+
         '<div class="field"><label class="lbl">Dates / Description</label><textarea id="pd-'+uid+'" rows="2">'+enc(p.desc)+'</textarea></div>'+
-        '<div class="field"><label class="lbl">Spots</label><input type="text" id="ps-'+uid+'" value="'+enc(p.spot)+'" style="text-align:center;" /></div>'+
-        '<div class="field"><label class="lbl">Status</label><select id="pst-'+uid+'"><option value="avail"'+(p.status==='avail'?' selected':'')+'>Available</option><option value="wait"'+(p.status==='wait'?' selected':'')+'>Waitlist</option><option value="full"'+(p.status==='full'?' selected':'')+'>Full</option></select></div>'+
+        '<div class="field"><label class="lbl">Spot Count</label><input type="text" id="ps-'+uid+'" value="'+enc(p.spot)+'" style="text-align:center;font-weight:700;" /></div>'+
+        '<div class="field"><label class="lbl">Status</label><select id="pst-'+uid+'" onchange="onStatusChange(this)"><option value="avail"'+(p.status==='avail'?' selected':'')+'>Available</option><option value="wait"'+(p.status==='wait'?' selected':'')+'>Waitlist</option><option value="full"'+(p.status==='full'?' selected':'')+'>Full</option></select></div>'+
       '</div>'+
     '</div>';
   }).join('');
 }
 
-function enc(s){return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function buildSpotDashboard(progs){
+  var grid=document.getElementById('spot-grid');
+  var preview=document.getElementById('spot-preview-badges');
+  if(!grid)return;
+
+  var tags={Special_:'tag-dual',Beg_:'tag-beg',Int_:'tag-int',Scrim_:'tag-scrim'};
+  var names={Special_:'Dual',Beg_:'Beginner',Int_:'Intermediate',Scrim_:'Scrimmage'};
+
+  grid.innerHTML=progs.map(function(p,i){
+    var prefix=p.val.indexOf('Special_')===0?'Special_':(p.val.indexOf('Beg_')===0?'Beg_':(p.val.indexOf('Int_')===0?'Int_':'Scrim_'));
+    var tagCls=tags[prefix]||'tag-beg';
+    var tagName=names[prefix]||'';
+    var statusCls='is-'+p.status;
+    return '<div class="spot-card" id="sc-'+i+'">'+
+      '<div class="spot-card-header">'+
+        '<span class="spot-tag '+tagCls+'">'+tagName+'</span>'+
+        '<span class="spot-card-name">'+p.title+'</span>'+
+      '</div>'+
+      '<div class="spot-controls">'+
+        '<div class="spot-input-wrap">'+
+          '<span class="spot-lbl">Spots Remaining</span>'+
+          '<input class="spot-num-input" type="text" id="sq-'+i+'" value="'+enc(p.spot)+'" placeholder="e.g. 10" oninput="syncSpotToCard('+i+');updateSpotPreview()" />'+
+        '</div>'+
+        '<div class="spot-input-wrap">'+
+          '<span class="spot-lbl">Status</span>'+
+          '<select class="spot-status-select '+statusCls+'" id="sq-st-'+i+'" onchange="this.className=\'spot-status-select is-\'+this.value;syncSpotToCard('+i+');updateSpotPreview()">'+
+            '<option value="avail"'+(p.status==='avail'?' selected':'')+'>Available</option>'+
+            '<option value="wait"'+(p.status==='wait'?' selected':'')+'>Waitlist</option>'+
+            '<option value="full"'+(p.status==='full'?' selected':'')+'>Full</option>'+
+          '</select>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+
+  updateSpotPreview();
+}
+
+function syncSpotToCard(i){
+  var p=progData[i];if(!p)return;
+  var prefix=p.val.indexOf('Special_')===0?'dual':(p.val.indexOf('Beg_')===0?'beg':(p.val.indexOf('Int_')===0?'int':'scrim'));
+  var typeIndex=progData.slice(0,i).filter(function(x){return x.val.indexOf(prefix.charAt(0).toUpperCase()+prefix.slice(1)+'_')===0||(prefix==='dual'&&x.val.indexOf('Special_')===0);}).length;
+  // also sync via value match
+  var spotEl=document.getElementById('ps-'+prefix+'-'+typeIndex);
+  var statusEl=document.getElementById('pst-'+prefix+'-'+typeIndex);
+  var newSpot=gv('sq-'+i);
+  var newStatus=document.getElementById('sq-st-'+i).value;
+  if(spotEl)spotEl.value=newSpot;
+  if(statusEl)statusEl.value=newStatus;
+}
+
+function updateSpotPreview(){
+  var preview=document.getElementById('spot-preview-badges');if(!preview)return;
+  var statusColors={avail:'background:#e8f5ea;color:#2a6a30;',wait:'background:#faeeda;color:#7a5000;',full:'background:#fdf0ee;color:#c0392b;'};
+  preview.innerHTML=progData.map(function(p,i){
+    var status=document.getElementById('sq-st-'+i)?document.getElementById('sq-st-'+i).value:p.status;
+    var spot=document.getElementById('sq-'+i)?document.getElementById('sq-'+i).value:p.spot;
+    var label=status==='avail'?spot+' spots rem.':(status==='wait'?'Waitlist':'Full');
+    var shortTitle=p.title.replace(/&mdash;/g,'—').split('—')[0].trim();
+    return '<div style="'+statusColors[status]+'font-size:12px;font-weight:700;padding:4px 10px;border-radius:4px;display:inline-block;">'+shortTitle+': '+label+'</div>';
+  }).join('');
+}
+
+function updateCapPreview(){
+  var el=document.getElementById('cap-preview');
+  if(el)el.textContent=gv('e-capacity');
+}
+
+function updateHeroPreview(){
+  var ey=gv('e-eyebrow'),t1=gv('e-title1'),t2=gv('e-title2'),hd=gv('e-herodesc');
+  st('prev-eyebrow',ey);
+  var titleEl=document.getElementById('prev-title');
+  if(titleEl)titleEl.innerHTML=(t1?t1+' ':'')+(t2?'<span style="color:var(--orange)">'+t2+'</span>':'');
+  st('prev-desc',hd);
+}
+
+function updateStatsPreview(){
+  var ids=['pv-weeks','pv-progs','pv-time','pv-from'];
+  var src=['e-weeks','e-progs','e-time','e-from'];
+  ids.forEach(function(id,i){st(id,gv(src[i]));});
+  var tv=gv('e-tshirtval');
+  st('pv-tshirt',tv?'$'+tv:'');
+}
+
+function syncTournPreview(){
+  for(var i=0;i<4;i++){
+    st('pv-t'+i+'-label',gv('e-t'+i+'-label'));
+    st('pv-t'+i+'-date',gv('e-t'+i+'-date'));
+  }
+}
+
+function onStatusChange(sel){
+  sel.className='spot-status-select is-'+sel.value;
+}
+
+function enc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 function applyAll(){
   if(!loaded){alert('Load your index.html first.');return;}
@@ -543,26 +791,17 @@ function applyAll(){
 
   // Hero eyebrow
   var ey=gv('e-eyebrow');if(ey)c=c.replace(/class="hero-eyebrow">([^<]+)</,'class="hero-eyebrow">'+ey+'<');
-  // Title line 2
   var t2=gv('e-title2');if(t2)c=c.replace(/(<span>)[^<]+(<\/span>\s*<\/h1>)/,'$1'+t2+'$2');
-  // Hero desc
-  var hd=gv('e-herodesc');
-  if(hd)c=c.replace(/(rgba\(255,249,245,0\.65\)[^>]+>)\s*[^<]+(\s*<\/p>)/,'$1\n      '+hd+'\n    $2');
+  var hd=gv('e-herodesc');if(hd)c=c.replace(/(rgba\(255,249,245,0\.65\)[^>]+>)\s*[^<]+(\s*<\/p>)/,'$1\n      '+hd+'\n    $2');
 
   // Stats
   var statVals=[gv('e-weeks'),gv('e-progs'),gv('e-time'),gv('e-from')];
   var si=0;
-  c=c.replace(/class="stat-num"[^>]*>([^<]+)</g,function(match){
-    var v=statVals[si];si++;
-    return v?match.replace(/>([^<]+)</,'>'+v+'<'):match;
-  });
+  c=c.replace(/class="stat-num"[^>]*>([^<]+)</g,function(match){var v=statVals[si];si++;return v?match.replace(/>([^<]+)</,'>'+v+'<'):match;});
 
   // Notice
   var nb=gv('e-n1bold'),nr=gv('e-n1rest');
-  if(nb||nr){
-    c=c.replace(/<strong>([^<]+)<\/strong>([^<]*Registration fills[^<]*)/i,
-      '<strong>'+(nb||'$1')+'</strong>'+(nr?' '+nr:'$2'));
-  }
+  if(nb)c=c.replace(/<strong>[^<]+<\/strong>([^<]*Registration[^<]*)/i,'<strong>'+nb+'</strong>'+(nr?' '+nr:'$1'));
 
   // Capacity
   var cap=gv('e-capacity');if(cap)c=c.replace(/Capacity Update[^<]{0,300}/,cap);
@@ -570,49 +809,38 @@ function applyAll(){
 
   // Locations
   var locs=c.match(/&#128205;[^<]{0,200}/g)||[];
-  [gv('e-loc1'),gv('e-loc2'),gv('e-loc3')].forEach(function(v,i){
-    if(v&&locs[i])c=c.replace(locs[i],'&#128205; '+v);
-  });
+  [gv('e-loc1'),gv('e-loc2'),gv('e-loc3')].forEach(function(v,i){if(v&&locs[i])c=c.replace(locs[i],'&#128205; '+v);});
 
-  // Accordion descriptions
-  var accDescs=[gv('e-dual-desc'),gv('e-beg-desc'),gv('e-int-desc'),gv('e-scrim-desc')];
+  // Accordion descs
+  var ads=[gv('e-dual-desc'),gv('e-beg-desc'),gv('e-int-desc'),gv('e-scrim-desc')];
   var adi=0;
-  c=c.replace(/class="acc-subdesc">([^<]+)</g,function(match){
-    var v=accDescs[adi];adi++;
-    return v?'class="acc-subdesc">'+v+'<':match;
-  });
+  c=c.replace(/class="acc-subdesc">([^<]+)</g,function(match){var v=ads[adi];adi++;return v?'class="acc-subdesc">'+v+'<':match;});
 
-  // Program cards
-  ['dual','beg','int','scrim'].forEach(function(type){
-    var container=document.getElementById(type+'-cards');
-    if(!container)return;
-    var rows=container.querySelectorAll('.prog-row');
-    rows.forEach(function(row,i){
-      var uid=type+'-'+i;
-      var oldTitle=row.querySelector('[id^="pt-"]').defaultValue;
-      var newTitle=gv('pt-'+uid);
-      var oldDesc=row.querySelector('[id^="pd-"]').defaultValue;
-      var newDesc=gv('pd-'+uid);
-      var newSpot=gv('ps-'+uid);
-      var newStatus=gv('pst-'+uid);
-
-      if(newTitle&&oldTitle!==newTitle)
-        c=c.replace('class="acc-prog-title">'+enc(oldTitle)+'<','class="acc-prog-title">'+newTitle+'<');
-      if(newDesc&&oldDesc!==newDesc)
-        c=c.replace('class="acc-prog-desc">'+enc(oldDesc)+'<','class="acc-prog-desc">'+newDesc+'<');
-
-      // Badge update - find by nearby price
-      var priceEl=row.querySelector('[id^="pt-"]');
-      var priceMatch=c.match(new RegExp('acc-prog-title">'+newTitle.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'[\\s\\S]{0,300}?acc-prog-badge badge-(av|wl|full)">([^<]+)<'));
-      if(priceMatch){
-        var oldBadgeFull=priceMatch[0].match(/acc-prog-badge badge-(av|wl|full)">([^<]+)</)[0];
-        var newBadge='';
-        if(newStatus==='avail')newBadge='acc-prog-badge badge-av">'+newSpot+' spots rem.<';
-        else if(newStatus==='wait')newBadge='acc-prog-badge badge-wl">Waitlist<';
-        else newBadge='acc-prog-badge badge-full">Full<';
-        if(oldBadgeFull&&newBadge)c=c.replace(oldBadgeFull,newBadge);
-      }
+  // Program cards — apply from spot dashboard (primary) and card editors
+  progData.forEach(function(p,i){
+    var prefix=p.val.indexOf('Special_')===0?'dual':(p.val.indexOf('Beg_')===0?'beg':(p.val.indexOf('Int_')===0?'int':'scrim'));
+    var typeArr=progData.filter(function(x){
+      if(prefix==='dual')return x.val.indexOf('Special_')===0;
+      return x.val.indexOf(prefix.charAt(0).toUpperCase()+'-')===0||x.val.indexOf(prefix.charAt(0).toUpperCase()+prefix.slice(1).charAt(0).toUpperCase())===0||x.val.split('_')[0].toLowerCase()===prefix;
     });
+
+    // Use spot dashboard values (most important)
+    var newSpot=document.getElementById('sq-'+i)?gv('sq-'+i):p.spot;
+    var newStatus=document.getElementById('sq-st-'+i)?document.getElementById('sq-st-'+i).value:p.status;
+
+    // Build new badge
+    var newBadgeHtml='';
+    if(newStatus==='avail')newBadgeHtml='class="acc-prog-badge badge-av">'+newSpot+' spots rem.<';
+    else if(newStatus==='wait')newBadgeHtml='class="acc-prog-badge badge-wl">Waitlist<';
+    else newBadgeHtml='class="acc-prog-badge badge-full">Full<';
+
+    // Find this card's current badge by locating the value= attribute
+    var cardRe=new RegExp('value="'+p.val.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'"[\\s\\S]{0,600}?class="acc-prog-badge badge-(av|wl|full)">([^<]+)<');
+    var cardMatch=c.match(cardRe);
+    if(cardMatch){
+      var oldBadge='class="acc-prog-badge badge-'+cardMatch[1]+'">'+cardMatch[2]+'<';
+      c=c.replace(oldBadge,newBadgeHtml);
+    }
   });
 
   // Emails
@@ -627,22 +855,16 @@ function applyAll(){
   // Tournament dates
   var tDates=[gv('e-t0-date'),gv('e-t1-date'),gv('e-t2-date'),gv('e-t3-date')];
   var ti=0;
-  c=c.replace(/font-size:34px[^>]+>([^<]+)<\/div>/g,function(match){
-    var v=tDates[ti];ti++;
-    return v?match.replace(/>([^<]+)<\/div>/,'>'+v+'</div>'):match;
-  });
-
-  // Tournament labels
+  c=c.replace(/font-size:34px[^>]+>([^<]+)<\/div>/g,function(match){var v=tDates[ti];ti++;return v?match.replace(/>([^<]+)<\/div>/,'>'+v+'</div>'):match;});
   ['Pre-Season','Mid-Season','FTLO Exclusive','End-Season'].forEach(function(lbl,i){
-    var v=gv('e-t'+i+'-label');
-    if(v&&v!==lbl)c=c.split(lbl).join(v);
+    var v=gv('e-t'+i+'-label');if(v&&v!==lbl)c=c.split(lbl).join(v);
   });
 
   // Success h2
   var sh=gv('e-suc-h2');if(sh)c=c.replace(/<h2>([^<]+)<\/h2>/,'<h2>'+sh+'</h2>');
 
   html=c;
-  setStatus('Changes applied — click Download','ready');
+  setStatus('Applied — click Download to save','ready');
 }
 
 function downloadForm(){
