@@ -850,7 +850,7 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
   <div class="notice warn">
     <span class="notice-icon">&#9888;</span>
     <div>
-      <strong>Capacity Update — April 11: Some programs filling up.</strong> Each program shows spots remaining. Registered spots are first come, first served &mdash; your spot is only confirmed after payment is received. <strong>Do not pay for a WAITLISTED spot unless you receive direct confirmation from FTLO.</strong>
+      <strong id="cap-notice">Capacity Update — April 11: Some programs filling up.</strong> Each program shows spots remaining. Registered spots are first come, first served &mdash; your spot is only confirmed after payment is received. <strong>Do not pay for a WAITLISTED spot unless you receive direct confirmation from FTLO.</strong>
     </div>
   </div>
 
@@ -1852,68 +1852,54 @@ document.addEventListener('keydown', function(e) {
 
 <script>
 // ── LIVE CAPACITY LOADER ──────────────────────────────────────────────
-// Fetches spot counts from the Capacity tab in Google Sheets via Apps Script.
-// Falls back to hardcoded values if fetch fails.
-// Auto-refreshes every 5 minutes.
+// Fetches spot counts AND notice text from Capacity tab via Apps Script.
+// Cache-busted on every load. Auto-refreshes every 5 minutes.
 
 var CAPACITY_FALLBACK = {
   'Special_MonWed_KiddKidd':       '5 spots rem.',
-  'Special_MonTue_KiddWindermere': '7 spots rem.',
+  'Special_MonTue_KiddWindermere': '4 spots rem.',
   'Special_TueWed_WindermereKidd': '6 spots rem.',
   'Beg_Mon_ThomasKidd':            '19 spots rem.',
-  'Beg_Tue_Windermere':            '32 spots rem.',
+  'Beg_Tue_Windermere':            '28 spots rem.',
   'Beg_Wed_ThomasKidd':            '22 spots rem.',
-  'Beg_Wed_Greentree':             '25 spots rem.',
+  'Beg_Wed_Greentree':             '20 spots rem.',
   'Int_Mon_ThomasKidd':            '11 spots rem.',
   'Int_Tue_Windermere':            '27 spots rem.',
-  'Int_Wed_Greentree':             '15 spots rem.',
-  'Scrim_Fri_ThomasKidd':          '32 spots rem.'
+  'Int_Wed_Greentree':             '10 spots rem.',
+  'Scrim_Fri_ThomasKidd':          '30 spots rem.'
 };
+var NOTICE_FALLBACK = 'Capacity Update — April 14: Some programs at 65% capacity.';
 
 function applyCapacity(data) {
   Object.keys(data).forEach(function(key) {
+    if (key === 'Capacity_Update_Text') {
+      var noticeEl = document.getElementById('cap-notice');
+      if (noticeEl && data[key]) noticeEl.textContent = data[key];
+      return;
+    }
     var el = document.getElementById('cap-' + key);
     if (!el) return;
     var val = String(data[key]).trim();
-    if (val.toUpperCase() === 'WAITLIST' || val === '0') {
-      el.className = 'acc-prog-badge badge-wl';
-      el.textContent = 'Waitlist';
-    } else if (val.toUpperCase() === 'FULL') {
-      el.className = 'acc-prog-badge badge-full';
-      el.textContent = 'Full';
-    } else {
-      var num = parseInt(val, 10);
-      el.className = 'acc-prog-badge badge-av';
-      el.textContent = (isNaN(num) ? val : num) + ' spots rem.';
-    }
+    el.textContent = val;
+    var isWaitlist = val.toLowerCase().indexOf('waitlist') !== -1;
+    el.className = el.className.replace(/\bwaitlisted\b/g, '').trim();
+    if (isWaitlist) el.classList.add('waitlisted');
   });
 }
 
 function loadCapacity() {
-  // Apply fallback values immediately so form always shows something
-  applyCapacity(CAPACITY_FALLBACK);
-
-  // Then try to fetch live values from Apps Script
-  var url = APPS_SCRIPT_URL + '?action=capacity';
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.onload = function() {
-    try {
-      var json = JSON.parse(xhr.responseText);
-      if (json && json.capacity) {
-        applyCapacity(json.capacity);
-      }
-    } catch(e) {
-      // Silently fall back to hardcoded values already applied
-    }
-  };
-  xhr.onerror = function() {
-    // Network error - fallback already applied above
-  };
-  xhr.send();
+  fetch(APPS_SCRIPT_URL + '?action=capacity&v=' + Date.now(), { cache: 'no-store' })
+    .then(function(r) { return r.json(); })
+    .then(function(json) {
+      if (json && json.capacity) applyCapacity(json.capacity);
+    })
+    .catch(function() {
+      applyCapacity(CAPACITY_FALLBACK);
+      var noticeEl = document.getElementById('cap-notice');
+      if (noticeEl) noticeEl.textContent = NOTICE_FALLBACK;
+    });
 }
 
-// Apply fallback immediately on load, then fetch live data
 loadCapacity();
-setInterval(loadCapacity, 5 * 60 * 1000);
+setInterval(loadCapacity, 300000);
 </script>
