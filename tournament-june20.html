@@ -234,10 +234,12 @@
   .payment-box ul { padding-left: 18px; margin-top: 6px; font-size: 0.85rem; }
   .payment-box li { margin-bottom: 4px; }
   .fee-display {
-    background: var(--orange); color: var(--charcoal); border-radius: 8px;
-    padding: 14px 18px; margin-bottom: 14px;
-    font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem;
-    font-weight: 800; text-align: center; text-transform: uppercase;
+    background: #edf4f6; color: var(--teal);
+    border: 2px solid var(--teal);
+    border-radius: 8px; padding: 14px 18px; margin-bottom: 14px;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem;
+    font-weight: 700; text-align: center; text-transform: uppercase;
+    pointer-events: none; user-select: none;
   }
 
   /* ── BUTTONS ── */
@@ -381,12 +383,13 @@
     <div class="field-card">
       <span class="fc-label">Gender <span class="req">*</span></span>
       <p class="hint">Please Note: For fair competition, Co-ed R4s teams must have 2 male and 2 female based on <strong>gender assigned at birth</strong>, unless discussed with FTLO in advance. If you identify as non-binary, please reach out so we can find the best fit, we want everyone to feel welcome.</p>
-      <div class="radio-group">
-        <label class="radio-item"><input type="radio" name="gender" value="Male"> Male</label>
-        <label class="radio-item"><input type="radio" name="gender" value="Female"> Female</label>
-        <label class="radio-item"><input type="radio" name="gender" value="Non-Binary"> Non-Binary</label>
-        <label class="radio-item"><input type="radio" name="gender" value="Other (Comments)"> Other (Comments)</label>
-      </div>
+      <select id="genderSelect" name="gender" style="width:100%;border:1.5px solid var(--border);border-radius:6px;padding:10px 12px;font-family:'Barlow',sans-serif;font-size:0.95rem;color:var(--charcoal);background:var(--white);outline:none;transition:border-color 0.2s;" onchange="this.style.borderColor=''">
+        <option value="">— Select —</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Non-Binary">Non-Binary</option>
+        <option value="Other (Comments)">Other (Comments)</option>
+      </select>
     </div>
 
     <div class="field-card">
@@ -431,14 +434,15 @@
 
     <div class="field-card">
       <span class="fc-label">How Many (Total) People Are You Registering For? <span class="req">*</span></span>
-      <div class="radio-group">
-        <label class="radio-item"><input type="radio" name="teamSize" value="1"> 1</label>
-        <label class="radio-item"><input type="radio" name="teamSize" value="2"> 2</label>
-        <label class="radio-item"><input type="radio" name="teamSize" value="3"> 3</label>
-        <label class="radio-item"><input type="radio" name="teamSize" value="4"> 4</label>
-        <label class="radio-item"><input type="radio" name="teamSize" value="5"> 5</label>
-        <label class="radio-item"><input type="radio" name="teamSize" value="6"> 6</label>
-      </div>
+      <select id="teamSizeSelect" name="teamSize" style="width:100%;border:1.5px solid var(--border);border-radius:6px;padding:10px 12px;font-family:'Barlow',sans-serif;font-size:0.95rem;color:var(--charcoal);background:var(--white);outline:none;transition:border-color 0.2s;" onchange="updateFee()">
+        <option value="">— Select —</option>
+        <option value="1">1 (Solo)</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4 (Full Team)</option>
+        <option value="5">5</option>
+        <option value="6">6 (Max)</option>
+      </select>
     </div>
 
     <div class="field-card">
@@ -450,19 +454,20 @@
     <div class="field-card">
       <span class="fc-label">How Would You Rank Your Team (or Individual)? <span class="req">*</span></span>
       <p class="hint">Based on <a href="https://www.ftlovolleyball.ca/skill-levels" target="_blank">FTLO's Skill Level Descriptions</a>.</p>
-      <div class="radio-group">
-        <label class="radio-item"><input type="radio" name="skillLevel" value="B: Beginner"> B: Beginner</label>
-        <label class="radio-item"><input type="radio" name="skillLevel" value="BB: Rally Ready"> BB: Rally Ready</label>
-        <label class="radio-item"><input type="radio" name="skillLevel" value="BB+: Lower Intermediate"> BB+: Lower Intermediate</label>
-        <label class="radio-item"><input type="radio" name="skillLevel" value="A: Intermediate"> A: Intermediate</label>
-        <label class="radio-item"><input type="radio" name="skillLevel" value="A+: Intermediate Plus"> A+: Intermediate Plus</label>
-        <label class="radio-item"><input type="radio" name="skillLevel" value="AA: I'm really really good at volleyballs"> AA: I'm really really good at volleyballs</label>
-      </div>
+      <select id="skillLevelSelect" name="skillLevel" style="width:100%;border:1.5px solid var(--border);border-radius:6px;padding:10px 12px;font-family:'Barlow',sans-serif;font-size:0.95rem;color:var(--charcoal);background:var(--white);outline:none;transition:border-color 0.2s;" onchange="this.style.borderColor=''">
+        <option value="">— Select —</option>
+        <option value="B: Beginner">B: Beginner</option>
+        <option value="BB: Rally Ready">BB: Rally Ready</option>
+        <option value="BB+: Lower Intermediate">BB+: Lower Intermediate</option>
+        <option value="A: Intermediate">A: Intermediate</option>
+        <option value="A+: Intermediate Plus">A+: Intermediate Plus</option>
+        <option value="AA: I'm really really good at volleyballs">AA: I'm really really good at volleyballs</option>
+      </select>
     </div>
 
     <div class="btn-row">
       <button class="btn btn-secondary" onclick="goTo(1)">← Back</button>
-      <button class="btn btn-primary" onclick="goTo(3)">Next: Conduct + Rules →</button>
+      <button class="btn btn-primary" onclick="goToSection3()">Next: Conduct + Rules →</button>
     </div>
   </div>
 
@@ -640,15 +645,26 @@ let selectedDivision = '';
 // LIVE SPOTS — fetch from Apps Script
 // ══════════════════════════════════════
 function loadSpots() {
-  fetch(SCRIPT_URL + '?action=getSpots&tab=Capacity')
-    .then(r => r.json())
-    .then(data => {
-      renderSpotsBadge('begSpotsBadge', data.begSpots);
-      renderSpotsBadge('intSpotsBadge', data.intSpots);
+  // Use no-cache and handle CORS redirect from Apps Script
+  fetch(SCRIPT_URL + '?action=getSpots&tab=Capacity', {
+    method: 'GET',
+    redirect: 'follow',
+    cache: 'no-store'
+  })
+    .then(r => r.text())
+    .then(text => {
+      try {
+        const data = JSON.parse(text);
+        renderSpotsBadge('begSpotsBadge', data.begSpots || '—');
+        renderSpotsBadge('intSpotsBadge', data.intSpots || '—');
+      } catch(e) {
+        renderSpotsBadge('begSpotsBadge', '—');
+        renderSpotsBadge('intSpotsBadge', '—');
+      }
     })
     .catch(() => {
-      renderSpotsBadge('begSpotsBadge', 'Check Back Soon');
-      renderSpotsBadge('intSpotsBadge', 'Check Back Soon');
+      renderSpotsBadge('begSpotsBadge', '—');
+      renderSpotsBadge('intSpotsBadge', '—');
     });
 }
 
@@ -714,10 +730,17 @@ function goToSection2() {
   setError('phone', phoneErr);
   if (phoneErr) valid = false;
 
-  // Gender radio
-  const genderPicked = !!document.querySelector('input[name="gender"]:checked');
-  setGroupError('gender', !genderPicked);
-  if (!genderPicked) valid = false;
+  // Gender select
+  const genderPicked = !!document.getElementById('genderSelect').value;
+  const genderEl = document.getElementById('genderSelect');
+  if (!genderPicked) {
+    genderEl.style.borderColor = '#c0392b';
+    genderEl.style.background = '#fff5f5';
+    valid = false;
+  } else {
+    genderEl.style.borderColor = '';
+    genderEl.style.background = '';
+  }
 
   // Program
   const program = document.getElementById('program').value.trim();
@@ -744,6 +767,59 @@ function goToSection2() {
   }
 
   goTo(2);
+}
+
+// ══════════════════════════════════════
+// SECTION 2 VALIDATION
+// ══════════════════════════════════════
+function goToSection3() {
+  let valid = true;
+
+  function fieldError(id, isErr) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.borderColor = isErr ? '#c0392b' : '';
+    el.style.background  = isErr ? '#fff5f5' : '';
+  }
+
+  // Division selected?
+  const divPicked = !!document.querySelector('input[name="division"]:checked');
+  const divGrid = document.querySelector('.division-grid');
+  if (!divPicked) {
+    divGrid.style.outline = '2px solid #c0392b';
+    divGrid.style.borderRadius = '8px';
+    valid = false;
+  } else {
+    divGrid.style.outline = '';
+  }
+
+  // Team size
+  const sizeVal = document.getElementById('teamSizeSelect').value;
+  fieldError('teamSizeSelect', !sizeVal);
+  if (!sizeVal) valid = false;
+
+  // Teammates
+  const tmVal = document.getElementById('teammates').value.trim();
+  fieldError('teammates', !tmVal);
+  if (!tmVal) valid = false;
+
+  // Skill level
+  const skillVal = document.getElementById('skillLevelSelect').value;
+  fieldError('skillLevelSelect', !skillVal);
+  if (!skillVal) valid = false;
+
+  if (!valid) {
+    const firstErr = document.querySelector(
+      '#sec2 select[style*="rgb(192"]', '#sec2 textarea[style*="rgb(192"]', '#sec2 .division-grid[style*="outline"]'
+    );
+    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const btn = event.currentTarget;
+    btn.style.background = '#c0392b';
+    btn.textContent = 'Please fill all required fields';
+    setTimeout(() => { btn.style.background = ''; btn.textContent = 'Next: Conduct + Rules →'; }, 2000);
+    return;
+  }
+  goTo(3);
 }
 
 // ══════════════════════════════════════
@@ -813,8 +889,8 @@ function updateTeammateHint() {
 // FEE CALCULATOR
 // ══════════════════════════════════════
 function updateFee() {
-  const sizeEl = document.querySelector('input[name="teamSize"]:checked');
-  if (!sizeEl) return;
+  const sizeEl = document.getElementById('teamSizeSelect');
+  if (!sizeEl || !sizeEl.value) return;
   const n = parseInt(sizeEl.value);
   let fee = 0;
   if (n === 1)      fee = 40;
@@ -824,7 +900,7 @@ function updateFee() {
   document.getElementById('paymentAmount').value = '$' + fee;
 }
 
-document.querySelectorAll('input[name="teamSize"]').forEach(r => r.addEventListener('change', updateFee));
+// teamSize is now a select — onchange handled inline
 
 // ══════════════════════════════════════
 // LIGHTBOX
@@ -839,6 +915,19 @@ function closeLightbox(e) {
 // FORM SUBMIT
 // ══════════════════════════════════════
 function submitForm() {
+  // Validate payment amount
+  const payAmt = document.getElementById('paymentAmount').value.trim();
+  const payEl  = document.getElementById('paymentAmount');
+  if (!payAmt) {
+    payEl.style.borderColor = '#c0392b';
+    payEl.style.background  = '#fff5f5';
+    payEl.focus();
+    payEl.placeholder = 'Required — enter your fee amount';
+    return;
+  }
+  payEl.style.borderColor = '';
+  payEl.style.background  = '';
+
   const btn = document.getElementById('btnSubmit');
   btn.disabled = true;
   document.getElementById('submittingOverlay').classList.add('open');
@@ -850,12 +939,12 @@ function submitForm() {
     fullName:      document.getElementById('fullName').value.trim(),
     email:         document.getElementById('email').value.trim(),
     phone:         document.getElementById('phone').value.trim(),
-    gender:        (document.querySelector('input[name="gender"]:checked') || {}).value || '',
+    gender:        document.getElementById('genderSelect').value,
     program:       document.getElementById('program').value.trim(),
     division:      (document.querySelector('input[name="division"]:checked') || {}).value || '',
-    teamSize:      (document.querySelector('input[name="teamSize"]:checked') || {}).value || '',
+    teamSize:      document.getElementById('teamSizeSelect').value,
     teammates:     document.getElementById('teammates').value.trim(),
-    skillLevel:    (document.querySelector('input[name="skillLevel"]:checked') || {}).value || '',
+    skillLevel:    document.getElementById('skillLevelSelect').value,
     paymentAmount: document.getElementById('paymentAmount').value.trim(),
     comments:      document.getElementById('comments').value.trim(),
     conductAgreed: 'Yes'
