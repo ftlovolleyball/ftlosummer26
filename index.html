@@ -837,7 +837,7 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
   </div>
 
   <div class="nav-row">
-    <button type="button" class="btn-next" onclick="checkEmailThenNext()">
+    <button type="button" class="btn-next" onclick="nextStep(1)">
       Continue to Programs
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
     </button>
@@ -850,7 +850,7 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
   <div class="notice warn">
     <span class="notice-icon">&#9888;</span>
     <div>
-      <strong id="cap-notice">Capacity Update — April 11: Some programs filling up.</strong> Each program shows spots remaining. Registered spots are first come, first served &mdash; your spot is only confirmed after payment is received. <strong>Do not pay for a WAITLISTED spot unless you receive direct confirmation from FTLO.</strong>
+      <strong>Capacity Update — April 11: Some programs filling up.</strong> Each program shows spots remaining. Registered spots are first come, first served &mdash; your spot is only confirmed after payment is received. <strong>Do not pay for a WAITLISTED spot unless you receive direct confirmation from FTLO.</strong>
     </div>
   </div>
 
@@ -1394,10 +1394,36 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
   </div>
 
   <div class="card">
+    <div class="card-title" style="margin-bottom:0.75rem;">E-Transfer Instructions</div>
+    <div class="etransfer-card">
+      <h4>Step 1 &mdash; Send E-Transfer Payment To:</h4>
+      <div class="etransfer-row">
+        <span class="etransfer-email"><span style="color:var(--white);font-weight:700;">reports@ftlovolleyball.ca</span></span>
+        <button type="button" class="copy-btn" onclick="copyText('reports@ftlovolleyball.ca', this)">Copy</button>
+      </div>
+      <div style="font-size:13px;color:rgba(255,249,245,0.5);margin:4px 0 14px 2px;">E-transfers must ONLY be sent to this address.</div>
+      <h4>Step 2 &mdash; Send Payment Screenshot To:</h4>
+      <div class="etransfer-row">
+        <span class="etransfer-email"><span style="color:var(--white);font-weight:700;">operations@ftlovolleyball.ca</span></span>
+        <button type="button" class="copy-btn" onclick="copyText('operations@ftlovolleyball.ca', this)">Copy</button>
+      </div>
+      <ol class="etransfer-steps">
+        <li>Send e-transfer payment to <strong style="color:var(--orange);">reports@ftlovolleyball.ca</strong> only</li>
+        <li>In the e-transfer comment box enter: <strong style="color:var(--orange);">[First Name] [Last Name] MON/TUE/WED [BEG or INT] [TK, WIND, or GTV]</strong></li>
+        <li>Confirm the e-transfer went through before submitting this form</li>
+        <li>Screenshot your completed transfer and email it to <strong style="color:var(--orange);">operations@ftlovolleyball.ca</strong></li>
+        <li>Save both emails as contacts so FTLO confirmations reach your inbox</li>
+      </ol>
+      <div class="etransfer-note">
+        <span style="font-size:17px;font-weight:900;color:#fff;display:block;margin-bottom:6px;">&#9888; DO NOT PAY if you registered for a WAITLISTED program</span> unless you receive a direct update from FTLO. Type "Waitlisted" in the payment field below if applicable.<br><br>
+        After your e-transfer and screenshot are received, FTLO will confirm your spot within <strong>3&ndash;7 business days</strong>.
+      </div>
+    </div>
+
     <div class="field" id="f-payTotal">
       <label class="lbl">Total Payment Amount You Will Transfer <span class="req">*</span></label>
-      <input type="text" name="payTotal" placeholder='e.g. $230 &mdash; or type "Waitlisted" if applicable' />
-      <div class="err-msg">Please enter your payment amount or &quot;Waitlisted&quot;.</div>
+      <input type="text" name="payTotal" placeholder='e.g. $230  &mdash;  or type "Waitlisted" if applicable' />
+      <div class="err-msg">Please enter your payment amount or "Waitlisted".</div>
     </div>
   </div>
 
@@ -1443,34 +1469,6 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
     <div class="field" style="margin-top:1.1rem;">
       <label class="lbl">Other Questions or Comments</label>
       <textarea name="comments" placeholder="Questions about clinic programs, skill level placement, or anything else? Leave them here."></textarea>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title" style="margin-bottom:0.75rem;">E-Transfer Instructions</div>
-    <div class="etransfer-card">
-      <h4>Step 1 &mdash; Send E-Transfer Payment To:</h4>
-      <div class="etransfer-row">
-        <span class="etransfer-email"><span style="color:var(--white);font-weight:700;">reports@ftlovolleyball.ca</span></span>
-        <button type="button" class="copy-btn" onclick="copyText('reports@ftlovolleyball.ca', this)">Copy</button>
-      </div>
-      <div style="font-size:13px;color:rgba(255,249,245,0.5);margin:4px 0 14px 2px;">E-transfers must ONLY be sent to this address.</div>
-      <h4>Step 2 &mdash; Send Payment Screenshot To:</h4>
-      <div class="etransfer-row">
-        <span class="etransfer-email"><span style="color:var(--white);font-weight:700;">operations@ftlovolleyball.ca</span></span>
-        <button type="button" class="copy-btn" onclick="copyText('operations@ftlovolleyball.ca', this)">Copy</button>
-      </div>
-      <ol class="etransfer-steps">
-        <li>Send e-transfer payment to <strong style="color:var(--orange);">reports@ftlovolleyball.ca</strong> only</li>
-        <li>In the e-transfer comment box enter: <strong style="color:var(--orange);">[First Name] [Last Name] MON/TUE/WED [BEG or INT] [TK, WIND, or GTV]</strong></li>
-        <li>Confirm the e-transfer went through before submitting this form</li>
-        <li>Screenshot your completed transfer and email it to <strong style="color:var(--orange);">operations@ftlovolleyball.ca</strong></li>
-        <li>Save both emails as contacts so FTLO confirmations reach your inbox</li>
-      </ol>
-      <h4 style="margin-top:16px;">Step 3 &mdash; Press Submit Registration Below:</h4>
-      <div class="etransfer-row">
-        <span class="etransfer-email">Press &ldquo;Submit Registration&rdquo; below to receive your email confirmation.</span>
-      </div>
     </div>
   </div>
 
@@ -1623,7 +1621,7 @@ function accInfoClose(id) {
   document.getElementById(id).classList.remove('open');
 }
 var usedEmails = [];
-var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwxWQR2eKbAOwkbQsOmW3-tSnl1e2tw3USOTZsS7fkSeH8EnrX3jeagqzDNc0X9Yy12yA/exec';
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf5oqa4f_9FJbgwqWrQXXx1bb2BY5CeZdG0PbfDNf5UtUYywZEM6lxq5aoMEKnQK0mhQ/exec';
 var currentStep = 1;
 
 function goToStep(n) {
@@ -1853,6 +1851,11 @@ document.addEventListener('keydown', function(e) {
 </script>
 
 <script>
+// ── LIVE CAPACITY LOADER ──────────────────────────────────────────────
+// Fetches spot counts from the Capacity tab in Google Sheets via Apps Script.
+// Falls back to hardcoded values if fetch fails.
+// Auto-refreshes every 5 minutes.
+
 var CAPACITY_FALLBACK = {
   'Special_MonWed_KiddKidd':       '5 spots rem.',
   'Special_MonTue_KiddWindermere': '7 spots rem.',
@@ -1866,63 +1869,51 @@ var CAPACITY_FALLBACK = {
   'Int_Wed_Greentree':             '15 spots rem.',
   'Scrim_Fri_ThomasKidd':          '32 spots rem.'
 };
-var NOTICE_FALLBACK = 'Capacity Update — April 14: Some programs filling up.';
 
 function applyCapacity(data) {
   Object.keys(data).forEach(function(key) {
-    if (key === 'Capacity_Update_Text') {
-      var noticeEl = document.getElementById('cap-notice');
-      if (noticeEl && data[key]) noticeEl.textContent = data[key];
-      return;
-    }
     var el = document.getElementById('cap-' + key);
     if (!el) return;
     var val = String(data[key]).trim();
-    el.textContent = val;
-    var isWaitlist = val.toLowerCase().indexOf('waitlist') !== -1;
-    el.className = el.className.replace(/waitlisted/g, '').trim();
-    if (isWaitlist) el.classList.add('waitlisted');
+    if (val.toUpperCase() === 'WAITLIST' || val === '0') {
+      el.className = 'acc-prog-badge badge-wl';
+      el.textContent = 'Waitlist';
+    } else if (val.toUpperCase() === 'FULL') {
+      el.className = 'acc-prog-badge badge-full';
+      el.textContent = 'Full';
+    } else {
+      var num = parseInt(val, 10);
+      el.className = 'acc-prog-badge badge-av';
+      el.textContent = (isNaN(num) ? val : num) + ' spots rem.';
+    }
   });
 }
 
 function loadCapacity() {
-  fetch(APPS_SCRIPT_URL + '?action=capacity&v=' + Date.now(), { cache: 'no-store' })
-    .then(function(r) { return r.json(); })
-    .then(function(json) {
-      if (json && json.capacity) applyCapacity(json.capacity);
-    })
-    .catch(function() {
-      applyCapacity(CAPACITY_FALLBACK);
-      var noticeEl = document.getElementById('cap-notice');
-      if (noticeEl) noticeEl.textContent = NOTICE_FALLBACK;
-    });
-}
+  // Apply fallback values immediately so form always shows something
+  applyCapacity(CAPACITY_FALLBACK);
 
-function checkEmailThenNext() {
-  var valid = validateStep(1);
-  if (!valid) return;
-  var email = getVal('email').toLowerCase();
-  var btn = document.querySelector('.btn-next');
-  btn.disabled = true;
-  btn.innerHTML = 'Checking...';
-  fetch(APPS_SCRIPT_URL + '?action=checkEmail&email=' + encodeURIComponent(email) + '&v=' + Date.now(), { cache: 'no-store' })
-    .then(function(r) { return r.json(); })
-    .then(function(json) {
-      btn.disabled = false;
-      btn.innerHTML = 'Continue to Programs <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
-      if (json.exists) {
-        markErr('f-email', 'This email has already been registered. Each person may only register once. Please contact info@ftlovolleyball.ca if you need help.');
-      } else {
-        showStep(2);
+  // Then try to fetch live values from Apps Script
+  var url = APPS_SCRIPT_URL + '?action=capacity';
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.onload = function() {
+    try {
+      var json = JSON.parse(xhr.responseText);
+      if (json && json.capacity) {
+        applyCapacity(json.capacity);
       }
-    })
-    .catch(function() {
-      btn.disabled = false;
-      btn.innerHTML = 'Continue to Programs <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
-      showStep(2);
-    });
+    } catch(e) {
+      // Silently fall back to hardcoded values already applied
+    }
+  };
+  xhr.onerror = function() {
+    // Network error - fallback already applied above
+  };
+  xhr.send();
 }
 
+// Apply fallback immediately on load, then fetch live data
 loadCapacity();
-setInterval(loadCapacity, 300000);
+setInterval(loadCapacity, 5 * 60 * 1000);
 </script>
