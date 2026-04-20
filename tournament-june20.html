@@ -366,8 +366,13 @@
   <div class="form-section active" id="sec1">
 
     <div class="field-card">
-      <span class="fc-label">Full Name <span class="req">*</span></span>
-      <input type="text" id="fullName" placeholder="First Name Last Name">
+      <span class="fc-label">First Name <span class="req">*</span></span>
+      <input type="text" id="firstName" placeholder="First Name">
+    </div>
+
+    <div class="field-card">
+      <span class="fc-label">Last Name <span class="req">*</span></span>
+      <input type="text" id="lastName" placeholder="Last Name">
     </div>
 
     <div class="field-card">
@@ -632,7 +637,7 @@
 // ══════════════════════════════════════
 // CONFIG
 // ══════════════════════════════════════
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz6UvsUjREy-1a1ATZso52Kl4lI5Ippw21IE1-9gwhr8NaN3YmTO5Vy1xmKLIGbIbIxTtQg/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwxWQR2eKbAOwkbQsOmW3-tSnl1e2tw3USOTZsS7fkSeH8EnrX3jeagqzDNc0X9Yy12yA/exec';
 const SHEET_TAB  = 'Pre-June20';
 
 // ══════════════════════════════════════
@@ -645,27 +650,32 @@ let selectedDivision = '';
 // LIVE SPOTS — fetch from Apps Script
 // ══════════════════════════════════════
 function loadSpots() {
-  // Use no-cache and handle CORS redirect from Apps Script
+  // Inject script tag to bypass CORS — Apps Script returns JSONP when callback param present
+  window._spotsCallback = function(data) {
+    renderSpotsBadge('begSpotsBadge', data.begSpots || '—');
+    renderSpotsBadge('intSpotsBadge', data.intSpots || '—');
+  };
+  const s = document.createElement('script');
+  s.src = SCRIPT_URL + '?action=getSpots&tab=Capacity&callback=_spotsCallback';
+  s.onerror = function() {
+    renderSpotsBadge('begSpotsBadge', '—');
+    renderSpotsBadge('intSpotsBadge', '—');
+  };
+  document.head.appendChild(s);
+
+  // Also try plain fetch as backup (works when CORS headers are set on deployed script)
   fetch(SCRIPT_URL + '?action=getSpots&tab=Capacity', {
     method: 'GET',
     redirect: 'follow',
-    cache: 'no-store'
+    cache: 'no-store',
+    mode: 'cors'
   })
-    .then(r => r.text())
-    .then(text => {
-      try {
-        const data = JSON.parse(text);
-        renderSpotsBadge('begSpotsBadge', data.begSpots || '—');
-        renderSpotsBadge('intSpotsBadge', data.intSpots || '—');
-      } catch(e) {
-        renderSpotsBadge('begSpotsBadge', '—');
-        renderSpotsBadge('intSpotsBadge', '—');
-      }
-    })
-    .catch(() => {
-      renderSpotsBadge('begSpotsBadge', '—');
-      renderSpotsBadge('intSpotsBadge', '—');
-    });
+  .then(r => r.json())
+  .then(data => {
+    if (data.begSpots) renderSpotsBadge('begSpotsBadge', data.begSpots);
+    if (data.intSpots) renderSpotsBadge('intSpotsBadge', data.intSpots);
+  })
+  .catch(() => {}); // silent — JSONP handles it
 }
 
 function renderSpotsBadge(id, text) {
@@ -712,11 +722,17 @@ function goToSection2() {
     }
   }
 
-  // Full Name
-  const name = document.getElementById('fullName').value.trim();
-  const nameErr = name.length < 2;
-  setError('fullName', nameErr);
-  if (nameErr) valid = false;
+  // First Name
+  const firstName = document.getElementById('firstName').value.trim();
+  const firstNameErr = firstName.length < 1;
+  setError('firstName', firstNameErr);
+  if (firstNameErr) valid = false;
+
+  // Last Name
+  const lastName = document.getElementById('lastName').value.trim();
+  const lastNameErr = lastName.length < 1;
+  setError('lastName', lastNameErr);
+  if (lastNameErr) valid = false;
 
   // Email
   const email = document.getElementById('email').value.trim();
@@ -936,7 +952,8 @@ function submitForm() {
     action:        'submitTournament',
     tab:           SHEET_TAB,
     timestamp:     new Date().toLocaleString(),
-    fullName:      document.getElementById('fullName').value.trim(),
+    firstName:     document.getElementById('firstName').value.trim(),
+    lastName:      document.getElementById('lastName').value.trim(),
     email:         document.getElementById('email').value.trim(),
     phone:         document.getElementById('phone').value.trim(),
     gender:        document.getElementById('genderSelect').value,
