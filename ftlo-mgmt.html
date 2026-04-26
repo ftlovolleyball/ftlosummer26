@@ -96,6 +96,7 @@
     <div class="login-sub">Tournament Manager</div>
     <input type="password" id="pwInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
     <button class="login-btn" onclick="doLogin()">Enter</button>
+    <div id="debugMsg" style="color:#F8BA44;font-size:0.8rem;margin-top:8px;"></div>
     <div class="login-err" id="loginErr">Incorrect password</div>
   </div>
 </div>
@@ -139,7 +140,10 @@ var configs = {};
 var spots   = {};
 
 function doLogin() {
-  if (document.getElementById('pwInput').value === PW) {
+  var entered = document.getElementById('pwInput').value;
+  var debug = document.getElementById('debugMsg');
+  if (debug) debug.textContent = 'You typed: ' + entered + ' | Expected: ' + PW;
+  if (entered === PW) {
     document.getElementById('loginWrap').style.display = 'none';
     document.getElementById('mainWrap').style.display  = 'block';
     loadAllEvents();
@@ -179,8 +183,8 @@ function renderGrid() {
     var isYouth = ev.type === 'youth';
     var begKey  = 'Tourn_' + (ev.id === 'june20' ? 'June20' : ev.id === 'july11' ? 'July11' : ev.id === 'july18' ? 'July18' : ev.id === 'aug8' ? 'Aug8' : 'Aug22') + '_' + (isYouth ? '15U' : 'Beg');
     var intKey  = 'Tourn_' + (ev.id === 'june20' ? 'June20' : ev.id === 'july11' ? 'July11' : ev.id === 'july18' ? 'July18' : ev.id === 'aug8' ? 'Aug8' : 'Aug22') + '_' + (isYouth ? '16U' : 'Int');
-    var begSpots = spots[begKey] || '—';
-    var intSpots = spots[intKey] || '—';
+    var begSpots = spots[begKey] || '--';
+    var intSpots = spots[intKey] || '--';
     var headerClass = isYouth ? 'youth' : (!isOpen ? 'closed-header' : '');
     var liveUrl = 'https://ftlovolleyball.github.io/ftlosummer26/' + ev.url;
     html += '<div class="event-card" id="card-' + ev.id + '">';
@@ -199,8 +203,8 @@ function renderGrid() {
     html += field('date-'+ev.id,     'Date',                    cfg.date     || '', false);
     html += field('deadline-'+ev.id, 'Registration Deadline',   cfg.deadline || '', false);
     html += field('location-'+ev.id, 'Location',                cfg.location || 'Thomas Kidd Elementary School Fields, Richmond, BC', false);
-    html += field('time-'+ev.id,     'Time',                    cfg.time     || '8:45am until 2:30–4:45pm', false);
-    html += field('cost-'+ev.id,     'Cost',                    cfg.cost     || '$40 Individual · $150 per Team of 4 · +$10 per additional (max 6). GST included.', true);
+    html += field('time-'+ev.id,     'Time',                    cfg.time     || '8:45am until 2:30-4:45pm', false);
+    html += field('cost-'+ev.id,     'Cost',                    cfg.cost     || '$40 Individual  /  $150 per Team of 4  /  +$10 per additional (max 6). GST included.', true);
     html += '</div>';
     // Spots
     html += '<div class="spots-row">';
@@ -209,7 +213,7 @@ function renderGrid() {
     html += '</div>';
     // Alert
     html += '<div class="field-group full" style="margin-bottom:14px;">';
-    html += '<label class="field-label">Event Specific Alert (shows below info card — leave blank to hide)</label>';
+    html += '<label class="field-label">Event Specific Alert (shows below info card -- leave blank to hide)</label>';
     html += '<textarea class="alert-field" id="alert-' + ev.id + '" oninput="updatePreview('' + ev.id + '')">' + (cfg.alert || '') + '</textarea>';
     html += '</div>';
     // Preview
@@ -251,7 +255,7 @@ function onToggle(evId) {
 }
 
 function updatePreview(evId) {
-  // evId might come in as 'june20' or 'title-june20' etc — normalize
+  // evId might come in as 'june20' or 'title-june20' etc -- normalize
   var id = evId.includes('-') ? evId.split('-').slice(-1)[0] : evId;
   // handle multi-word ids like 'aug22'
   var realId = EVENT_DEFS.find(function(e){return evId.endsWith(e.id);});
@@ -271,7 +275,7 @@ function updatePreview(evId) {
     return;
   }
   var html = '<div class="preview-card">';
-  html += '<div class="preview-title">' + (title||'—') + '</div>';
+  html += '<div class="preview-title">' + (title||'--') + '</div>';
   if (date)     html += '<p><strong>Date:</strong> ' + date + '</p>';
   if (deadline) html += '<p><strong>Deadline:</strong> ' + deadline + '</p>';
   if (location) html += '<p><strong>Location:</strong> ' + location + '</p>';
