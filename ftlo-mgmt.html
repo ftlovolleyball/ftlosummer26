@@ -158,8 +158,8 @@ function doLogout() {
 
 function loadAllEvents() {
   document.getElementById('eventsGrid').innerHTML = '<div class="loading-bar">Loading tournament data...</div>';
-  var p1 = fetch(SCRIPT_URL + '?action=getAllFormConfigs&v=' + Date.now(), {cache:'no-store'}).then(r=>r.json());
-  var p2 = fetch(SCRIPT_URL + '?action=capacity&v='          + Date.now(), {cache:'no-store'}).then(r=>r.json());
+  var p1 = fetch(SCRIPT_URL + '?action=getAllFormConfigs&v=' + Date.now(), {cache:'no-store'}).then(function(r){return r.json();});
+  var p2 = fetch(SCRIPT_URL + '?action=capacity&v='          + Date.now(), {cache:'no-store'}).then(function(r){return r.json();});
   Promise.all([p1, p2]).then(function(results) {
     var cfgData = results[0];
     var capData = results[1];
