@@ -126,7 +126,7 @@
 
 <script>
 var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwfZHLNDtnpjtN4ScEyrYit3Ht5aqU-E1OznCHU_j4PJT_XNMRXe_AQquTUJLeas7HN/exec';
-var PW = 'ftl0hu3';
+var PW = 'ftloadmin2026';
 
 var EVENT_DEFS = [
   { id:'june20',  label:'Pre-Season Tournament',    date:'June 20',  type:'adult',  begLabel:'Beginner', intLabel:'Intermediate', tab:'Pre-June20',  url:'tournament-june20.html', independent:true },
@@ -141,8 +141,6 @@ var spots   = {};
 
 function doLogin() {
   var entered = document.getElementById('pwInput').value;
-  var debug = document.getElementById('debugMsg');
-  if (debug) debug.textContent = 'You typed: ' + entered + ' | Expected: ' + PW;
   if (entered === PW) {
     document.getElementById('loginWrap').style.display = 'none';
     document.getElementById('mainWrap').style.display  = 'block';
