@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FTLO Tournament Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --teal:#1F4049; --orange:#F8BA44; --white:#FFF9F5; --charcoal:#222; --bg:#f4f0eb; --border:#ddd8d0; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); font-family:'Barlow',sans-serif; color:var(--charcoal); min-height:100vh; }
+  /* LOGIN */
+  .login-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
+  .login-card { background:var(--teal); border-radius:14px; padding:40px 36px; max-width:380px; width:100%; text-align:center; box-shadow:0 4px 24px rgba(0,0,0,0.18); }
+  .login-logo { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:2.2rem; color:var(--orange); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:4px; }
+  .login-sub { font-size:0.85rem; color:rgba(255,249,245,0.6); margin-bottom:28px; letter-spacing:0.08em; text-transform:uppercase; }
+  .login-card input { width:100%; padding:12px 16px; border-radius:7px; border:2px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.1); color:var(--white); font-size:1rem; font-family:'Barlow',sans-serif; outline:none; margin-bottom:12px; text-align:center; letter-spacing:0.1em; }
+  .login-card input::placeholder { color:rgba(255,249,245,0.4); }
+  .login-card input:focus { border-color:var(--orange); }
+  .login-btn { width:100%; padding:13px; background:var(--orange); color:var(--teal); font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.1rem; text-transform:uppercase; border:none; border-radius:7px; cursor:pointer; letter-spacing:0.08em; }
+  .login-err { color:#ff8a80; font-size:0.85rem; margin-top:8px; display:none; }
+  /* MAIN */
+  .main-wrap { display:none; max-width:1100px; margin:0 auto; padding:24px 16px 60px; }
+  .top-bar { background:var(--teal); border-radius:10px; padding:16px 22px; display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+  .top-bar-title { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.5rem; color:var(--orange); text-transform:uppercase; letter-spacing:0.05em; }
+  .top-bar-sub { font-size:0.8rem; color:rgba(255,249,245,0.55); margin-top:2px; }
+  .logout-btn { background:rgba(255,255,255,0.1); color:var(--white); border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:7px 16px; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.85rem; text-transform:uppercase; cursor:pointer; }
+  /* EVENT CARDS */
+  .events-grid { display:grid; grid-template-columns:1fr; gap:20px; }
+  .event-card { background:white; border-radius:12px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.08); }
+  .event-card-header { background:var(--teal); padding:14px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .event-card-header.youth { background:#2e5e35; }
+  .event-card-header.closed-header { background:#6b3a3a; }
+  .event-name { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; color:var(--white); text-transform:uppercase; }
+  .event-meta { font-size:0.8rem; color:rgba(255,249,245,0.6); margin-top:2px; }
+  .status-toggle { display:flex; align-items:center; gap:8px; }
+  .toggle-label { font-size:0.8rem; font-weight:600; color:rgba(255,249,245,0.7); text-transform:uppercase; letter-spacing:0.06em; }
+  .toggle { position:relative; width:48px; height:26px; cursor:pointer; }
+  .toggle input { opacity:0; width:0; height:0; }
+  .toggle-slider { position:absolute; inset:0; background:#c0392b; border-radius:13px; transition:0.3s; }
+  .toggle-slider:before { content:''; position:absolute; width:20px; height:20px; left:3px; bottom:3px; background:white; border-radius:50%; transition:0.3s; }
+  .toggle input:checked + .toggle-slider { background:#27ae60; }
+  .toggle input:checked + .toggle-slider:before { transform:translateX(22px); }
+  .event-body { padding:20px; }
+  .fields-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+  @media(max-width:560px) { .fields-grid { grid-template-columns:1fr; } }
+  .field-group { display:flex; flex-direction:column; gap:4px; }
+  .field-group.full { grid-column:1/-1; }
+  .field-label { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:#666; }
+  .field-input { border:1.5px solid var(--border); border-radius:6px; padding:9px 12px; font-family:'Barlow',sans-serif; font-size:0.9rem; color:var(--charcoal); background:#faf8f5; outline:none; transition:border-color 0.2s; }
+  .field-input:focus { border-color:var(--teal); }
+  .spots-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+  .spots-card { background:#f0f7f9; border:1.5px solid #b8d4da; border-radius:8px; padding:12px 14px; }
+  .spots-card-label { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--teal); margin-bottom:6px; }
+  .spots-live { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.3rem; color:var(--teal); margin-bottom:4px; }
+  .spots-hint { font-size:0.75rem; color:#888; }
+  .alert-field { background:#fff8e1; border:1.5px solid #ffe082; border-radius:6px; padding:9px 12px; font-family:'Barlow',sans-serif; font-size:0.9rem; color:var(--charcoal); width:100%; outline:none; resize:vertical; min-height:60px; }
+  .alert-field:focus { border-color:#f9a825; }
+  /* PREVIEW */
+  .preview-section { border-top:2px solid #f0ebe4; margin-top:16px; padding-top:16px; }
+  .preview-label { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#888; margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+  .preview-label::after { content:''; flex:1; height:1px; background:#e8e2db; }
+  .preview-card { background:white; border-radius:8px; padding:16px 18px; border-left:4px solid var(--teal); box-shadow:0 1px 4px rgba(0,0,0,0.06); font-size:0.88rem; line-height:1.7; }
+  .preview-card.closed-preview { border-left-color:#c0392b; background:#fdf5f5; }
+  .preview-title { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.15rem; color:var(--teal); text-transform:uppercase; margin-bottom:8px; }
+  .preview-card p { color:#555; margin-bottom:3px; }
+  .preview-card strong { color:var(--teal); }
+  .preview-alert { background:#fff3e0; border:1px solid #ffcc80; border-radius:5px; padding:7px 10px; margin-top:8px; font-size:0.82rem; color:#e65100; }
+  .preview-closed { text-align:center; padding:20px; }
+  .preview-closed-icon { font-size:2rem; margin-bottom:6px; }
+  .preview-closed-title { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; color:#c0392b; text-transform:uppercase; }
+  .preview-closed-msg { font-size:0.85rem; color:#888; margin-top:4px; }
+  /* SAVE BTN */
+  .save-row { display:flex; align-items:center; justify-content:space-between; margin-top:16px; gap:12px; flex-wrap:wrap; }
+  .save-btn { background:var(--teal); color:var(--orange); font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1rem; text-transform:uppercase; letter-spacing:0.08em; padding:11px 28px; border-radius:7px; border:none; cursor:pointer; transition:opacity 0.15s; }
+  .save-btn:hover { opacity:0.88; }
+  .save-btn:disabled { opacity:0.5; cursor:not-allowed; }
+  .save-status { font-size:0.85rem; font-weight:600; color:#27ae60; display:none; }
+  .save-status.error { color:#c0392b; }
+  .url-chip { display:inline-flex; align-items:center; gap:6px; background:#f0f7f9; border:1px solid #b8d4da; border-radius:6px; padding:5px 10px; font-size:0.78rem; color:var(--teal); font-family:monospace; margin-top:8px; cursor:pointer; text-decoration:none; }
+  .url-chip:hover { background:#e0eef2; }
+  /* GLOBAL SAVE */
+  .global-bar { background:white; border-radius:10px; padding:16px 20px; margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 1px 6px rgba(0,0,0,0.07); gap:12px; flex-wrap:wrap; }
+  .global-bar-title { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1rem; color:var(--teal); text-transform:uppercase; }
+  .global-bar-sub { font-size:0.8rem; color:#888; }
+  .refresh-btn { background:var(--bg); border:1.5px solid var(--border); color:var(--charcoal); font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.85rem; text-transform:uppercase; padding:8px 16px; border-radius:6px; cursor:pointer; }
+  .loading-bar { text-align:center; padding:40px; color:#888; font-size:0.9rem; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <div class="login-logo">FTLO</div>
+    <div class="login-sub">Tournament Manager</div>
+    <input type="password" id="pwInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Enter</button>
+    <div class="login-err" id="loginErr">Incorrect password</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap" id="mainWrap">
+  <div class="top-bar">
+    <div>
+      <div class="top-bar-title">FTLO Tournament Manager</div>
+      <div class="top-bar-sub">All changes save directly to Google Sheets &mdash; live instantly</div>
+    </div>
+    <button class="logout-btn" onclick="doLogout()">Logout</button>
+  </div>
+
+  <div class="global-bar">
+    <div>
+      <div class="global-bar-title">5 Active Tournament Forms</div>
+      <div class="global-bar-sub">Edit any event below and click Save. Changes go live immediately.</div>
+    </div>
+    <button class="refresh-btn" onclick="loadAllEvents()">&#x21bb; Refresh All</button>
+  </div>
+
+  <div class="events-grid" id="eventsGrid">
+    <div class="loading-bar">Loading tournament data...</div>
+  </div>
+</div>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwfZHLNDtnpjtN4ScEyrYit3Ht5aqU-E1OznCHU_j4PJT_XNMRXe_AQquTUJLeas7HN/exec';
+const PW = 'ftl0hu3';
+
+const EVENT_DEFS = [
+  { id:'june20',  label:'Pre-Season Tournament',    date:'June 20',  type:'adult',  begLabel:'Beginner', intLabel:'Intermediate', tab:'Pre-June20',  url:'tournament-june20.html', independent:true },
+  { id:'july11',  label:'Youth Tournament',         date:'July 11',  type:'youth',  begLabel:'15U',      intLabel:'16U',          tab:'Youth-July11', url:'tournament-youth.html' },
+  { id:'july18',  label:'Mid-Season Tournament',    date:'July 18',  type:'adult',  begLabel:'Beginner', intLabel:'Intermediate', tab:'Mid-July18',   url:'tournament.html?event=july18' },
+  { id:'aug8',    label:'FTLO Exclusive Tournament', date:'Aug 8',   type:'adult',  begLabel:'Beginner', intLabel:'Intermediate', tab:'FTLO-Aug8',    url:'tournament.html?event=aug8' },
+  { id:'aug22',   label:'End-Season Tournament',    date:'Aug 22',   type:'adult',  begLabel:'Beginner', intLabel:'Intermediate', tab:'End-Aug22',    url:'tournament.html?event=aug22' },
+];
+
+var configs = {};
+var spots   = {};
+
+function doLogin() {
+  if (document.getElementById('pwInput').value === PW) {
+    document.getElementById('loginWrap').style.display = 'none';
+    document.getElementById('mainWrap').style.display  = 'block';
+    loadAllEvents();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+}
+
+function doLogout() {
+  document.getElementById('mainWrap').style.display  = 'none';
+  document.getElementById('loginWrap').style.display = 'flex';
+  document.getElementById('pwInput').value = '';
+}
+
+function loadAllEvents() {
+  document.getElementById('eventsGrid').innerHTML = '<div class="loading-bar">Loading tournament data...</div>';
+  var p1 = fetch(SCRIPT_URL + '?action=getAllFormConfigs&v=' + Date.now(), {cache:'no-store'}).then(r=>r.json());
+  var p2 = fetch(SCRIPT_URL + '?action=capacity&v='          + Date.now(), {cache:'no-store'}).then(r=>r.json());
+  Promise.all([p1, p2]).then(function(results) {
+    var cfgData = results[0];
+    var capData = results[1];
+    EVENT_DEFS.forEach(function(ev) {
+      configs[ev.id] = (cfgData && cfgData[ev.id]) ? cfgData[ev.id] : {};
+    });
+    spots = (capData && capData.capacity) ? capData.capacity : {};
+    renderGrid();
+  }).catch(function() {
+    document.getElementById('eventsGrid').innerHTML = '<div class="loading-bar" style="color:#c0392b;">Failed to load data. Check your Apps Script deployment.</div>';
+  });
+}
+
+function renderGrid() {
+  var html = '';
+  EVENT_DEFS.forEach(function(ev) {
+    var cfg     = configs[ev.id] || {};
+    var isOpen  = cfg.status !== 'closed';
+    var isYouth = ev.type === 'youth';
+    var begKey  = 'Tourn_' + (ev.id === 'june20' ? 'June20' : ev.id === 'july11' ? 'July11' : ev.id === 'july18' ? 'July18' : ev.id === 'aug8' ? 'Aug8' : 'Aug22') + '_' + (isYouth ? '15U' : 'Beg');
+    var intKey  = 'Tourn_' + (ev.id === 'june20' ? 'June20' : ev.id === 'july11' ? 'July11' : ev.id === 'july18' ? 'July18' : ev.id === 'aug8' ? 'Aug8' : 'Aug22') + '_' + (isYouth ? '16U' : 'Int');
+    var begSpots = spots[begKey] || '—';
+    var intSpots = spots[intKey] || '—';
+    var headerClass = isYouth ? 'youth' : (!isOpen ? 'closed-header' : '');
+    var liveUrl = 'https://ftlovolleyball.github.io/ftlosummer26/' + ev.url;
+    html += '<div class="event-card" id="card-' + ev.id + '">';
+    html += '<div class="event-card-header ' + headerClass + '">';
+    html += '<div><div class="event-name">' + ev.label + ' &mdash; ' + ev.date + (isYouth ? ' &#127941;' : '') + '</div>';
+    html += '<div class="event-meta">Tab: ' + ev.tab + (ev.independent ? ' &nbsp;&middot;&nbsp; Independent form' : '') + '</div></div>';
+    html += '<div class="status-toggle"><span class="toggle-label">' + (isOpen ? 'Open' : 'Closed') + '</span>';
+    html += '<label class="toggle"><input type="checkbox" id="toggle-' + ev.id + '" ' + (isOpen ? 'checked' : '') + ' onchange="onToggle('' + ev.id + '')"><span class="toggle-slider"></span></label></div>';
+    html += '</div>';
+    html += '<div class="event-body">';
+    // URL chip
+    html += '<a class="url-chip" href="' + liveUrl + '" target="_blank">&#128279; ' + liveUrl + '</a>';
+    // Fields grid
+    html += '<div style="margin-top:14px;"><div class="fields-grid">';
+    html += field('title-'+ev.id,    'Event Title',             cfg.title    || ev.label, false);
+    html += field('date-'+ev.id,     'Date',                    cfg.date     || '', false);
+    html += field('deadline-'+ev.id, 'Registration Deadline',   cfg.deadline || '', false);
+    html += field('location-'+ev.id, 'Location',                cfg.location || 'Thomas Kidd Elementary School Fields, Richmond, BC', false);
+    html += field('time-'+ev.id,     'Time',                    cfg.time     || '8:45am until 2:30–4:45pm', false);
+    html += field('cost-'+ev.id,     'Cost',                    cfg.cost     || '$40 Individual · $150 per Team of 4 · +$10 per additional (max 6). GST included.', true);
+    html += '</div>';
+    // Spots
+    html += '<div class="spots-row">';
+    html += spotsCard(ev.begLabel + ' Spots', begSpots, 'Edit in Google Sheets Capacity tab: ' + begKey);
+    html += spotsCard(ev.intLabel + ' Spots', intSpots, 'Edit in Google Sheets Capacity tab: ' + intKey);
+    html += '</div>';
+    // Alert
+    html += '<div class="field-group full" style="margin-bottom:14px;">';
+    html += '<label class="field-label">Event Specific Alert (shows below info card — leave blank to hide)</label>';
+    html += '<textarea class="alert-field" id="alert-' + ev.id + '" oninput="updatePreview('' + ev.id + '')">' + (cfg.alert || '') + '</textarea>';
+    html += '</div>';
+    // Preview
+    html += '<div class="preview-section">';
+    html += '<div class="preview-label">Live Preview</div>';
+    html += '<div id="preview-' + ev.id + '"></div>';
+    html += '</div>';
+    // Save row
+    html += '<div class="save-row">';
+    html += '<div><button class="save-btn" onclick="saveEvent('' + ev.id + '')" id="savebtn-' + ev.id + '">Save Changes</button>';
+    html += '<span class="save-status" id="savestatus-' + ev.id + '"></span></div></div>';
+    html += '</div></div></div>';
+  });
+  document.getElementById('eventsGrid').innerHTML = html;
+  EVENT_DEFS.forEach(function(ev) { updatePreview(ev.id); });
+}
+
+function field(id, label, val, full) {
+  return '<div class="field-group' + (full?' full':'') + '"><label class="field-label">' + label + '</label><input class="field-input" id="' + id + '" value="' + val.replace(/"/g,'&quot;') + '" oninput="updatePreview('' + id.split('-')[1] + '-' + id.split('-').slice(2).join('-') + '')" onchange="updatePreview('' + id.split('-').slice(1).join('-') + '')"></div>';
+}
+
+function spotsCard(label, val, hint) {
+  var cls = val.toLowerCase().indexOf('waitlist')!==-1 ? 'color:#e65100;' : val.toLowerCase().indexOf('full')!==-1 ? 'color:#c0392b;' : 'color:var(--teal);';
+  return '<div class="spots-card"><div class="spots-card-label">' + label + '</div><div class="spots-live" style="' + cls + '">' + val + '</div><div class="spots-hint">' + hint + '</div></div>';
+}
+
+function onToggle(evId) {
+  updatePreview(evId);
+  var card = document.getElementById('card-' + evId);
+  var header = card.querySelector('.event-card-header');
+  var isOpen = document.getElementById('toggle-' + evId).checked;
+  header.className = 'event-card-header';
+  if (!isOpen) header.classList.add('closed-header');
+  else {
+    var ev = EVENT_DEFS.find(function(e){return e.id===evId;});
+    if (ev && ev.type === 'youth') header.classList.add('youth');
+  }
+  card.querySelector('.toggle-label').textContent = isOpen ? 'Open' : 'Closed';
+}
+
+function updatePreview(evId) {
+  // evId might come in as 'june20' or 'title-june20' etc — normalize
+  var id = evId.includes('-') ? evId.split('-').slice(-1)[0] : evId;
+  // handle multi-word ids like 'aug22'
+  var realId = EVENT_DEFS.find(function(e){return evId.endsWith(e.id);});
+  if (realId) id = realId.id;
+  var previewEl = document.getElementById('preview-' + id);
+  if (!previewEl) return;
+  var isOpen  = document.getElementById('toggle-' + id) && document.getElementById('toggle-' + id).checked;
+  var title    = gv('title-'+id);
+  var date     = gv('date-'+id);
+  var deadline = gv('deadline-'+id);
+  var location = gv('location-'+id);
+  var time     = gv('time-'+id);
+  var cost     = gv('cost-'+id);
+  var alert    = document.getElementById('alert-'+id) ? document.getElementById('alert-'+id).value.trim() : '';
+  if (!isOpen) {
+    previewEl.innerHTML = '<div class="preview-card closed-preview"><div class="preview-closed"><div class="preview-closed-icon">&#128274;</div><div class="preview-closed-title">Registration Closed</div><div class="preview-closed-msg">This event is currently closed.<br>Please email <a href="mailto:info@ftlovolleyball.ca">info@ftlovolleyball.ca</a> for any questions.</div></div></div>';
+    return;
+  }
+  var html = '<div class="preview-card">';
+  html += '<div class="preview-title">' + (title||'—') + '</div>';
+  if (date)     html += '<p><strong>Date:</strong> ' + date + '</p>';
+  if (deadline) html += '<p><strong>Deadline:</strong> ' + deadline + '</p>';
+  if (location) html += '<p><strong>Location:</strong> ' + location + '</p>';
+  if (time)     html += '<p><strong>Time:</strong> ' + time + '</p>';
+  if (cost)     html += '<p><strong>Cost:</strong> ' + cost + '</p>';
+  html += '<p style="font-size:0.82rem;color:#c0392b;margin-top:6px;"><strong>*Do not pay as individual until contacted by FTLO Admin*</strong></p>';
+  if (alert) html += '<div class="preview-alert">&#9888; ' + alert + '</div>';
+  html += '</div>';
+  previewEl.innerHTML = html;
+}
+
+function gv(id) {
+  var el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+function saveEvent(evId) {
+  var btn    = document.getElementById('savebtn-'+evId);
+  var status = document.getElementById('savestatus-'+evId);
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+  status.style.display = 'none';
+  var isOpen = document.getElementById('toggle-'+evId).checked;
+  var data = {
+    action:    'saveFormConfig',
+    eventId:   evId,
+    status:    isOpen ? 'open' : 'closed',
+    title:     gv('title-'+evId),
+    date:      gv('date-'+evId),
+    deadline:  gv('deadline-'+evId),
+    location:  gv('location-'+evId),
+    time:      gv('time-'+evId),
+    cost:      gv('cost-'+evId),
+    alert:     document.getElementById('alert-'+evId) ? document.getElementById('alert-'+evId).value.trim() : ''
+  };
+  fetch(SCRIPT_URL, {method:'POST', body:JSON.stringify(data)})
+    .then(function(r){return r.json();})
+    .then(function(res){
+      btn.disabled = false;
+      btn.textContent = 'Save Changes';
+      status.style.display = 'inline';
+      if (res.result === 'success') {
+        status.className = 'save-status';
+        status.textContent = '&#10003; Saved!';
+      } else {
+        status.className = 'save-status error';
+        status.textContent = 'Error saving. Try again.';
+      }
+      setTimeout(function(){status.style.display='none';}, 3000);
+    })
+    .catch(function(){
+      btn.disabled = false;
+      btn.textContent = 'Save Changes';
+      status.style.display = 'inline';
+      status.className = 'save-status error';
+      status.textContent = 'Network error. Try again.';
+      setTimeout(function(){status.style.display='none';}, 3000);
+    });
+}
+</script>
+</body>
+</html>
