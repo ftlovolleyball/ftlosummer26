@@ -250,6 +250,26 @@
   <!-- SECTION 3 — CONDUCT + RULES -->
   <div class="form-section" id="sec3">
     <!-- Scrollable policy window -->
+    <div class="conduct-box">
+      <h3>Weather Cancellation Refund Policy</h3>
+      <p>As a not-for-profit organization, extreme and unsafe weather conditions resulting in tournament cancellations will follow these conditions:</p>
+      <ul>
+        <li>100% refunded to the Captain if <strong>cancellation by FTLO</strong> occurs <u>before</u> the tournament date.</li>
+        <li>90% refunded on tournament date if cancelled before the first pool play match begins.</li>
+        <li>75% refunded if cancelled after the first pool play round completes.</li>
+        <li>No refunds after 4 pool play rounds. Modified playoffs may still occur depending on forecast.</li>
+        <li>Tournaments continue unless notified by FTLO Tournament Coordinator.</li>
+      </ul>
+    </div>
+    <div class="conduct-box">
+      <h3>Event-Specific Refund Policy</h3>
+      <ul>
+        <li>100% refunded if cancelled 14+ calendar days before event start date.</li>
+        <li>50% refunded if cancelled within 14 days.</li>
+      </ul>
+    </div>
+
+    <!-- Scrollable policy window -->
     <div style="background:white; border-radius:10px; margin-bottom:14px; box-shadow:0 1px 4px rgba(0,0,0,0.07); overflow:hidden;">
       <div style="background:var(--teal); padding:13px 20px; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:0.95rem; text-transform:uppercase; color:var(--white); letter-spacing:0.4px;">
         FTLO Code of Conduct &amp; Policies — Please Read
@@ -549,7 +569,7 @@ function updateFee() {
     return;
   }
   var n = parseInt(sizeEl.value);
-  var fee = n === 1 ? 40 : n <= 4 ? 150 : 150 + (n - 4) * 10;
+  var fee = n < 4 ? n * 40 : n === 4 ? 150 : 150 + (n - 4) * 10;
   var label = n === 1 ? '1 Person (Solo)' : n === 4 ? 'Team of 4' : n + ' People';
   if (feeDiv) {
     feeDiv.textContent = 'Estimated Fee: $' + fee + ' — ' + label + ' (GST included)';
