@@ -904,8 +904,9 @@ function updateFee() {
   if (!sizeEl || !sizeEl.value) return;
   const n = parseInt(sizeEl.value);
   let fee = 0;
-  if (n === 1)      fee = 40;
-  else if (n <= 4)  fee = 150;
+  if (n === 1)        fee = 40;
+  else if (n < 4)   fee = n * 40;
+  else if (n === 4) fee = 150;
   else              fee = 150 + (n - 4) * 10;
   const label = n === 1 ? '1 Person (Solo)' : n === 4 ? 'Team of 4' : n + ' People';
   document.getElementById('feeDisplay').textContent = 'Estimated Fee: $' + fee + ' — ' + label + ' (GST included)';
