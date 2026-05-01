@@ -227,11 +227,15 @@ function renderGrid() {
           mkSpots(ev.begLabel + ' Spots', begSpots, 'Capacity tab key: ' + begKey) +
           mkSpots(ev.intLabel + ' Spots', intSpots, 'Capacity tab key: ' + intKey) +
         '</div>' +
-        '<div class="fg full" style="margin-bottom:14px;">' +
-          '<label>Event Specific Alert (leave blank to hide)</label>' +
-          '<textarea id="alert-' + ev.id + '">' + (cfg.alert || '') + '</textarea>' +
-        '</div>' +
-        '<div class="preview-wrap">' +
+       '<div class="fg full" style="margin-bottom:14px;">' +
+  '<label>Event Specific Alert (leave blank to hide)</label>' +
+  '<textarea id="alert-' + ev.id + '">' + (cfg.alert || '') + '</textarea>' +
+'</div>' +
+'<div class="fg full" style="margin-bottom:14px;">' +
+  '<label>Event Description (shown on registration page, leave blank to hide)</label>' +
+  '<textarea id="description-' + ev.id + '" rows="3">' + (cfg.description || '') + '</textarea>' +
+'</div>' +
+'<div class="preview-wrap">' +
           '<div class="preview-lbl">Live Preview</div>' +
           '<div id="preview-' + ev.id + '"></div>' +
         '</div>' +
@@ -257,9 +261,11 @@ function renderGrid() {
       if (el) el.addEventListener('input', function() { updatePreview(ev.id); });
     });
     var alertEl = document.getElementById('alert-' + ev.id);
-    if (alertEl) alertEl.addEventListener('input', function() { updatePreview(ev.id); });
+if (alertEl) alertEl.addEventListener('input', function() { updatePreview(ev.id); });
+var descEl2 = document.getElementById('description-' + ev.id);
+if (descEl2) descEl2.addEventListener('input', function() { updatePreview(ev.id); });
 
-    // Attach save listener
+// Attach save listener
     document.getElementById('savebtn-' + ev.id).addEventListener('click', function() {
       saveEvent(ev.id);
     });
@@ -307,7 +313,8 @@ function updatePreview(evId) {
   var location = gv('location-' + evId);
   var time     = gv('time-'     + evId);
   var cost     = gv('cost-'     + evId);
-  var alert    = document.getElementById('alert-' + evId) ? document.getElementById('alert-' + evId).value.trim() : '';
+ var alert    = document.getElementById('alert-' + evId) ? document.getElementById('alert-' + evId).value.trim() : '';
+var description = document.getElementById('description-' + evId) ? document.getElementById('description-' + evId).value.trim() : '';;
   var html = '<div class="preview-card">';
   html += '<div class="preview-title">' + (title || '--') + '</div>';
   if (date)     html += '<p><strong>Date:</strong> '                  + date     + '</p>';
@@ -316,8 +323,9 @@ function updatePreview(evId) {
   if (time)     html += '<p><strong>Time:</strong> '                  + time     + '</p>';
   if (cost)     html += '<p><strong>Cost:</strong> '                  + cost     + '</p>';
   html += '<p style="font-size:0.82rem;color:#c0392b;margin-top:6px;"><strong>*Do not pay as individual until contacted by FTLO Admin*</strong></p>';
-  if (alert) html += '<div class="preview-alert-box">Alert: ' + alert + '</div>';
-  html += '</div>';
+  if (description) html += '<p style="font-size:0.85rem;color:#444;margin-top:6px;line-height:1.6;">' + description + '</p>';
+if (alert) html += '<div class="preview-alert-box">Alert: ' + alert + '</div>';
+html += '</div>';
   el.innerHTML = html;
 }
 
@@ -341,24 +349,15 @@ function saveEvent(evId) {
     location:  gv('location-' + evId),
     time:      gv('time-'     + evId),
     cost:      gv('cost-'     + evId),
-    alert:     alertEl ? alertEl.value.trim() : ''
+   alert:     alertEl ? alertEl.value.trim() : '',
+description: (document.getElementById('description-' + evId) || {value:''}).value.trim()
   };
-  fetch(SCRIPT_URL, {method:'POST', body:JSON.stringify(data)})
-    .then(function(r) { return r.json(); })
-    .then(function(res) {
+  fetch(SCRIPT_URL, {method:'POST', mode:'no-cors', body:JSON.stringify(data)})
+    .then(function() {
       btn.disabled = false;
       btn.textContent = 'Save Changes';
-      if (res.result === 'success') {
-        okMsg.style.display = 'inline';
-        setTimeout(function() { okMsg.style.display = 'none'; }, 3000);
-      } else {
-        errMsg.style.display = 'inline';
-      }
-    })
-    .catch(function() {
-      btn.disabled = false;
-      btn.textContent = 'Save Changes';
-      errMsg.style.display = 'inline';
+      okMsg.style.display = 'inline';
+      setTimeout(function() { okMsg.style.display = 'none'; }, 3000);
     });
 }
 </script>
