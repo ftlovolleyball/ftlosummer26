@@ -549,7 +549,7 @@
           <li><strong>Participatory Suitability:</strong> FTLO reserves the right to decline and/or refund a participant's registration if deemed not suitable for the playing environment.</li>
         </ul>
 
-        <p style="font-weight:700; color:var(--teal); font-family:'Barlow Condensed',sans-serif; font-size:0.93rem; text-transform:uppercase; margin-bottom:6px; border-top:1px solid var(--border); padding-top:12px;">General Agreements of Participation</p>
+<p id="generalAgreements" style="font-weight:700; color:var(--teal); font-family:'Barlow Condensed',sans-serif; font-size:0.93rem; text-transform:uppercase; margin-bottom:6px; border-top:1px solid var(--border); padding-top:12px;">General Agreements of Participation</p>
         <ul style="padding-left:18px; margin-bottom:14px;">
           <li style="margin-bottom:5px;"><strong>Assumption of Risks:</strong> It is understood that, by accepting and registering for FTLO Volleyball programs, there are inherent physical risks associated with any sport, including indoor and outdoor volleyball. Participants may be struck by volleyballs during training and league play. FTLO programs are designed with safety in mind, but participants must freely accept that sprained ankles, impact to fingers, body, limbs, and sore muscle groups may result from participation in addition to other potential risks, dangers, and hazards causing possible injury, death, property damage or losses.</li>
           <li style="margin-bottom:5px;"><strong>Participant Conduct &amp; Facility Compliance:</strong> Participants agree to respect all designated areas within and surrounding the school grounds used for FTLO activities. Entry into unauthorized or restricted areas is strictly prohibited. Negligent or reckless behavior toward equipment may result in financial responsibility for damages.</li>
@@ -598,6 +598,9 @@
     </div>
 
     <div class="fee-display" id="feeDisplay">Select team size to calculate your fee</div>
+<div id="pendingReminder" style="display:none; background:#fff8e1; border:1.5px solid #ffcc02; border-radius:8px; padding:12px 16px; margin-bottom:14px; font-size:0.85rem; color:#7a5c00; line-height:1.6;">
+  <strong>Reminder:</strong> For teams of 3 or fewer, please write <strong>"Pending"</strong> on your e-transfer — individual and incomplete team spots must be confirmed by FTLO Admin before payment is finalized.
+</div>
 
     <div class="field-card">
       <span class="fc-label">Please Input How Much Your Registration Fee for E-Transfer Will Be <span class="req">*</span></span>
@@ -833,6 +836,13 @@ function goTo(step) {
   document.getElementById('sec' + step).classList.add('active');
   document.getElementById('pill' + step).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (step === 3) {
+    setTimeout(function() {
+      const scroll = document.getElementById('policyScroll');
+      const target = document.getElementById('generalAgreements');
+      if (scroll && target) scroll.scrollTop = target.offsetTop - 8;
+    }, 80);
+  }
 }
 
 function goToPayment() {
@@ -890,14 +900,17 @@ function updateTeammateHint() {
 // ══════════════════════════════════════
 function updateFee() {
   const sizeEl = document.getElementById('teamSizeSelect');
+  const pendingDiv = document.getElementById('pendingReminder');
   if (!sizeEl || !sizeEl.value) return;
   const n = parseInt(sizeEl.value);
   let fee = 0;
   if (n === 1)      fee = 40;
   else if (n <= 4)  fee = 150;
   else              fee = 150 + (n - 4) * 10;
-  document.getElementById('feeDisplay').textContent = 'Estimated Fee: $' + fee + ' (GST included)';
-  document.getElementById('paymentAmount').value = '$' + fee;
+  const label = n === 1 ? '1 Person (Solo)' : n === 4 ? 'Team of 4' : n + ' People';
+  document.getElementById('feeDisplay').textContent = 'Estimated Fee: $' + fee + ' — ' + label + ' (GST included)';
+  document.getElementById('paymentAmount').value = n <= 3 ? 'Pending' : '$' + fee;
+  if (pendingDiv) pendingDiv.style.display = n <= 3 ? 'block' : 'none';
 }
 
 // teamSize is now a select — onchange handled inline
