@@ -400,7 +400,7 @@ const EVENTS = {
   'july18': {
     title:    '2026 FTLO Mid-Season Tournament',
     date:     'Saturday, July 18th, 2026',
-    deadline: 'Monday, July 14th, 2026',
+    deadline: 'Tuesday, July 14th, 2026',
     cost:     '$40 Individual &nbsp;&middot;&nbsp; $150 per Team of 4 &nbsp;&middot;&nbsp; +$10 per additional player (max 6). GST included.',
     tab:      'Mid-July18',
     begKey:   'Tourn_July18_Beg',
@@ -410,7 +410,8 @@ const EVENTS = {
   'aug8': {
     title:    '2026 FTLO Exclusive Tournament',
     date:     'Saturday, August 8th, 2026',
-    deadline: 'Monday, August 4th, 2026',
+    deadline: 'Tuesday, August 4th, 2026',
+    description: 'All players must have participated in FTLO (Boba) leagues/clinics at one point in time.',
     cost:     '$40 Individual &nbsp;&middot;&nbsp; $150 per Team of 4 &nbsp;&middot;&nbsp; +$10 per additional player (max 6). GST included.',
     tab:      'FTLO-Aug8',
     begKey:   'Tourn_Aug8_Beg',
@@ -420,7 +421,7 @@ const EVENTS = {
   'aug22': {
     title:    '2026 FTLO End-Season Tournament',
     date:     'Saturday, August 22nd, 2026',
-    deadline: 'Monday, August 18th, 2026',
+    deadline: 'Tuesday, August 18th, 2026',
     cost:     '$40 Individual &nbsp;&middot;&nbsp; $150 per Team of 4 &nbsp;&middot;&nbsp; +$10 per additional player (max 6). GST included.',
     tab:      'End-Aug22',
     begKey:   'Tourn_Aug22_Beg',
@@ -486,9 +487,10 @@ function loadFormConfig() {
         var alertEl = document.getElementById('eventAlert');
         if (alertEl) { alertEl.textContent = cfg.alert; alertEl.style.display = 'block'; }
       }
-      if (cfg && cfg.description && cfg.description.trim() !== '') {
+      var desc = (cfg && cfg.description && cfg.description.trim()) || (EVENT.description || '');
+      if (desc) {
         var descEl = document.getElementById('eventDescription');
-        if (descEl) { descEl.textContent = cfg.description; descEl.style.display = 'block'; }
+        if (descEl) { descEl.textContent = desc; descEl.style.display = 'block'; }
       }
     })
     .catch(function() {
@@ -498,6 +500,10 @@ function loadFormConfig() {
       document.getElementById('eventDate').innerHTML     = '<strong>Date:</strong> ' + EVENT.date;
       document.getElementById('eventDeadline').innerHTML = '<strong>Registration Deadline:</strong> ' + EVENT.deadline;
       document.getElementById('eventCost').innerHTML     = '<strong>Cost:</strong> ' + EVENT.cost;
+      if (EVENT.description) {
+        var descEl = document.getElementById('eventDescription');
+        if (descEl) { descEl.textContent = EVENT.description; descEl.style.display = 'block'; }
+      }
     });
 }
 
