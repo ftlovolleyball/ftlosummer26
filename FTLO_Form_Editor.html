@@ -531,18 +531,22 @@ textarea { resize: vertical; min-height: 64px; line-height: 1.55; }
 <!-- TOURNAMENT EVENT DESCRIPTIONS -->
 <div class="panel" id="p-tourn-event">
   <div class="ph"><div class="ph-title">Event Descriptions</div><div class="ph-sub">Text shown between Time and Format on each tournament registration card. Load your <strong>tournament.html</strong> file using the ↑ Load button.</div></div>
-  <div class="notice info"><span>ℹ</span><div>Load <strong>tournament.html</strong> (not index.html) to edit these. After applying, download and upload to GitHub.</div></div>
+  <div class="notice info"><span>ℹ</span><div>Load the relevant tournament HTML file using ↑ Load. Each tournament file stores its own description — load and download separately per file.</div></div>
   <div class="card">
-    <div class="card-title">Mid-Season Tournament — July 18</div>
+    <div class="card-title">Pre-Season Tournament — June 20 <span class="lbl-hint">(load tournament-june20.html)</span></div>
+    <div class="field"><label class="lbl">Event Description <span class="lbl-hint">leave blank to hide</span></label><textarea id="e-tdesc-june20" rows="3" placeholder="e.g. Join us for the 2026 FTLO Pre-Season Tournament on Saturday, June 20th, 2026."></textarea></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Mid-Season Tournament — July 18 <span class="lbl-hint">(load tournament.html?event=july18)</span></div>
     <div class="field"><label class="lbl">Event Description <span class="lbl-hint">leave blank to hide</span></label><textarea id="e-tdesc-july18" rows="3" placeholder="Optional note shown on the registration card between Time and Format..."></textarea></div>
   </div>
   <div class="card">
-    <div class="card-title">FTLO Exclusive Tournament — August 8</div>
-    <div class="field"><label class="lbl">Event Description <span class="lbl-hint">leave blank to hide</span></label><textarea id="e-tdesc-aug8" rows="3" placeholder="e.g. All players must have participated in FTLO (Boba) leagues/clinics at one point in time."></textarea></div>
+    <div class="card-title">FTLO Exclusive Tournament — August 8 <span class="lbl-hint">(load tournament.html?event=aug8)</span></div>
+    <div class="field"><label class="lbl">Event Description <span class="lbl-hint">leave blank to hide</span></label><textarea id="e-tdesc-aug8" rows="3" placeholder="e.g. Join us for the 2026 FTLO Exclusive Tournament on Saturday, August 8th, 2026."></textarea></div>
   </div>
   <div class="card">
-    <div class="card-title">End-Season Tournament — August 22</div>
-    <div class="field"><label class="lbl">Event Description <span class="lbl-hint">leave blank to hide</span></label><textarea id="e-tdesc-aug22" rows="3" placeholder="Optional note shown on the registration card between Time and Format..."></textarea></div>
+    <div class="card-title">End-Season Tournament — August 22 <span class="lbl-hint">(load tournament.html?event=aug22)</span></div>
+    <div class="field"><label class="lbl">Event Description <span class="lbl-hint">leave blank to hide</span></label><textarea id="e-tdesc-aug22" rows="3" placeholder="e.g. Join us for the 2026 FTLO End-Season Tournament on Saturday, August 22nd, 2026."></textarea></div>
   </div>
 </div>
 
@@ -638,12 +642,15 @@ function populate(){
   });
   syncTP();
 
-  // Tournament event descriptions (when tournament.html is loaded)
+  // Tournament event descriptions — EVENTS object (tournament.html)
   ['july18','aug8','aug22'].forEach(function(tid){
     var re=new RegExp("'"+tid+"':\\s*\\{[^{}]*description:\\s*'([^']*)'");
     var m2=c.match(re);
     if(m2) sv('e-tdesc-'+tid,m2[1]);
   });
+  // Static eventDescription paragraph (tournament-june20.html)
+  var june20Re=c.match(/<p id="eventDescription"[^>]*>([^<]*)<\/p>/);
+  if(june20Re) sv('e-tdesc-june20',june20Re[1]);
 }
 
 function buildProgCards(){
@@ -828,6 +835,13 @@ function applyAll(){
   });
 
   var sh=gv('e-suc-h');if(sh)c=c.replace(/<h2>([^<]+)<\/h2>/,'<h2>'+sh+'</h2>');
+
+  // Static eventDescription paragraph (tournament-june20.html)
+  var june20Desc=gv('e-tdesc-june20');
+  c=c.replace(/(<p id="eventDescription"[^>]*>)[^<]*(<\/p>)/,function(match,open,close){
+    var vis=june20Desc?'style="margin-top:8px; font-size:0.9rem; color:#555; line-height:1.6;"':'style="display:none; margin-top:8px; font-size:0.9rem; color:#555; line-height:1.6;"';
+    return '<p id="eventDescription" '+vis+'>'+june20Desc+close;
+  });
 
   // Tournament event descriptions — update EVENTS JS object in tournament HTML files
   ['july18','aug8','aug22'].forEach(function(tid){
