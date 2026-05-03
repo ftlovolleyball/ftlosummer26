@@ -798,10 +798,16 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
       <div class="err-msg">Please enter a valid email address.</div>
     </div>
 
+    <div class="field" id="f-emailConfirm">
+      <label class="lbl">Confirm Email Address <span class="req">*</span></label>
+      <input type="email" name="emailConfirm" placeholder="jane@email.com" autocomplete="off" />
+      <div class="err-msg">Email addresses do not match. Please check for typos.</div>
+    </div>
+
     <div class="field" id="f-phone">
       <label class="lbl">Phone Number <span class="req">*</span></label>
       <input type="tel" name="phone" id="phoneInput" placeholder="604-555-0100" autocomplete="tel" inputmode="numeric" maxlength="12" oninput="formatPhone(this)" />
-      <div class="err-msg">Please enter your phone number.</div>
+      <div class="err-msg">Please enter your full 10-digit phone number (e.g. 604-555-0100).</div>
     </div>
 
     <div class="field-row">
@@ -1686,7 +1692,10 @@ function validateStep(step) {
       markErr('f-email', 'This email address has already been submitted for registration. Each applicant may only register once. Please contact info@ftlovolleyball.ca if you need assistance.');
       ok = false;
     }
-    if (getVal('phone') === '') { markErr('f-phone'); ok = false; } else clearErr('f-phone');
+    var emailConfirm = getVal('emailConfirm');
+    if (emailConfirm === '' || emailConfirm !== email) { markErr('f-emailConfirm'); ok = false; } else clearErr('f-emailConfirm');
+    var phoneDigits = getVal('phone').replace(/\D/g, '');
+    if (phoneDigits.length < 10) { markErr('f-phone'); ok = false; } else clearErr('f-phone');
     if (getVal('city') === '') { markErr('f-city'); ok = false; } else clearErr('f-city');
     if (getVal('gender') === '') { markErr('f-gender'); ok = false; } else clearErr('f-gender');
   }

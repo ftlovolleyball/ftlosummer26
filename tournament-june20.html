@@ -223,16 +223,48 @@
   /* ── PAYMENT ── */
   .payment-box {
     background: var(--teal); color: var(--white);
-    border-radius: 10px; padding: 20px 22px; margin-bottom: 14px;
+    border-radius: 10px; padding: 22px 24px; margin-bottom: 14px;
   }
   .payment-box h3 {
-    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
-    font-size: 1.2rem; text-transform: uppercase; margin-bottom: 12px; color: var(--orange);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+    font-size: 1.35rem; text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: 18px; color: var(--orange);
   }
   .payment-box p { font-size: 0.88rem; line-height: 1.7; }
   .payment-box strong { color: var(--orange); }
   .payment-box ul { padding-left: 18px; margin-top: 6px; font-size: 0.85rem; }
   .payment-box li { margin-bottom: 4px; }
+  .et-step-label {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--orange); margin-bottom: 8px; margin-top: 18px;
+  }
+  .et-step-label:first-of-type { margin-top: 0; }
+  .et-email-row {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 7px; padding: 10px 14px; margin-bottom: 6px;
+  }
+  .et-email-addr {
+    flex: 1; font-family: 'Barlow', monospace; font-weight: 700;
+    font-size: 0.95rem; color: var(--white);
+  }
+  .et-copy-btn {
+    background: var(--orange); color: var(--teal); border: none; border-radius: 5px;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.75rem;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px;
+    cursor: pointer; flex-shrink: 0; transition: background 0.15s;
+  }
+  .et-copy-btn:hover { background: #e0a82e; }
+  .et-hint { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-bottom: 4px; }
+  .et-list { list-style: none; counter-reset: etl; padding: 0; margin-top: 10px; }
+  .et-list li { counter-increment: etl; display: flex; gap: 10px; font-size: 0.86rem; line-height: 1.6; margin-bottom: 6px; }
+  .et-list li::before { content: counter(etl); font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: var(--orange); min-width: 16px; }
+  .et-list strong { color: var(--orange); }
+  .et-submit-note {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 7px; padding: 11px 14px; font-size: 0.9rem; font-weight: 600;
+  }
   .fee-display {
     background: #edf4f6; color: var(--teal);
     border: 2px solid var(--teal);
@@ -347,9 +379,9 @@
     <p><strong>Registration Deadline:</strong> Tuesday, June 16th, 2026</p>
     <p><strong>Location:</strong> Thomas Kidd Elementary School Fields, Richmond, BC</p>
     <p><strong>Time:</strong> 8:45am until 2:30 – 4:45pm (depending on how far you go)</p>
+    <p id="eventDescription" style="display:none; margin-top:8px; font-size:0.9rem; color:#555; line-height:1.6;"></p>
     <p><strong>Format:</strong> Reverse Co-ed 4's. Preferred 4 people. No more than 2 males or females on the court at once. Maximum 6 players per team.</p>
     <p><strong>Cost:</strong> $40 Individual &nbsp;·&nbsp; $150 per Team of 4 &nbsp;·&nbsp; +$10 per additional player (max 6). GST included.</p>
-    <p id="eventDescription" style="margin-top:10px; font-size:0.9rem; color:#444; line-height:1.6;"></p>
     <p style="margin-top:10px; font-size:0.85rem; color:#c0392b;"><strong>*Do not pay as an individual (solo) until contacted by FTLO Admin*</strong></p>
   </div>
 
@@ -379,6 +411,11 @@
     <div class="field-card">
       <span class="fc-label">Email Address <span class="req">*</span></span>
       <input type="email" id="email" placeholder="your@email.com">
+    </div>
+
+    <div class="field-card">
+      <span class="fc-label">Confirm Email Address <span class="req">*</span></span>
+      <input type="email" id="emailConfirm" placeholder="your@email.com" autocomplete="off">
     </div>
 
     <div class="field-card">
@@ -585,17 +622,32 @@
   <div class="form-section" id="sec4">
 
     <div class="payment-box">
-      <h3>Registration Fee</h3>
-      <p>Costs: GST already included.</p>
-      <p style="margin-top:6px;"><strong>$40</strong> for <em>Individual</em> &nbsp;·&nbsp; <strong>$150 per Team of 4</strong> &nbsp;·&nbsp; <strong>$10</strong> per additional player, max 6 total per team.</p>
-      <p style="margin-top:8px;"><strong>*Do not pay as an individual (solo) until contacted by FTLO Admin*</strong></p>
-      <p style="margin-top:14px; color: var(--orange);"><strong>E-transfer to REPORTS@ftlovolleyball.ca</strong></p>
-      <ul>
-        <li>Comment: <strong>FTLO June 20 Tourney [BEG or INT] - [Team Captain]</strong></li>
-        <li>Send Screenshot to <strong>INFO@ftlovolleyball.ca</strong></li>
-        <li>Do not pay as an individual (solo) until contacted by FTLO Admin</li>
-      </ul>
-      <p style="margin-top:10px; font-size:0.8rem; opacity:0.75;">All costs have GST included.</p>
+      <h3>E-Transfer Instructions</h3>
+
+      <div class="et-step-label">Step 1 &mdash; Send E-Transfer Payment To:</div>
+      <div class="et-email-row">
+        <span class="et-email-addr">reports@ftlovolleyball.ca</span>
+        <button class="et-copy-btn" onclick="copyText('reports@ftlovolleyball.ca',this)">Copy</button>
+      </div>
+      <p class="et-hint">E-transfers must ONLY be sent to this address.</p>
+
+      <div class="et-step-label">Step 2 &mdash; Send Payment Screenshot To:</div>
+      <div class="et-email-row">
+        <span class="et-email-addr">info@ftlovolleyball.ca</span>
+        <button class="et-copy-btn" onclick="copyText('info@ftlovolleyball.ca',this)">Copy</button>
+      </div>
+      <ol class="et-list">
+        <li>Send e-transfer payment to <strong>reports@ftlovolleyball.ca</strong> only</li>
+        <li>In the e-transfer comment box enter: <strong>[First Name Last Name] [26 Sum] June20 &ndash; [Beg or Int]</strong></li>
+        <li>Confirm the e-transfer went through before submitting this form</li>
+        <li>Screenshot your completed transfer and email it to <strong>info@ftlovolleyball.ca</strong></li>
+        <li>Save both emails as contacts so FTLO confirmations reach your inbox</li>
+      </ol>
+
+      <div class="et-step-label">Step 3 &mdash; Press Submit Registration Below:</div>
+      <div class="et-submit-note">Press &ldquo;Submit Registration&rdquo; below to receive your email confirmation.</div>
+
+      <p style="margin-top:12px; font-size:0.78rem; color:rgba(255,255,255,0.5);">*Do not pay as an individual (solo) until contacted by FTLO Admin. GST included in all fees.*</p>
     </div>
 
     <div class="fee-display" id="feeDisplay">Select team size to calculate your fee</div>
@@ -727,6 +779,12 @@ function goToSection2() {
   const emailErr = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   setError('email', emailErr);
   if (emailErr) valid = false;
+
+  // Confirm Email
+  const emailConfirm = document.getElementById('emailConfirm').value.trim();
+  const emailConfirmErr = !emailConfirm || emailConfirm !== email;
+  setError('emailConfirm', emailConfirmErr);
+  if (emailConfirmErr) valid = false;
 
   // Phone — must be full ###-###-####
   const phone = document.getElementById('phone').value.trim();
@@ -985,6 +1043,14 @@ function showThankYou(email) {
 // ══════════════════════════════════════
 // PHONE AUTO-FORMAT  ###-###-####
 // ══════════════════════════════════════
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(function() {
+    var orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(function() { btn.textContent = orig; }, 2000);
+  });
+}
+
 function formatPhone(input) {
   // Strip everything except digits
   let digits = input.value.replace(/\D/g, '');

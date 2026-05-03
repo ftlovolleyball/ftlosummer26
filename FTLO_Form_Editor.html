@@ -279,6 +279,10 @@ textarea { resize: vertical; min-height: 64px; line-height: 1.55; }
     <div class="nav" onclick="go('p-success',this)"><div class="nav-ic">✓</div><div class="nav-txt">Success Message</div></div>
     <div class="nav" onclick="go('p-tournaments',this)"><div class="nav-ic">🏐</div><div class="nav-txt">Tournament Dates</div></div>
   </div>
+  <div class="sb-group">
+    <div class="sb-label">Tournament Pages</div>
+    <div class="nav" onclick="go('p-tourn-event',this)"><div class="nav-ic">📋</div><div class="nav-txt">Event Descriptions</div></div>
+  </div>
 </nav>
 
 <!-- ══ CONTENT ══ -->
@@ -524,6 +528,24 @@ textarea { resize: vertical; min-height: 64px; line-height: 1.55; }
   </div>
 </div>
 
+<!-- TOURNAMENT EVENT DESCRIPTIONS -->
+<div class="panel" id="p-tourn-event">
+  <div class="ph"><div class="ph-title">Event Descriptions</div><div class="ph-sub">Text shown between Time and Format on each tournament registration card. Load your <strong>tournament.html</strong> file using the ↑ Load button.</div></div>
+  <div class="notice info"><span>ℹ</span><div>Load <strong>tournament.html</strong> (not index.html) to edit these. After applying, download and upload to GitHub.</div></div>
+  <div class="card">
+    <div class="card-title">Mid-Season Tournament — July 18</div>
+    <div class="field"><label class="lbl">Event Description <span class="lbl-hint">leave blank to hide</span></label><textarea id="e-tdesc-july18" rows="3" placeholder="Optional note shown on the registration card between Time and Format..."></textarea></div>
+  </div>
+  <div class="card">
+    <div class="card-title">FTLO Exclusive Tournament — August 8</div>
+    <div class="field"><label class="lbl">Event Description <span class="lbl-hint">leave blank to hide</span></label><textarea id="e-tdesc-aug8" rows="3" placeholder="e.g. All players must have participated in FTLO (Boba) leagues/clinics at one point in time."></textarea></div>
+  </div>
+  <div class="card">
+    <div class="card-title">End-Season Tournament — August 22</div>
+    <div class="field"><label class="lbl">Event Description <span class="lbl-hint">leave blank to hide</span></label><textarea id="e-tdesc-aug22" rows="3" placeholder="Optional note shown on the registration card between Time and Format..."></textarea></div>
+  </div>
+</div>
+
 </main>
 </div>
 </div>
@@ -615,6 +637,13 @@ function populate(){
     if(c.indexOf(lbl)!==-1)sv('e-t'+i+'l',lbl);
   });
   syncTP();
+
+  // Tournament event descriptions (when tournament.html is loaded)
+  ['july18','aug8','aug22'].forEach(function(tid){
+    var re=new RegExp("'"+tid+"':\\s*\\{[^{}]*description:\\s*'([^']*)'");
+    var m2=c.match(re);
+    if(m2) sv('e-tdesc-'+tid,m2[1]);
+  });
 }
 
 function buildProgCards(){
@@ -799,6 +828,18 @@ function applyAll(){
   });
 
   var sh=gv('e-suc-h');if(sh)c=c.replace(/<h2>([^<]+)<\/h2>/,'<h2>'+sh+'</h2>');
+
+  // Tournament event descriptions — update EVENTS JS object in tournament HTML files
+  ['july18','aug8','aug22'].forEach(function(tid){
+    var newDesc=gv('e-tdesc-'+tid);
+    var existRe=new RegExp("('"+tid+"':\\s*\\{[^{}]*)description:\\s*'[^']*'");
+    if(existRe.test(c)){
+      c=c.replace(existRe,function(match,prefix){return prefix+"description: '"+newDesc+"'";});
+    } else if(newDesc){
+      var insertRe=new RegExp("('"+tid+"':\\s*\\{[^{}]*?)(emailTitle:\\s*'[^']*')");
+      c=c.replace(insertRe,function(match,prefix,title){return prefix+"description: '"+newDesc+"',\n    "+title;});
+    }
+  });
 
   html=c;
   setStatus('Applied — click Download','ready');

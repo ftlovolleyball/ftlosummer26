@@ -133,9 +133,9 @@
     <p id="eventDeadline"><strong>Registration Deadline:</strong> —</p>
     <p><strong>Location:</strong> Thomas Kidd Elementary School Fields, Richmond, BC</p>
     <p><strong>Time:</strong> 8:45am until 2:30 &ndash; 4:45pm (depending on how far you go)</p>
+    <p id="eventDescription" style="display:none; margin-top:8px; font-size:0.9rem; color:#555; line-height:1.6;"></p>
     <p><strong>Format:</strong> Reverse Co-ed 4's. Preferred 4 people. No more than 2 males or females on the court at once. Maximum 6 players per team.</p>
     <p id="eventCost"><strong>Cost:</strong> —</p>
-    <p id="eventDescription" style="display:none; margin-top:10px; font-size:0.9rem; color:#444; line-height:1.6;"></p>
     <p style="margin-top:10px; font-size:0.85rem; color:#c0392b;"><strong>*Do not pay as an individual (solo) until contacted by FTLO Admin*</strong></p>
   </div>
 
@@ -162,6 +162,10 @@
       <input type="email" id="email" placeholder="your@email.com">
     </div>
     <div class="field-card">
+      <span class="fc-label">Confirm Email Address <span class="req">*</span></span>
+      <input type="email" id="emailConfirm" placeholder="your@email.com" autocomplete="off">
+    </div>
+    <div class="field-card">
       <span class="fc-label">Phone Number (including dashes " - ") <span class="req">*</span></span>
       <input type="tel" id="phone" placeholder="604-123-4567" maxlength="12" oninput="formatPhone(this)" inputmode="numeric">
     </div>
@@ -180,6 +184,11 @@
       <span class="fc-label">Which Program Do You Train With? <span class="req">*</span></span>
       <p class="hint">FTLO, EX-FTLO, None (Please share from where you were introduced)</p>
       <input type="text" id="program" placeholder="e.g. FTLO, EX-FTLO, None &ndash; Introduced by...">
+    </div>
+    <div class="field-card" id="affiliationCard" style="display:none;">
+      <span class="fc-label">Team FTLO / Boba Clinic Affiliation <span class="req">*</span></span>
+      <p class="hint">This is an FTLO-exclusive event. Please list each teammate's connection to FTLO and/or Boba clinics (include season/year if possible). Solo registrants: describe your own affiliation.</p>
+      <textarea id="affiliation" rows="3" placeholder="e.g. Jane Smith &ndash; FTLO Summer 2025, John Doe &ndash; Boba Clinic Fall 2024..."></textarea>
     </div>
     <div class="btn-row">
       <button class="btn btn-primary" onclick="goToSection2()">Next: Division &rarr;</button>
@@ -450,6 +459,12 @@ document.addEventListener('DOMContentLoaded', function() {
   closedDiv.innerHTML = '<div style="font-size:3rem;margin-bottom:12px;">&#128274;</div><div style="font-family:Barlow Condensed,sans-serif;font-weight:900;font-size:2rem;color:#1F4049;text-transform:uppercase;margin-bottom:10px;">Registration Closed</div><div id="closedMsg" style="font-size:0.95rem;color:#555;line-height:1.7;">This event is currently closed.<br>Please email <a href=\"mailto:info@ftlovolleyball.ca\" style=\"color:#1F4049;font-weight:600;\">info@ftlovolleyball.ca</a> for any questions.</div>';
   document.body.insertBefore(closedDiv, document.getElementById('mainWrap'));
 
+  // Show affiliation field for FTLO Exclusive tournament only
+  if (eventId === 'aug8') {
+    var affCard = document.getElementById('affiliationCard');
+    if (affCard) affCard.style.display = 'block';
+  }
+
   // Add alert box to info card
   var alertBox = document.createElement('div');
   alertBox.id = 'eventAlert';
@@ -592,9 +607,15 @@ function goToSection2() {
   if (!document.getElementById('lastName').value.trim())  { showErr('lastName');  ok = false; }
   var email = document.getElementById('email').value.trim();
   if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) { showErr('email'); ok = false; }
-  if (!document.getElementById('phone').value.trim())     { showErr('phone');     ok = false; }
+  var emailConfirm = document.getElementById('emailConfirm').value.trim();
+  if (!emailConfirm || emailConfirm !== email) { showErr('emailConfirm'); ok = false; }
+  var phone = document.getElementById('phone').value.trim();
+  if (!/^\d{3}-\d{3}-\d{4}$/.test(phone)) { showErr('phone'); ok = false; }
   if (!document.getElementById('genderSelect').value)     { document.getElementById('genderSelect').style.borderColor = '#c0392b'; ok = false; }
   if (!document.getElementById('program').value.trim())   { showErr('program');   ok = false; }
+  if (EVENT && EVENT.tab === 'FTLO-Aug8') {
+    if (!document.getElementById('affiliation').value.trim()) { showErr('affiliation'); ok = false; }
+  }
   if (ok) goToSection(2);
 }
 
@@ -682,7 +703,8 @@ function submitForm() {
     skillLevel:    document.getElementById('skillLevelSelect').value,
     paymentAmount: document.getElementById('paymentAmount').value.trim(),
     comments:      document.getElementById('comments').value.trim(),
-    conductAgreed: 'Yes'
+    conductAgreed: 'Yes',
+    affiliateInfo: eventId === 'aug8' ? (document.getElementById('affiliation').value.trim()) : ''
   };
 
   fetch(SCRIPT_URL, {
