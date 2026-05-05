@@ -677,6 +677,7 @@ function submitForm() {
     action:        'submitTournament',
     tab:           EVENT.tab,
     eventTitle:    EVENT.emailTitle,
+    payComment:    EVENT.payComment || '',
     timestamp:     new Date().toLocaleString('en-CA', { timeZone: 'America/Vancouver' }),
     firstName:     document.getElementById('firstName').value.trim(),
     lastName:      document.getElementById('lastName').value.trim(),
