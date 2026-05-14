@@ -591,7 +591,7 @@
       <p style="margin-top:8px;"><strong>*Do not pay as an individual (solo) until contacted by FTLO Admin*</strong></p>
       <p style="margin-top:14px; color: var(--orange);"><strong>E-transfer to REPORTS@ftlovolleyball.ca</strong></p>
       <ul>
-        <li>Comment: <strong>FTLO June 20 Tourney [BEG or INT] - [Team Captain]</strong></li>
+        <li>Comment: <strong id="payCommentRef">FTLO June 20 Tourney [BEG or INT] — [Team Captain]</strong></li>
         <li>Send Screenshot to <strong>INFO@ftlovolleyball.ca</strong></li>
         <li>Do not pay as an individual (solo) until contacted by FTLO Admin</li>
       </ul>
@@ -856,6 +856,7 @@ function goToPayment() {
     wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
+  updatePayComment();
   goTo(4);
 }
 
@@ -882,6 +883,16 @@ function selectDiv(el, val) {
   selectedDivision = val;
   updateTeammateHint();
   updateFee();
+  updatePayComment();
+}
+
+function updatePayComment() {
+  var firstName = (document.getElementById('firstName').value || '').trim();
+  var lastName  = (document.getElementById('lastName').value  || '').trim();
+  var name      = (firstName + ' ' + lastName).trim() || '[Team Captain]';
+  var divAbbr   = selectedDivision === 'Beginner' ? 'BEG' : selectedDivision === 'Intermediate' ? 'INT' : '[BEG or INT]';
+  var el = document.getElementById('payCommentRef');
+  if (el) el.textContent = 'FTLO June 20 Tourney ' + divAbbr + ' — ' + name;
 }
 
 function updateTeammateHint() {
