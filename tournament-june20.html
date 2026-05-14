@@ -973,6 +973,7 @@ function submitForm() {
     teammates:     document.getElementById('teammates').value.trim(),
     skillLevel:    document.getElementById('skillLevelSelect').value,
     paymentAmount: document.getElementById('paymentAmount').value.trim(),
+    payComment:    (document.getElementById('payCommentRef') || {}).textContent || '',
     comments:      document.getElementById('comments').value.trim(),
     conductAgreed: 'Yes'
   };
