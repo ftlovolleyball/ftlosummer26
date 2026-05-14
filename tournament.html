@@ -630,6 +630,7 @@ function goToSection4() {
     document.getElementById('conductErr').style.display = 'block'; return;
   }
   document.getElementById('conductErr').style.display = 'none';
+  updatePayComment();
   goToSection(4);
 }
 
@@ -644,6 +645,19 @@ function selectDiv(card, val) {
   card.querySelector('input[type="radio"]').checked = true;
   document.getElementById('divErr').style.display = 'none';
   updateTeammateHint();
+  updatePayComment();
+}
+
+function updatePayComment() {
+  var firstName = (document.getElementById('firstName').value || '').trim();
+  var lastName  = (document.getElementById('lastName').value  || '').trim();
+  var name      = (firstName + ' ' + lastName).trim() || '[Team Captain]';
+  var divEl     = document.querySelector('input[name="division"]:checked');
+  var divVal    = divEl ? divEl.value : '';
+  var divAbbr   = divVal === 'Beginner' ? 'BEG' : divVal === 'Intermediate' ? 'INT' : '[BEG or INT]';
+  var base      = EVENT && EVENT.payComment ? EVENT.payComment : 'FTLO Tourney';
+  var el = document.getElementById('payCommentRef');
+  if (el) el.textContent = base + ' ' + divAbbr + ' — ' + name;
 }
 function formatPhone(el) {
   var v = el.value.replace(/\D/g,'');
