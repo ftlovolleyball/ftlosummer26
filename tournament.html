@@ -417,7 +417,7 @@ const EVENTS = {
     tab:      'FTLO-Aug8',
     begKey:   'Tourn_Aug8_Beg',
     intKey:   'Tourn_Aug8_Int',
-    emailTitle: 'FTLO Exclusive Tournament (August 8)',
+    emailTitle: 'Exclusive Tournament (August 8)',
     payComment: 'FTLO Aug 8 Tourney'
   },
   'aug22': {
@@ -703,6 +703,7 @@ function submitForm() {
     teammates:     document.getElementById('teammates').value.trim(),
     skillLevel:    document.getElementById('skillLevelSelect').value,
     paymentAmount: document.getElementById('paymentAmount').value.trim(),
+    payComment:    (document.getElementById('payCommentRef') || {}).textContent || '',
     comments:      document.getElementById('comments').value.trim(),
     conductAgreed: 'Yes'
   };
