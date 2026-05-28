@@ -148,12 +148,18 @@
     <p id="eventDate"><strong>Date:</strong> Saturday, July 11th, 2026</p>
     <p id="eventDeadline"><strong>Registration Deadline:</strong> Monday, July 7th, 2026</p>
     <p id="eventLocation"><strong>Location:</strong> Thomas Kidd Elementary School Fields, Richmond, BC</p>
-    <p id="eventTime"><strong>Time:</strong> TBD</p>
+    <p id="eventTime"><strong>Time:</strong> Check-in 8:40 AM &middot; End Time 2:00&ndash;4:30 PM</p>
     <p><strong>Format:</strong> Reverse Co-ed 4's. Ages 15U &amp; 16U. Maximum 6 players per team.</p>
     <p id="eventCost"><strong>Cost:</strong> TBD</p>
     <p style="margin-top:10px;font-size:0.85rem;color:#c0392b;"><strong>*Do not pay as an individual (solo) until contacted by FTLO Admin*</strong></p>
-    <p style="margin-top:12px;font-size:0.88rem;line-height:1.6;">&#127909; New to outdoor 4's? Watch: <a href="https://www.youtube.com/watch?v=2ZjS-rAjAbY" target="_blank" style="color:var(--teal);font-weight:600;">Salmon Fest 4s</a></p>
     <div class="alert-box" id="eventAlert"></div>
+  </div>
+
+  <div style="margin-bottom:24px;">
+    <p style="font-size:0.85rem;font-weight:600;color:var(--teal);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;">&#127909; New to outdoor 4's? Watch: Salmon Fest 4s</p>
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;">
+      <iframe src="https://www.youtube.com/embed/2ZjS-rAjAbY" title="Salmon Fest 4s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:8px;"></iframe>
+    </div>
   </div>
 
   <div class="steps">
@@ -188,15 +194,8 @@
       <input type="tel" id="phone" placeholder="604-123-4567" maxlength="12" oninput="formatPhone(this)" inputmode="numeric">
     </div>
     <div class="field-card">
-      <span class="fc-label">Gender <span class="req">*</span></span>
-      <p class="hint">For fair competition, Co-ed R4s teams must have 2 male and 2 female based on <strong>gender assigned at birth</strong>, unless discussed with FTLO in advance.</p>
-      <select id="genderSelect" onchange="this.style.borderColor=''">
-        <option value="">&#x2014; Select &#x2014;</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Non-Binary">Non-Binary</option>
-        <option value="Other (Comments)">Other (Comments)</option>
-      </select>
+      <span class="fc-label">Gender</span>
+      <p class="hint">For fair competition, Co-ed R4s teams must have 2 male and 2 female based on <strong>gender assigned at birth</strong>, unless discussed with FTLO in advance. Please note your gender in your teammates list below as (m), (f), or (o).</p>
     </div>
     <div class="field-card">
       <span class="fc-label">Which Club Team Did You Previously Play For? <span class="req">*</span></span>
@@ -248,8 +247,8 @@
     </div>
     <div class="field-card">
       <span class="fc-label">Teammates' Full Names <span class="req">*</span></span>
-      <p class="hint">List all teammates including the athlete. Solo registrants: enter athlete name only.</p>
-      <textarea id="teammates" rows="3" placeholder="e.g. Jane Smith, John Doe, Alex Kim, Sam Park"></textarea>
+      <p class="hint">List all teammates including the athlete. Include each player's gender as (m), (f), or (o) after their name. Solo registrants: enter athlete name only.</p>
+      <textarea id="teammates" rows="3" placeholder="e.g. Jane Smith (f), John Doe (m), Alex Kim (f), Sam Park (m)"></textarea>
       <div class="error-msg" id="teammatesErr">Please list teammates.</div>
     </div>
     <div class="field-card">
@@ -275,7 +274,7 @@
   <div class="form-section" id="sec3">
     <div class="guardian-box">
       <div class="g-title">Parent / Guardian Information <span>Required</span></div>
-      <p style="font-size:0.85rem;color:#555;margin-bottom:14px;line-height:1.6;">All youth participants require a parent or guardian to provide their contact information. Additional parental consent details will be communicated by FTLO prior to the event.</p>
+      <p style="font-size:0.85rem;color:#555;margin-bottom:14px;line-height:1.6;"><strong>You (the athlete) are filling in your parent or guardian's contact information below.</strong> This allows FTLO to send the required consent documentation directly to them.</p>
       <div class="guardian-field">
         <label>Guardian Full Name <span style="color:#c0392b;">*</span></label>
         <input type="text" id="guardianName" placeholder="Parent or Guardian Full Name">
@@ -302,7 +301,7 @@
     <div class="field-card" style="background:#fff8e1;border:1.5px solid #ffe082;">
       <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
         <input type="checkbox" id="guardianConsent" style="margin-top:3px;accent-color:var(--teal);width:18px;height:18px;flex-shrink:0;">
-        <span style="font-size:0.9rem;line-height:1.55;">I am the parent or legal guardian of the registered athlete and consent to their participation in this FTLO Youth Tournament event. I understand that additional consent documentation may be required prior to the event.</span>
+        <span style="font-size:0.9rem;line-height:1.55;">My parent/guardian is aware of my participation and will sign the consent documentation emailed to them.</span>
       </label>
       <div class="error-msg" id="consentErr">Guardian consent is required.</div>
     </div>
@@ -317,9 +316,7 @@
 
     <div class="conduct-box" style="background:#e8f4f6;border-color:#b8d4da;">
       <h3 style="color:var(--teal);">&#128216; Parent / Guardian Consent Required</h3>
-      <p>As a youth participant (under 18), your <strong>parent or legal guardian must complete a separate consent form</strong> before you can participate in the July 11 tournament. This covers assumption of risk, safe sport expectations, medical notes, and photo/video consent — as a minor, these must be acknowledged by a parent or guardian on your behalf.</p>
-      <p style="margin-top:8px;"><strong>Please forward this link to your parent or guardian after registering:</strong></p>
-      <a href="tournament-youth-waiver.html" target="_blank" style="display:inline-block;margin-top:10px;background:var(--teal);color:var(--white);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.95rem;text-transform:uppercase;padding:10px 20px;border-radius:6px;text-decoration:none;letter-spacing:0.3px;">Parent Consent Form &rarr;</a>
+      <p>There is a <strong>mandatory Parent Consent Form</strong> that all participants' parents or guardians must sign before they can participate. FTLO will email the consent form link to the parent/guardian contact you provided.</p>
     </div>
 
     <div class="conduct-box">
@@ -425,10 +422,10 @@
   <div class="ty-email" id="confirmedEmail"></div>
   <p class="ty-body">Please double-check the email address above for any typos.</p>
 
-  <div style="background:#fff3e0;border:2px solid #ffcc80;border-radius:10px;padding:18px 22px;margin:16px 0;text-align:left;">
-    <p style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.1rem;color:#e65100;text-transform:uppercase;margin-bottom:8px;">&#9888;&#65039; Parent / Guardian Consent Required</p>
-    <p style="font-size:0.9rem;color:#555;line-height:1.6;margin-bottom:12px;">Your parent or guardian must complete the <strong>Parent Consent Form</strong> before you can participate. Please forward this link to them right away — <strong>you will not be able to participate without it.</strong></p>
-    <a href="tournament-youth-waiver.html" target="_blank" style="display:inline-block;background:#e65100;color:white;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;text-transform:uppercase;padding:12px 24px;border-radius:7px;text-decoration:none;letter-spacing:0.5px;">Open Parent Consent Form &rarr;</a>
+  <div style="background:#fff3e0;border:2px solid #ffcc80;border-radius:10px;padding:22px 26px;margin:16px 0;text-align:left;">
+    <p style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.32rem;color:#e65100;text-transform:uppercase;margin-bottom:10px;">&#9888;&#65039; Parent / Guardian Consent Required</p>
+    <p style="font-size:1.08rem;color:#555;line-height:1.6;margin-bottom:14px;">Your parent or guardian must complete the <strong>Parent Consent Form</strong> before you can participate. Please forward this link to them right away — <strong>you will not be able to participate without it.</strong></p>
+    <a href="tournament-youth-waiver.html" target="_blank" style="display:inline-block;background:#e65100;color:white;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.2rem;text-transform:uppercase;padding:14px 28px;border-radius:7px;text-decoration:none;letter-spacing:0.5px;">Open Parent Consent Form &middot; Forward to your parent/guardian to sign &rarr;</a>
   </div>
 
   <p class="ty-body" style="margin-top:10px;">E-transfer your payment to <strong>REPORTS@ftlovolleyball.ca</strong> to complete your registration.</p>
@@ -540,7 +537,6 @@ function goToSection2() {
   var email = v('email');
   if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) { markErr('email'); ok=false; }
   if (!v('phone'))     { markErr('phone');     ok=false; }
-  if (!document.getElementById('genderSelect').value) { document.getElementById('genderSelect').style.borderColor='#c0392b'; ok=false; }
   if (!v('program'))   { markErr('program');   ok=false; }
   if (ok) goToSection(2);
 }
@@ -635,7 +631,7 @@ function submitForm() {
     dob: v('dob'),
     email: v('email'),
     phone: v('phone'),
-    gender: document.getElementById('genderSelect').value,
+    gender: '',
     program: v('program'),
     division: division,
     teamSize: document.getElementById('teamSizeSelect').value,

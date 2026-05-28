@@ -682,7 +682,7 @@
     <div class="ed-grid">
       <div class="ed-row"><span class="ed-label">Date:</span> Saturday, July 11, 2026</div>
       <div class="ed-row"><span class="ed-label">Venue:</span> Thomas Kidd Elementary Park</div>
-      <div class="ed-row"><span class="ed-label">Check-in:</span> 8:45 AM</div>
+      <div class="ed-row"><span class="ed-label">Check-in:</span> 8:40 AM</div>
       <div class="ed-row"><span class="ed-label">Games begin:</span> 9:15 AM</div>
       <div class="ed-row"><span class="ed-label">Estimated finish:</span> 2:00&ndash;4:45 PM (depends on team placement &amp; playoff schedule)</div>
       <div class="ed-row"><span class="ed-label">Format:</span> Outdoor Grass Coed 4s &mdash; Minimum 2 players of opposite gender on at all times</div>
@@ -985,14 +985,48 @@ mandatory.forEach(function(id) {
 document.getElementById('relationship').addEventListener('change', validateForm);
 document.getElementById('relationshipOther') && document.getElementById('relationshipOther').addEventListener('input', validateForm);
 
+var WAIVER_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwfZHLNDtnpjtN4ScEyrYit3Ht5aqU-E1OznCHU_j4PJT_XNMRXe_AQquTUJLeas7HN/exec';
+
 function handleSubmit() {
-  var parentName = document.getElementById('parentFirst').value.trim() + ' ' + document.getElementById('parentLast').value.trim();
-  var youthName = document.getElementById('youthFirst').value.trim() + ' ' + document.getElementById('youthLast').value.trim();
+  var parentFirst = document.getElementById('parentFirst').value.trim();
+  var parentLast = document.getElementById('parentLast').value.trim();
+  var parentName = parentFirst + ' ' + parentLast;
+  var youthFirst = document.getElementById('youthFirst').value.trim();
+  var youthLast = document.getElementById('youthLast').value.trim();
+  var youthName = youthFirst + ' ' + youthLast;
   var rel = document.getElementById('relationship').value;
   if (rel === 'Other') {
     var otherVal = document.getElementById('relationshipOther').value.trim();
     if (otherVal) rel = otherVal;
   }
+  var photoConsent = document.querySelector('input[name="photoConsent"]:checked');
+  var photoVal = photoConsent ? photoConsent.value : 'Not selected';
+
+  var payload = {
+    action: 'submitForm',
+    tab: 'Youth-July11-Waivers',
+    youthFirst: youthFirst,
+    youthLast: youthLast,
+    youthDob: document.getElementById('youthDob').value,
+    parentFirst: parentFirst,
+    parentLast: parentLast,
+    parentEmail: document.getElementById('parentEmail').value.trim(),
+    parentPhone: document.getElementById('parentPhone').value.trim(),
+    relationship: rel,
+    injuries: (document.getElementById('injuries') ? document.getElementById('injuries').value.trim() : ''),
+    conditions: (document.getElementById('conditions') ? document.getElementById('conditions').value.trim() : ''),
+    allergies: (document.getElementById('allergies') ? document.getElementById('allergies').value.trim() : ''),
+    medications: (document.getElementById('medications') ? document.getElementById('medications').value.trim() : ''),
+    photoConsent: photoVal,
+    consentSigned: 'Yes',
+    timestamp: new Date().toISOString()
+  };
+
+  fetch(WAIVER_SCRIPT_URL, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  }).catch(function() {});
+
   document.getElementById('thankyouMsg').textContent = 'Thank you, ' + parentName + '. Your consent for ' + youthName + ' has been recorded. A confirmation has been sent to your email address.';
   document.getElementById('policyContent').style.display = 'none';
   document.getElementById('thankyou').classList.add('active');
