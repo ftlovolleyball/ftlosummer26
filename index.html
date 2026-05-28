@@ -1780,7 +1780,7 @@ function collectData() {
   for (var j = 0; j < hc.length; j++) heardFrom.push(hc[j].value);
 
   return {
-    timestamp:    new Date().toLocaleString('en-CA', { timeZone: 'America/Vancouver' }),
+    timestamp:    (function() { var p = {}; new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Vancouver', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).formatToParts(new Date()).forEach(function(x) { p[x.type] = x.value; }); return p.year + '-' + p.month + '-' + p.day + ' ' + p.hour + ':' + p.minute + ':' + p.second; })(),
     firstName:    getVal('firstName'),
     lastName:     getVal('lastName'),
     email:        getVal('email'),
