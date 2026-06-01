@@ -150,12 +150,12 @@
     <p id="eventLocation"><strong>Location:</strong> Thomas Kidd Elementary School Fields, Richmond, BC</p>
     <p id="eventTime"><strong>Time:</strong> Check-in 8:40 AM &middot; End Time 2:00&ndash;4:30 PM</p>
     <p><strong>Format:</strong> Reverse Co-ed 4's. Ages 15U &amp; 16U. Maximum 6 players per team.</p>
-    <p id="eventCost"><strong>Cost:</strong> TBD</p>
+    <p id="eventCost"><strong>Cost:</strong> $150 / Team of 4 &nbsp;&middot;&nbsp; $40 Solo &nbsp;&middot;&nbsp; $10 per extra player (max 6)</p>
     <p style="margin-top:10px;font-size:0.85rem;color:#c0392b;"><strong>*Do not pay as an individual (solo) until contacted by FTLO Admin*</strong></p>
     <div class="alert-box" id="eventAlert"></div>
   </div>
 
-  <div style="margin-bottom:24px;">
+  <div id="videoEmbed" style="margin-bottom:24px;">
     <p style="font-size:0.85rem;font-weight:600;color:var(--teal);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;">&#127909; New to outdoor 4's? Watch: Salmon Fest 4s</p>
     <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;">
       <iframe src="https://www.youtube.com/embed/2ZjS-rAjAbY" title="Salmon Fest 4s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:8px;"></iframe>
@@ -526,6 +526,8 @@ function goToSection(n) {
     if (i+1 === n) el.classList.add('active');
     else if (i+1 < n) el.classList.add('done');
   });
+  var vid = document.getElementById('videoEmbed');
+  if (vid) vid.style.display = n === 1 ? 'block' : 'none';
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
