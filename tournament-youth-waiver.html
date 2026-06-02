@@ -248,8 +248,8 @@
   }
   .youth-name-field input {
     width: 100%;
-    background: rgba(255,249,245,0.06);
-    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,249,245,0.12);
+    border: 1.5px solid rgba(255,255,255,0.4);
     border-radius: 4px;
     padding: 13px 16px;
     color: var(--white);
@@ -261,7 +261,7 @@
     transition: border-color 0.2s;
   }
   .youth-name-field input::placeholder {
-    color: rgba(255,249,245,0.2);
+    color: rgba(255,249,245,0.5);
     font-size: 22px;
   }
   .youth-name-field input:focus { border-color: var(--orange); }
@@ -868,23 +868,15 @@
 
     <div class="checkbox-row">
       <input type="checkbox" id="check1">
-      <label for="check1">I have read and understood the event details, policies, and participant expectations.</label>
+      <label for="check1">I have read and understood the event details, policies, and participant expectations, and I consent to my child participating in the July 11, 2026 FTLO Youth Tournament. I understand the risks of outdoor recreationally competitive volleyball and acknowledge that FTLO cannot eliminate all risks connected to sport or outdoor conditions.</label>
     </div>
     <div class="checkbox-row">
       <input type="checkbox" id="check2">
-      <label for="check2">I understand the risks of outdoor recreationally competitive volleyball and consent to my child participating.</label>
+      <label for="check2">I confirm my child is part of the 15U / 16U age group (aged 14 or older) and is physically capable of participating in recreationally competitive outdoor volleyball. I understand they must stop playing and notify FTLO staff immediately if they feel unwell, injured, overheated, dizzy, or unable to continue safely.</label>
     </div>
     <div class="checkbox-row">
       <input type="checkbox" id="check3">
-      <label for="check3">I confirm my child is part of the 15U / 16U age group (aged 14 or older) and is physically capable of participating in recreationally competitive outdoor volleyball.</label>
-    </div>
-    <div class="checkbox-row">
-      <input type="checkbox" id="check4">
-      <label for="check4">I understand my child must <strong>check in</strong> at the FTLO tournament command tent before playing and check out if leaving early.</label>
-    </div>
-    <div class="checkbox-row">
-      <input type="checkbox" id="check5">
-      <label for="check5">I understand that my child should stop playing and notify FTLO staff if they feel unwell, injured, overheated, dizzy, or unable to continue safely.</label>
+      <label for="check3">I understand my child must <strong>check in</strong> at the FTLO tournament command tent before playing and <strong>check out</strong> if leaving early. I understand that all parents, guardians, and spectators are expected to follow FTLO staff directions and support a respectful, safe tournament environment.</label>
     </div>
 
     <!-- PHOTO CONSENT: separate opt-in/opt-out, not required -->
@@ -928,7 +920,7 @@
 </footer>
 
 <script>
-var mandatory = ['check1','check2','check3','check4','check5','checkMedical'];
+var mandatory = ['check1','check2','check3','checkMedical'];
 var allFields = ['parentFirst','parentLast','parentEmail','parentPhone','relationship','youthFirst','youthLast','youthDob'];
 
 function formatPhone(input) {
@@ -1003,7 +995,7 @@ function handleSubmit() {
   var photoVal = photoConsent ? photoConsent.value : 'Not selected';
 
   var payload = {
-    action: 'submitForm',
+    action: 'submitTournament',
     tab: 'Youth-July11-Waivers',
     youthFirst: youthFirst,
     youthLast: youthLast,
