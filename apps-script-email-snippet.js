@@ -74,6 +74,11 @@ function handleYouthJuly11Submit(data, ss) {
   if (data.guardianEmail) {
     sendYouthRegistrationEmail(data);
   }
+
+  // ── 3. Send athlete confirmation email (includes consent link) ─────────────
+  if (data.email) {
+    sendYouthAthleteConfirmationEmail(data);
+  }
 }
 
 
@@ -140,6 +145,93 @@ function sendYouthRegistrationEmail(data) {
       _emailRow('Guardian Email',  data.guardianEmail  || '—'),
       _emailRow('Guardian Phone',  data.guardianPhone  || '—'),
       _emailRow('Relationship',    data.guardianRelation || '—'),
+
+      '<div style="border-top:1px solid #ddd;margin:12px 0;"></div>',
+
+      _emailRow('Payment Amount',  data.paymentAmount || '—'),
+      _emailRow('Payer Email',     data.payerEmail    || '—'),
+      _emailRow('E-transfer Ref',  data.payComment    || '—'),
+
+      (data.comments ? _emailRow('Comments', data.comments) : ''),
+
+      '<div style="border-top:1px solid #ddd;margin:12px 0;"></div>',
+      _emailRow('Submitted',       data.timestamp    || '—'),
+    '</div>',
+
+    // Footer
+    '<div style="background:#1F4049;padding:16px 28px;border-radius:0 0 8px 8px;text-align:center;">',
+      '<p style="margin:0;font-size:12px;color:rgba(255,249,245,0.55);">',
+        'FTLO Volleyball Association &mdash; ',
+        '<a href="https://www.ftlovolleyball.ca" style="color:#F8BA44;text-decoration:none;">ftlovolleyball.ca</a>',
+      '</p>',
+    '</div>',
+
+    '</div>'
+  ].join('');
+
+  GmailApp.sendEmail(toEmail, subject, '', {
+    htmlBody: html,
+    cc: CC,
+    name: 'FTLO Volleyball'
+  });
+}
+
+
+function sendYouthAthleteConfirmationEmail(data) {
+  var WAIVER_URL  = 'https://ftlovolleyball.github.io/ftlosummer26/tournament-youth-waiver.html';
+  var CC          = 'youth@ftlovolleyball.ca, operations@ftlovolleyball.ca';
+
+  var athleteName  = ((data.firstName || '') + ' ' + (data.lastName || '')).trim();
+  var guardianName = (data.guardianName || 'your parent/guardian').trim();
+  var toEmail      = data.email;
+
+  var subject = 'Registration Confirmed: Youth LM Grass 4s Tournament July 11 — ' + athleteName;
+
+  var html = [
+    '<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;color:#222;">',
+
+    // Header bar
+    '<div style="background:#1F4049;padding:24px 28px;border-radius:8px 8px 0 0;">',
+      '<p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#F8BA44;">FTLO Volleyball</p>',
+      '<h1 style="margin:0;font-size:22px;line-height:1.25;color:#FFF9F5;">Youth LM Grass 4s Tournament<br>July 11, 2026 — Registration Confirmed</h1>',
+    '</div>',
+
+    // Confirmation message
+    '<div style="background:#e8f5e9;border-left:5px solid #2e7d32;padding:22px 28px;">',
+      '<p style="margin:0 0 4px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#2e7d32;">&#9989; You\'re Registered!</p>',
+      '<p style="margin:0 0 16px;font-size:15px;line-height:1.65;color:#333;">',
+        'Hi <strong>' + athleteName + '</strong>,<br><br>',
+        'Your registration for the <strong>Youth Lower Mainland Grass 4s Tournament</strong>',
+        ' on <strong>Saturday, July 11, 2026</strong> at Thomas Kidd Elementary Park, Richmond, BC has been received.',
+      '</p>',
+    '</div>',
+
+    // Consent form reminder
+    '<div style="background:#fff3e0;border-left:5px solid #e65100;padding:22px 28px;">',
+      '<p style="margin:0 0 4px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#e65100;">&#9888;&#65039; Parent/Guardian Consent Required</p>',
+      '<p style="margin:0 0 16px;font-size:15px;line-height:1.65;color:#333;">',
+        '<strong>' + guardianName + '</strong> will also receive a separate email, but please make sure your parent or guardian',
+        ' completes the consent form below. <strong>You cannot participate without it.</strong>',
+      '</p>',
+      '<a href="' + WAIVER_URL + '"',
+        ' style="display:inline-block;background:#e65100;color:#ffffff;font-size:15px;font-weight:700;',
+        'text-transform:uppercase;padding:14px 28px;border-radius:7px;text-decoration:none;letter-spacing:0.4px;">',
+        '&#128221; Parent Consent Form &rarr;',
+      '</a>',
+      '<p style="margin:12px 0 0;font-size:12px;color:#999;">',
+        'Or copy this link: <a href="' + WAIVER_URL + '" style="color:#e65100;">' + WAIVER_URL + '</a>',
+      '</p>',
+    '</div>',
+
+    // Registration summary
+    '<div style="background:#f7f7f7;border:1px solid #e0e0e0;border-top:none;padding:22px 28px;">',
+      '<p style="margin:0 0 14px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#1F4049;">Your Registration Summary</p>',
+
+      _emailRow('Athlete',         athleteName       || '—'),
+      _emailRow('Division',        data.division     || '—'),
+      _emailRow('Team Size',       data.teamSize     || '—'),
+      _emailRow('Teammates',       (data.teammates   || '—').replace(/\n/g, '<br>')),
+      _emailRow('Skill Level',     data.skillLevel   || '—'),
 
       '<div style="border-top:1px solid #ddd;margin:12px 0;"></div>',
 
