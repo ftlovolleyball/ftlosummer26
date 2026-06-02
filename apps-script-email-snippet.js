@@ -85,7 +85,7 @@ function sendYouthRegistrationEmail(data) {
   var guardianName = (data.guardianName || 'Parent/Guardian').trim();
   var toEmail      = data.guardianEmail;
 
-  var subject = 'Action Required: Sign Consent Form for ' + athleteName + ' — FTLO Youth Tournament July 11';
+  var subject = 'Action Required: Sign Consent Form for ' + athleteName + ' — Youth LM Grass 4s Tournament July 11';
 
   var html = [
     '<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;color:#222;">',
@@ -93,7 +93,7 @@ function sendYouthRegistrationEmail(data) {
     // Header bar
     '<div style="background:#1F4049;padding:24px 28px;border-radius:8px 8px 0 0;">',
       '<p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#F8BA44;">FTLO Volleyball</p>',
-      '<h1 style="margin:0;font-size:22px;line-height:1.25;color:#FFF9F5;">Youth Tournament<br>July 11, 2026 — Parent Consent</h1>',
+      '<h1 style="margin:0;font-size:22px;line-height:1.25;color:#FFF9F5;">Youth LM Grass 4s Tournament<br>July 11, 2026 — Parent Consent</h1>',
     '</div>',
 
     // Action required banner
@@ -101,7 +101,7 @@ function sendYouthRegistrationEmail(data) {
       '<p style="margin:0 0 4px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#e65100;">&#9888;&#65039; Action Required</p>',
       '<p style="margin:0 0 16px;font-size:15px;line-height:1.65;color:#333;">',
         'Hi <strong>' + guardianName + '</strong>,<br><br>',
-        '<strong>' + athleteName + '</strong> has registered for the FTLO Youth Volleyball Tournament',
+        '<strong>' + athleteName + '</strong> has registered for the Youth Lower Mainland Grass 4s Tournament',
         ' on <strong>Saturday, July 11, 2026</strong> at Thomas Kidd Elementary Park, Richmond, BC.',
         '<br><br>',
         '<strong>ALL participating players must have this consent form electronically signed by a parent or guardian before they can participate.</strong>',

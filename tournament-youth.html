@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FTLO Youth Tournament Registration 2026</title>
+<title>Youth Lower Mainland Grass 4s Tournament - 15U / 16U — Registration</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -143,7 +143,7 @@
       <span class="badge">Registration Open</span>
       <span class="youth-badge">Youth Event</span>
     </div>
-    <h2 id="eventTitle">2026 FTLO Youth Tournament</h2>
+    <h2 id="eventTitle">Youth Lower Mainland Grass 4s Tournament — 15U / 16U</h2>
     <hr class="divider-line">
     <p id="eventDate"><strong>Date:</strong> Saturday, July 11th, 2026</p>
     <p id="eventDeadline"><strong>Registration Deadline:</strong> Monday, July 7th, 2026</p>
@@ -451,13 +451,13 @@
 <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwfZHLNDtnpjtN4ScEyrYit3Ht5aqU-E1OznCHU_j4PJT_XNMRXe_AQquTUJLeas7HN/exec';
 const EVENT = {
-  title: '2026 FTLO Youth Tournament',
+  title: 'Youth LM Grass 4s Tournament — 15U / 16U',
   date: 'Saturday, July 11th, 2026',
   deadline: 'Monday, July 7th, 2026',
   tab: 'Youth-July11',
   begKey: 'Tourn_July11_15U',
   intKey: 'Tourn_July11_16U',
-  emailTitle: 'Youth Tournament (July 11)'
+  emailTitle: 'Youth LM Grass 4s Tournament (July 11)'
 };
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -620,7 +620,7 @@ function submitForm() {
   btn.disabled = true;
   document.getElementById('submittingOverlay').classList.add('open');
   var division = (document.querySelector('input[name="division"]:checked')||{}).value||'';
-  var dynamicTitle = division ? 'Youth Tournament (July 11) – ' + division : EVENT.emailTitle;
+  var dynamicTitle = division ? 'Youth LM Grass 4s Tournament (July 11) – ' + division : EVENT.emailTitle;
   var payComment = (document.getElementById('payCommentRef') || {}).textContent || '';
   var data = {
     action: 'submitTournament',
