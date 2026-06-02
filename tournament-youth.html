@@ -155,13 +155,6 @@
     <div class="alert-box" id="eventAlert"></div>
   </div>
 
-  <div id="videoEmbed" style="margin-bottom:24px;">
-    <p style="font-size:0.85rem;font-weight:600;color:var(--teal);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;">&#127909; New to outdoor 4's? Watch: Salmon Fest 4s</p>
-    <div style="position:relative;padding-bottom:31.5%;height:0;overflow:hidden;border-radius:8px;max-width:56%;">
-      <iframe src="https://www.youtube.com/embed/2ZjS-rAjAbY?start=22" title="Salmon Fest 4s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:8px;"></iframe>
-    </div>
-  </div>
-
   <div class="steps">
     <div class="step-pill active" id="pill1">1. Athlete</div>
     <div class="step-pill" id="pill2">2. Division</div>
@@ -172,6 +165,12 @@
 
   <!-- SECTION 1 — ATHLETE INFO -->
   <div class="form-section active" id="sec1">
+    <div style="margin-bottom:20px;">
+      <p style="font-size:0.85rem;font-weight:600;color:var(--teal);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;">&#127909; New to outdoor 4's? Watch: Salmon Fest 4s</p>
+      <div style="position:relative;padding-bottom:31.5%;height:0;overflow:hidden;border-radius:8px;max-width:56%;">
+        <iframe src="https://www.youtube.com/embed/2ZjS-rAjAbY?start=22" title="Salmon Fest 4s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:8px;"></iframe>
+      </div>
+    </div>
     <div class="field-card">
       <span class="fc-label">Athlete First Name <span class="req">*</span></span>
       <input type="text" id="firstName" placeholder="First Name" oninput="updatePayComment()">
@@ -273,7 +272,7 @@
   <!-- SECTION 3 — GUARDIAN INFO -->
   <div class="form-section" id="sec3">
     <div class="guardian-box">
-      <div class="g-title">Parent / Guardian Information <span>Required</span></div>
+      <div class="g-title">Youth Participant to fill: Parent / Guardian Information <span>Required</span></div>
       <p style="font-size:0.85rem;color:#555;margin-bottom:14px;line-height:1.6;"><strong>You (the athlete) are filling in your parent or guardian's contact information below.</strong> This allows FTLO to send the required consent documentation directly to them.</p>
       <div class="guardian-field">
         <label>Guardian Full Name <span style="color:#c0392b;">*</span></label>
@@ -528,8 +527,6 @@ function goToSection(n) {
     if (i+1 === n) el.classList.add('active');
     else if (i+1 < n) el.classList.add('done');
   });
-  var vid = document.getElementById('videoEmbed');
-  if (vid) vid.style.display = n === 1 ? 'block' : 'none';
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
