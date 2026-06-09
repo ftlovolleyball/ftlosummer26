@@ -692,7 +692,7 @@ function submitForm() {
     action:        'submitTournament',
     tab:           EVENT.tab,
     eventTitle:    EVENT.emailTitle,
-    timestamp:     (function() { var p = {}; new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Vancouver', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).formatToParts(new Date()).forEach(function(x) { p[x.type] = x.value; }); return p.year + '-' + p.month + '-' + p.day + ' ' + p.hour + ':' + p.minute + ':' + p.second; })(),
+    timestamp:     (function() { var p = {}; new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Vancouver', year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true }).formatToParts(new Date()).forEach(function(x) { p[x.type] = x.value; }); return p.year + '-' + p.month + '-' + p.day + ', ' + p.hour + ':' + p.minute + ':' + p.second + ' ' + p.dayPeriod; })(),
     firstName:     document.getElementById('firstName').value.trim(),
     lastName:      document.getElementById('lastName').value.trim(),
     email:         document.getElementById('email').value.trim(),
