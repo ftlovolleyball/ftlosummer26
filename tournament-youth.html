@@ -150,8 +150,8 @@
     <p id="eventLocation"><strong>Location:</strong> Thomas Kidd Elementary School Fields, Richmond, BC</p>
     <p id="eventTime"><strong>Time:</strong> Check-in 8:40 AM &middot; End Time 2:00&ndash;4:30 PM</p>
     <p><strong>Format:</strong> Reverse Co-ed 4's. Ages 15U &amp; 16U. Maximum 6 players per team. <strong>Maximum 20 team entries.</strong></p>
-    <p id="eventCost"><strong>Cost:</strong> $150 / Team of 4 &nbsp;&middot;&nbsp; $40 Solo &nbsp;&middot;&nbsp; $10 per extra player (max 6)</p>
-    <p style="margin-top:10px;font-size:0.85rem;color:#c0392b;"><strong>*Do not pay as an individual (solo) until contacted by FTLO Admin*</strong></p>
+    <p id="eventCost"><strong>Cost:</strong> $35 per person &nbsp;&middot;&nbsp; $140 Team of 4 &nbsp;&middot;&nbsp; $10 per extra player (max 6)</p>
+    <p style="margin-top:10px;font-size:0.85rem;color:#c0392b;"><strong>*Solo registrants: do not pay until contacted by FTLO Admin to confirm your spot on a team.*</strong></p>
     <div class="alert-box" id="eventAlert"></div>
   </div>
 
@@ -372,8 +372,9 @@
     <div class="payment-box">
       <h3>Registration Fee</h3>
       <p>Costs: GST already included.</p>
-      <p style="margin-top:6px;"><strong>$40</strong> for <em>Individual</em> &nbsp;·&nbsp; <strong>$150 per Team of 4</strong> &nbsp;·&nbsp; <strong>$10</strong> per additional player, max 6 total per team.</p>
+      <p style="margin-top:6px;"><strong>$35</strong> per person &nbsp;·&nbsp; <strong>$140 Team of 4</strong> &nbsp;·&nbsp; <strong>$10</strong> per additional player, max 6 total per team. GST included.</p>
       <p style="margin-top:8px;"><strong>*Do not pay if you have less than 4 people on your team*</strong></p>
+      <p style="margin-top:10px;font-size:0.85rem;color:rgba(255,249,245,0.75);">&#128161; <em>Tip: If your teammates want to split the cost, have them e-transfer or pay you back their share ($35/person) after you've submitted the team registration.</em></p>
       <p style="margin-top:14px;"><strong>E-transfer to REPORTS@ftlovolleyball.ca</strong></p>
       <ul>
         <li>Comment: <strong id="payCommentRef">FTLO July11 Youth Tourney [15U or 16U] &mdash; [Team Captain]</strong></li>
@@ -398,7 +399,7 @@
     <div class="field-card">
       <span class="fc-label">Payment Amount You Will Be Transferring <span class="req">*</span></span>
       <p class="hint">Auto-calculated from team size. Teams of 3 or fewer: write "Pending" and wait for FTLO confirmation.</p>
-      <input type="text" id="paymentAmount" placeholder="e.g. $150 or Pending">
+      <input type="text" id="paymentAmount" placeholder="e.g. $140 or Pending">
     </div>
 
     <div class="field-card">
@@ -431,7 +432,7 @@
 
   <p class="ty-body" style="margin-top:10px;">E-transfer your payment to <strong>REPORTS@ftlovolleyball.ca</strong> to complete your registration.</p>
   <p class="ty-body">Send a screenshot of your e-transfer to <strong>INFO@ftlovolleyball.ca</strong>.</p>
-  <p class="ty-body" style="color:#c0392b;margin-top:6px;"><strong>Do not pay if you have less than 4 people on your team — wait for FTLO Admin to contact you first.</strong></p>
+  <p class="ty-body" style="color:#c0392b;margin-top:6px;"><strong>Do not pay if you have less than 4 people on your team — wait for FTLO Admin to contact you first.</strong> Team fee is $140 for 4 players · $10 per extra player (max 6) · $35 per person for solo/incomplete registrants once confirmed.</p>
 
   <div style="background:white;border-radius:10px;padding:18px 22px;margin:16px 0;text-align:left;box-shadow:0 1px 6px rgba(0,0,0,0.07);">
     <p style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;color:var(--teal);text-transform:uppercase;margin-bottom:10px;">&#9728;&#65039; Things to Bring</p>
@@ -581,10 +582,10 @@ function updateFee() {
   if (!sizeEl || !sizeEl.value) return;
   var n = parseInt(sizeEl.value);
   var fee = 0;
-  if (n === 1)      fee = 40;
-  else if (n < 4)   fee = n * 40;
-  else if (n === 4) fee = 150;
-  else              fee = 150 + (n - 4) * 10;
+  if (n === 1)      fee = 35;
+  else if (n < 4)   fee = n * 35;
+  else if (n === 4) fee = 140;
+  else              fee = 140 + (n - 4) * 10;
   var label = n === 1 ? '1 Person (Solo)' : n === 4 ? 'Team of 4' : n + ' People';
   if (feeDisplay) feeDisplay.textContent = 'Estimated Fee: $' + fee + ' — ' + label + ' (GST included)';
   var payEl = document.getElementById('paymentAmount');
