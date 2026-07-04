@@ -105,6 +105,15 @@
   .payment-box ul { padding-left: 18px; margin-top: 6px; font-size: 0.85rem; color: rgba(255,249,245,0.85); }
   .payment-box li { margin-bottom: 4px; }
   .fee-display { background: #e8f4f6; border: 2px solid var(--teal); border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--teal); text-align: center; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .blurred-details { filter: blur(6px); user-select: none; pointer-events: none; }
+  .cancelled-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 1100; align-items: center; justify-content: center; padding: 20px; }
+  .cancelled-overlay.open { display: flex; }
+  .cancelled-modal { background: white; border-radius: 12px; padding: 32px 28px; max-width: 420px; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.3); border-top: 6px solid var(--orange); }
+  .cancelled-icon { font-size: 2.6rem; margin-bottom: 10px; }
+  .cancelled-modal h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.6rem; color: var(--teal); text-transform: uppercase; margin-bottom: 12px; }
+  .cancelled-modal p { font-size: 0.93rem; color: #444; line-height: 1.6; margin-bottom: 18px; }
+  .cancelled-modal a { color: var(--teal); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -119,6 +128,15 @@
 <div class="submitting-overlay" id="submittingOverlay">
   <div class="spinner"></div>
   <p>Submitting your registration...</p>
+</div>
+
+<div class="cancelled-overlay open" id="cancelledOverlay">
+  <div class="cancelled-modal">
+    <div class="cancelled-icon">&#128683;</div>
+    <h2>Tournament Cancelled</h2>
+    <p>The Youth Lower Mainland Grass 4s Tournament on <strong>July 11th</strong> has been <strong>cancelled indefinitely</strong>. We apologize for the inconvenience. Questions? Email <a href="mailto:info@ftlovolleyball.ca">info@ftlovolleyball.ca</a>.</p>
+    <button class="btn btn-primary" onclick="document.getElementById('cancelledOverlay').classList.remove('open')">Close</button>
+  </div>
 </div>
 
 <div class="hero">
@@ -138,7 +156,7 @@
 
 <div class="form-wrap" id="mainWrap" style="display:none;">
 
-  <div class="info-card" id="eventInfoCard">
+  <div class="info-card blurred-details" id="eventInfoCard">
     <div>
       <span class="badge">Registration Open</span>
       <span class="youth-badge">Youth Event</span>
@@ -202,7 +220,7 @@
       <input type="text" id="program" placeholder="e.g. Valley Volleyball Club, School Team, None" oninput="updatePayComment()">
     </div>
     <div class="btn-row">
-      <button class="btn btn-primary" onclick="goToSection2()">Next: Division &rarr;</button>
+      <button class="btn btn-primary" onclick="goToSection2()" disabled title="Registration is closed — this tournament has been cancelled.">Next: Division &rarr;</button>
     </div>
   </div>
 
@@ -532,6 +550,8 @@ function goToSection(n) {
 }
 
 function goToSection2() {
+  document.getElementById('cancelledOverlay').classList.add('open');
+  return;
   var ok = true;
   if (!v('firstName')) { markErr('firstName'); ok=false; }
   if (!v('lastName'))  { markErr('lastName');  ok=false; }
