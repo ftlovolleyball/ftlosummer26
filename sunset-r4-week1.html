@@ -59,38 +59,8 @@ html, body {
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body { margin:0; padding: 2.5rem 1rem 5rem; }
 
-.layout { max-width: 1180px; margin: 0 auto; display:flex; align-items:flex-start; gap: 1.75rem; }
-.wrap { max-width: 900px; flex: 1 1 auto; min-width:0; display:flex; flex-direction:column; gap: 2rem; }
+.wrap { max-width: 900px; margin: 0 auto; display:flex; flex-direction:column; gap: 2rem; }
 
-.toc {
-  flex: none; width: 172px; position: sticky; top: 1.5rem; z-index: 10;
-  max-height: calc(100vh - 3rem); overflow-y: auto;
-  display:flex; flex-direction:column; gap:0.2rem;
-  background: var(--paper-raised); border:1px solid var(--line); border-radius:8px;
-  padding: 1rem 0.9rem;
-}
-.toc-title { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color: var(--ink-soft); font-weight:700; margin-bottom:0.4rem; }
-.toc-group { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.06em; color: var(--ink-soft); font-weight:700; margin:0.6rem 0 0.1rem; }
-.toc a { color: var(--ink); text-decoration:none; font-size:0.85rem; font-weight:600; padding:0.35rem 0.5rem; border-radius:5px; }
-.toc a.toc-sub { font-weight:500; padding-left:0.9rem; font-size:0.82rem; }
-.toc a:hover, .toc a:focus-visible { background: var(--teal-light); color: var(--brand-ink); outline:none; }
-
-@media (max-width: 920px) {
-  .layout { flex-direction:column; }
-  .toc {
-    position:sticky; top:0; z-index:10; width:100%; max-width:none;
-    flex-direction:row; flex-wrap:nowrap; align-items:center;
-    overflow-x:auto; gap:0.3rem; padding:0.65rem 0.7rem;
-    border-radius:0; border-width:0 0 1px 0;
-    box-shadow: 0 2px 8px hsl(var(--shadow) / 0.12);
-  }
-  .toc-title, .toc-group { display:none; }
-  .toc a { flex:none; white-space:nowrap; }
-  .toc a.toc-sub { padding-left:0.5rem; }
-  .wrap { padding-top:0.5rem; }
-}
-
-.page { scroll-margin-top: 4rem; }
 .page {
   background: var(--paper-raised); border: 1px solid var(--line); border-radius: 4px;
   overflow: hidden;
@@ -213,8 +183,6 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
 
 @media print {
   body { padding:0; background:#fff; color:#000; }
-  .toc { display:none; }
-  .layout { display:block; max-width:none; }
   .page { box-shadow:none; border:1px solid #999; border-radius:0; break-after:page; page-break-after:always; }
   .page-pad { padding: 0.5in; }
   .wrap { max-width:none; gap:0; }
@@ -235,18 +203,6 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
   a { text-decoration:underline; }
 }
 </style>
-
-<div class="layout">
-
-  <nav class="toc" aria-label="Table of contents">
-    <div class="toc-title">Contents</div>
-    <a href="#overview">Overview</a>
-    <div class="toc-group">Pools</div>
-    <a href="#pool-A" class="toc-sub">Pool A</a><a href="#pool-B" class="toc-sub">Pool B</a><a href="#pool-C" class="toc-sub">Pool C</a><a href="#pool-D" class="toc-sub">Pool D</a><a href="#pool-E" class="toc-sub">Pool E</a><a href="#pool-F" class="toc-sub">Pool F</a>
-    <a href="#reseed">Reseed Key</a>
-    <a href="#league-rules">League Rules</a>
-    <a href="#grass-rules">Grass Rules</a>
-  </nav>
 
 <div class="wrap">
 
@@ -746,5 +702,4 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
     </div>
   </section>
 
-</div>
 </div>
