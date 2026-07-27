@@ -63,7 +63,8 @@ body { margin:0; padding: 2.5rem 1rem 5rem; }
 .wrap { max-width: 900px; flex: 1 1 auto; min-width:0; display:flex; flex-direction:column; gap: 2rem; }
 
 .toc {
-  flex: none; width: 172px; position: sticky; top: 1.5rem;
+  flex: none; width: 172px; position: sticky; top: 1.5rem; z-index: 10;
+  max-height: calc(100vh - 3rem); overflow-y: auto;
   display:flex; flex-direction:column; gap:0.2rem;
   background: var(--paper-raised); border:1px solid var(--line); border-radius:8px;
   padding: 1rem 0.9rem;
@@ -78,16 +79,20 @@ body { margin:0; padding: 2.5rem 1rem 5rem; }
 @media (max-width: 920px) {
   .layout { flex-direction:column; }
   .toc {
-    position:static; width:100%; flex-direction:row; flex-wrap:nowrap;
-    overflow-x:auto; gap:0.3rem; padding:0.7rem;
+    position:sticky; top:0; z-index:10; width:100%; max-width:none;
+    flex-direction:row; flex-wrap:nowrap; align-items:center;
+    overflow-x:auto; gap:0.3rem; padding:0.65rem 0.7rem;
+    border-radius:0; border-width:0 0 1px 0;
+    box-shadow: 0 2px 8px hsl(var(--shadow) / 0.12);
   }
   .toc-title, .toc-group { display:none; }
   .toc a { flex:none; white-space:nowrap; }
   .toc a.toc-sub { padding-left:0.5rem; }
   .toc .print-btn { margin-top:0; margin-left:0.3rem; width:auto; flex:none; }
+  .wrap { padding-top:0.5rem; }
 }
 
-.page { scroll-margin-top: 1.25rem; }
+.page { scroll-margin-top: 4rem; }
 .page {
   background: var(--paper-raised); border: 1px solid var(--line); border-radius: 4px;
   overflow: hidden;
