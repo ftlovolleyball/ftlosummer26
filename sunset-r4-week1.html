@@ -17,6 +17,7 @@
   --gold:        #F8BA44;
   --gold-dark:   #a06800;
   --gold-light:  #fff4dc;
+  --red:         #c0392b;
   --paper:       #FFF9F5;
   --paper-raised:#ffffff;
   --ink:         #222222;
@@ -31,6 +32,7 @@
     --brand-ink:   #8fd8de;
     --gold-light:  #40300f;
     --gold-dark:   #ffce7a;
+    --red:         #ff8b78;
     --paper:       #1b2e33;
     --paper-raised:#24393f;
     --ink:         #FFF9F5;
@@ -40,11 +42,11 @@
   }
 }
 :root[data-theme="dark"] {
-  --teal-light:#2c4750; --brand-ink:#8fd8de; --gold-light:#40300f; --gold-dark:#ffce7a; --paper:#1b2e33; --paper-raised:#24393f;
+  --teal-light:#2c4750; --brand-ink:#8fd8de; --gold-light:#40300f; --gold-dark:#ffce7a; --red:#ff8b78; --paper:#1b2e33; --paper-raised:#24393f;
   --ink:#FFF9F5; --ink-soft:#b9cbce; --line:#446069; --line-soft:#33505a;
 }
 :root[data-theme="light"] {
-  --teal-light:#e8f0f2; --brand-ink:#1F4049; --gold-light:#fff4dc; --gold-dark:#a06800; --paper:#FFF9F5; --paper-raised:#ffffff;
+  --teal-light:#e8f0f2; --brand-ink:#1F4049; --gold-light:#fff4dc; --gold-dark:#a06800; --red:#c0392b; --paper:#FFF9F5; --paper-raised:#ffffff;
   --ink:#222222; --ink-soft:#5b6a6d; --line:#ccc7c0; --line-soft:#ede8e2;
 }
 
@@ -107,29 +109,34 @@ h1,h2,h3 { margin:0; text-wrap: balance; }
 .pool-tag { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; color: var(--gold-dark); border:1px solid var(--gold-dark); border-radius:3px; padding:0.15rem 0.5rem; align-self:center; }
 .pool-move { max-width:340px; font-size:0.86rem; color: var(--ink-soft); line-height:1.5; text-align:right; }
 
-.pool-body { display:grid; grid-template-columns: 0.85fr 1.15fr; gap:2rem; padding: 1.5rem 2.25rem 2rem; }
-@media (max-width:680px) { .pool-body { grid-template-columns:1fr; } }
+.pool-body { display:flex; flex-direction:column; gap:2.5rem; padding: 1.75rem 2.25rem 2.25rem; }
 
-.block-label { font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color: var(--brand-ink); margin-bottom:0.75rem; font-weight:700; }
+.block-label { font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color: var(--brand-ink); margin-bottom:0.9rem; font-weight:700; }
 
 table { width:100%; border-collapse:collapse; font-size:0.9rem; }
-.standings-table th, .standings-table td { padding:0.5rem; border-bottom:1px solid var(--line-soft); text-align:left; }
-.standings-table th { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); font-weight:700; }
-.standings-table td.code { font-family:"Barlow Condensed Local"; color: var(--gold-dark); font-weight:700; }
+.standings-table th, .standings-table td { padding:0.75rem 0.6rem; border-bottom:1px solid var(--line-soft); text-align:left; }
+.standings-table th { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); font-weight:700; line-height:1.5; }
+.standings-table .sub-h { font-size:0.62rem; letter-spacing:0.02em; text-transform:none; opacity:0.8; }
+.standings-table td { font-size:1rem; }
+.standings-table td.code { font-family:"Barlow Condensed Local"; color: var(--gold-dark); font-weight:700; font-size:1.05rem; }
 
 .fill-cell { text-align:center; }
-.fill-cell .line { display:inline-block; width:2.1rem; height:1.15rem; border-bottom:1.5px solid var(--line); }
+.fill-cell .line { display:inline-block; width:3rem; height:1.5rem; border-bottom:2px solid var(--line); }
+
+.frac-cell { text-align:center; white-space:nowrap; }
+.frac-cell .box { display:inline-block; width:1.7rem; height:1.5rem; border-bottom:2px solid var(--line); }
+.frac-cell .slash { display:inline-block; width:1rem; text-align:center; color: var(--ink-soft); font-weight:700; }
 
 .match-table-wrap { overflow-x:auto; }
-.match-table { min-width: 460px; }
-.match-table th { font-size:0.66rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); font-weight:700; padding:0.4rem 0.4rem; border-bottom:1px solid var(--line-soft); }
-.match-table td { padding:0.7rem 0.4rem; border-bottom:1px solid var(--line-soft); font-size:0.88rem; }
-.match-table .gcol { width:0.9rem; border-bottom:none; }
-.match-table td.time-row { background: var(--gold-light); color: var(--gold-dark); font-family:"Barlow Condensed Local"; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; font-size:0.78rem; border-bottom:1px solid var(--line-soft); }
+.match-table { min-width: 520px; }
+.match-table th { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); font-weight:700; padding:0.5rem 0.5rem; border-bottom:1px solid var(--line-soft); }
+.match-table td { padding:1rem 0.5rem; border-bottom:1px solid var(--line-soft); font-size:0.92rem; }
+.match-table .gcol { width:1.1rem; border-bottom:none; }
+.match-table td.time-row { background: var(--gold-light); color: var(--gold-dark); font-family:"Barlow Condensed Local"; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; font-size:0.8rem; border-bottom:1px solid var(--line-soft); padding:0.6rem 0.5rem; }
 
 .score-cell { text-align:center; white-space:nowrap; }
-.score-cell .box { display:inline-block; width:1.3rem; height:1.15rem; border-bottom:1.5px solid var(--line); }
-.score-cell .vs { display:inline-block; width:0.7rem; text-align:center; color: var(--ink-soft); }
+.score-cell .box { display:inline-block; width:1.9rem; height:1.6rem; border-bottom:2px solid var(--line); }
+.score-cell .vs { display:inline-block; width:0.8rem; text-align:center; color: var(--ink-soft); }
 
 /* ---- Reference / reseed page ---- */
 .ref-table-wrap { overflow-x:auto; margin-top:1.25rem; }
@@ -156,18 +163,62 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
 
 .page-foot { margin-top:1.5rem; font-size:0.72rem; color: var(--ink-soft); text-align:right; }
 
+/* ---- Grass rules page ---- */
+.grass-page .letterhead { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; padding-bottom:1.1rem; border-bottom:2px solid var(--brand-ink); }
+.grass-page .letterhead h2 { font-size:1.8rem; color: var(--ink); }
+.grass-page .letterhead .subtitle { font-size:1rem; color: var(--ink-soft); font-weight:600; margin-top:0.2rem; }
+.brand-box-outline { border:1.5px solid var(--brand-ink); color: var(--brand-ink); border-radius:3px; padding:0.3rem 0.7rem; font-family:"Barlow Condensed Local"; font-weight:900; letter-spacing:0.04em; text-transform:uppercase; font-size:0.95rem; flex:none; }
+.grass-list { list-style:none; margin:1.6rem 0 0; padding:0; display:flex; flex-direction:column; gap:1.1rem; counter-reset:grule; }
+.grass-list > li { display:flex; gap:0.9rem; }
+.grass-num { font-family:"Barlow Condensed Local"; font-weight:900; font-size:1.5rem; color: var(--ink); line-height:1.15; flex:none; width:1.6rem; }
+.grass-body { font-size:0.95rem; line-height:1.55; }
+.grass-kw { color: var(--brand-ink); font-weight:800; text-transform:uppercase; letter-spacing:0.01em; }
+.grass-body .warn { color: var(--red); font-weight:700; }
+.grass-sub { list-style:none; margin:0.4rem 0 0; padding:0; display:flex; flex-direction:column; gap:0.3rem; }
+.grass-sub li { display:flex; gap:0.5rem; font-size:0.9rem; color: var(--ink-soft); line-height:1.5; }
+.grass-sub .dot { flex:none; color: var(--brand-ink); }
+.grass-page .page-foot { margin-top:1.75rem; }
+
+/* ---- Print bar (screen only) ---- */
+.print-bar { display:flex; justify-content:flex-end; }
+.print-btn {
+  display:inline-flex; align-items:center; gap:0.5rem;
+  background: var(--brand-ink); color: var(--paper); border:none; border-radius:6px;
+  font-family:"Barlow Local"; font-weight:700; font-size:0.9rem; letter-spacing:0.01em;
+  padding:0.6rem 1.1rem; cursor:pointer;
+}
+.print-btn:hover { opacity:0.9; }
+.print-btn:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+
 @media print {
-  body { padding:0; background:#fff; }
-  .page { box-shadow:none; border:none; border-radius:0; break-after:page; page-break-after:always; }
+  body { padding:0; background:#fff; color:#000; }
+  .print-bar { display:none; }
+  .page { box-shadow:none; border:1px solid #999; border-radius:0; break-after:page; page-break-after:always; }
   .page-pad { padding: 0.5in; }
-  .hero { padding: 0.5in 0.5in 0.4in; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  .pool-head { padding: 0.35in 0.5in; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  .pool-body { padding: 0.4in 0.5in 0.5in; }
   .wrap { max-width:none; gap:0; }
+
+  /* Ink-saving: strip all fills/tints, force black text on white, keep only outlines */
+  * { background:#fff !important; color:#000 !important; box-shadow:none !important; text-shadow:none !important; }
+  .hero { padding: 0.5in 0.5in 0.4in; border-bottom:2px solid #000; }
+  .brand-box, .brand-box-outline { border-color:#000 !important; }
+  .date-pill { border-color:#000 !important; }
+  .date-pill.current { border:1.5px solid #000 !important; font-weight:900; }
+  .pool-head { padding: 0.35in 0.5in; border-bottom:2px solid #000; }
+  .pool-body { padding: 0.4in 0.5in 0.5in; }
+  .pool-tag { border-color:#000 !important; }
+  .callout { border-left:2px solid #000; }
+  .match-table td.time-row { border-top:1px solid #000; border-bottom:1px solid #000; }
+  th, td { border-color:#ccc !important; }
+  .fill-cell .line, .frac-cell .box, .score-cell .box { border-bottom-color:#000 !important; }
+  a { text-decoration:underline; }
 }
 </style>
 
 <div class="wrap">
+
+  <div class="print-bar">
+    <button class="print-btn" onclick="window.print()" type="button">🖶&nbsp; Print pool packet (B&amp;W, ink-saving)</button>
+  </div>
 
   <section class="page cover-page">
     <div class="hero">
@@ -232,8 +283,8 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
       <div class="standings">
         <h3 class="block-label">Week 1 seed &amp; standings</h3>
         <table class="standings-table">
-          <thead><tr><th>Captain</th><th>Code</th><th>Matches</th><th>Games</th><th>Points</th><th>Rank</th></tr></thead>
-          <tbody><tr><td>Kevin Nguyen</td><td class="code">A1</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Aahron Sangalang</td><td class="code">A2</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Aj grape</td><td class="code">A3</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Vanna Nguyen</td><td class="code">A4</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr></tbody>
+          <thead><tr><th>Captain</th><th>Code</th><th>Matches<br><span class="sub-h">W&nbsp;/&nbsp;L</span></th><th>Sets<br><span class="sub-h">W&nbsp;/&nbsp;L</span></th><th>Rank</th></tr></thead>
+          <tbody><tr><td>Kevin Nguyen</td><td class="code">A1</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Aahron Sangalang</td><td class="code">A2</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Aj grape</td><td class="code">A3</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Vanna Nguyen</td><td class="code">A4</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr></tbody>
         </table>
       </div>
 
@@ -243,7 +294,7 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
         <table class="match-table">
           <thead>
             <tr><th colspan="4">Court 1</th><th class="gcol"></th><th colspan="4">Court 2</th></tr>
-            <tr><th>Match</th><th>G1</th><th>G2</th><th>G3</th><th class="gcol"></th><th>Match</th><th>G1</th><th>G2</th><th>G3</th></tr>
+            <tr><th>Match</th><th>Set&nbsp;1</th><th>Set&nbsp;2</th><th>Set&nbsp;3</th><th class="gcol"></th><th>Match</th><th>Set&nbsp;1</th><th>Set&nbsp;2</th><th>Set&nbsp;3</th></tr>
           </thead>
           <tbody>
             <tr>
@@ -276,8 +327,8 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
       <div class="standings">
         <h3 class="block-label">Week 1 seed &amp; standings</h3>
         <table class="standings-table">
-          <thead><tr><th>Captain</th><th>Code</th><th>Matches</th><th>Games</th><th>Points</th><th>Rank</th></tr></thead>
-          <tbody><tr><td>Danny Ly</td><td class="code">B1</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Nina Chiang</td><td class="code">B2</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Matthew Mendoza</td><td class="code">B3</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Alex Lu</td><td class="code">B4</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr></tbody>
+          <thead><tr><th>Captain</th><th>Code</th><th>Matches<br><span class="sub-h">W&nbsp;/&nbsp;L</span></th><th>Sets<br><span class="sub-h">W&nbsp;/&nbsp;L</span></th><th>Rank</th></tr></thead>
+          <tbody><tr><td>Danny Ly</td><td class="code">B1</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Nina Chiang</td><td class="code">B2</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Matthew Mendoza</td><td class="code">B3</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Alex Lu</td><td class="code">B4</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr></tbody>
         </table>
       </div>
 
@@ -287,7 +338,7 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
         <table class="match-table">
           <thead>
             <tr><th colspan="4">Court 3</th><th class="gcol"></th><th colspan="4">Court 4</th></tr>
-            <tr><th>Match</th><th>G1</th><th>G2</th><th>G3</th><th class="gcol"></th><th>Match</th><th>G1</th><th>G2</th><th>G3</th></tr>
+            <tr><th>Match</th><th>Set&nbsp;1</th><th>Set&nbsp;2</th><th>Set&nbsp;3</th><th class="gcol"></th><th>Match</th><th>Set&nbsp;1</th><th>Set&nbsp;2</th><th>Set&nbsp;3</th></tr>
           </thead>
           <tbody>
             <tr>
@@ -320,8 +371,8 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
       <div class="standings">
         <h3 class="block-label">Week 1 seed &amp; standings</h3>
         <table class="standings-table">
-          <thead><tr><th>Captain</th><th>Code</th><th>Matches</th><th>Games</th><th>Points</th><th>Rank</th></tr></thead>
-          <tbody><tr><td>Phil Majak</td><td class="code">C1</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Caleb Choo</td><td class="code">C2</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Daria Tai</td><td class="code">C3</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>An Tran</td><td class="code">C4</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr></tbody>
+          <thead><tr><th>Captain</th><th>Code</th><th>Matches<br><span class="sub-h">W&nbsp;/&nbsp;L</span></th><th>Sets<br><span class="sub-h">W&nbsp;/&nbsp;L</span></th><th>Rank</th></tr></thead>
+          <tbody><tr><td>Phil Majak</td><td class="code">C1</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Caleb Choo</td><td class="code">C2</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Daria Tai</td><td class="code">C3</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>An Tran</td><td class="code">C4</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr></tbody>
         </table>
       </div>
 
@@ -331,7 +382,7 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
         <table class="match-table">
           <thead>
             <tr><th colspan="4">Court 5</th><th class="gcol"></th><th colspan="4">Court 6</th></tr>
-            <tr><th>Match</th><th>G1</th><th>G2</th><th>G3</th><th class="gcol"></th><th>Match</th><th>G1</th><th>G2</th><th>G3</th></tr>
+            <tr><th>Match</th><th>Set&nbsp;1</th><th>Set&nbsp;2</th><th>Set&nbsp;3</th><th class="gcol"></th><th>Match</th><th>Set&nbsp;1</th><th>Set&nbsp;2</th><th>Set&nbsp;3</th></tr>
           </thead>
           <tbody>
             <tr>
@@ -364,8 +415,8 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
       <div class="standings">
         <h3 class="block-label">Week 1 seed &amp; standings</h3>
         <table class="standings-table">
-          <thead><tr><th>Captain</th><th>Code</th><th>Matches</th><th>Games</th><th>Points</th><th>Rank</th></tr></thead>
-          <tbody><tr><td>Kyle Historillo</td><td class="code">D1</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Sherwin Catubig</td><td class="code">D2</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Simon Shum</td><td class="code">D3</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Phoebe Nahuman</td><td class="code">D4</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr></tbody>
+          <thead><tr><th>Captain</th><th>Code</th><th>Matches<br><span class="sub-h">W&nbsp;/&nbsp;L</span></th><th>Sets<br><span class="sub-h">W&nbsp;/&nbsp;L</span></th><th>Rank</th></tr></thead>
+          <tbody><tr><td>Kyle Historillo</td><td class="code">D1</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Sherwin Catubig</td><td class="code">D2</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Simon Shum</td><td class="code">D3</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Phoebe Nahuman</td><td class="code">D4</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr></tbody>
         </table>
       </div>
 
@@ -375,7 +426,7 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
         <table class="match-table">
           <thead>
             <tr><th colspan="4">Court 7</th><th class="gcol"></th><th colspan="4">Court 8</th></tr>
-            <tr><th>Match</th><th>G1</th><th>G2</th><th>G3</th><th class="gcol"></th><th>Match</th><th>G1</th><th>G2</th><th>G3</th></tr>
+            <tr><th>Match</th><th>Set&nbsp;1</th><th>Set&nbsp;2</th><th>Set&nbsp;3</th><th class="gcol"></th><th>Match</th><th>Set&nbsp;1</th><th>Set&nbsp;2</th><th>Set&nbsp;3</th></tr>
           </thead>
           <tbody>
             <tr>
@@ -408,8 +459,8 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
       <div class="standings">
         <h3 class="block-label">Week 1 seed &amp; standings</h3>
         <table class="standings-table">
-          <thead><tr><th>Captain</th><th>Code</th><th>Matches</th><th>Games</th><th>Points</th><th>Rank</th></tr></thead>
-          <tbody><tr><td>Cindy Ha</td><td class="code">E1</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Joshua Lee</td><td class="code">E2</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Marissa Wong</td><td class="code">E3</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>David Chen</td><td class="code">E4</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr></tbody>
+          <thead><tr><th>Captain</th><th>Code</th><th>Matches<br><span class="sub-h">W&nbsp;/&nbsp;L</span></th><th>Sets<br><span class="sub-h">W&nbsp;/&nbsp;L</span></th><th>Rank</th></tr></thead>
+          <tbody><tr><td>Cindy Ha</td><td class="code">E1</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Joshua Lee</td><td class="code">E2</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Marissa Wong</td><td class="code">E3</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>David Chen</td><td class="code">E4</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr></tbody>
         </table>
       </div>
 
@@ -419,7 +470,7 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
         <table class="match-table">
           <thead>
             <tr><th colspan="4">Court 9</th><th class="gcol"></th><th colspan="4">Court 10</th></tr>
-            <tr><th>Match</th><th>G1</th><th>G2</th><th>G3</th><th class="gcol"></th><th>Match</th><th>G1</th><th>G2</th><th>G3</th></tr>
+            <tr><th>Match</th><th>Set&nbsp;1</th><th>Set&nbsp;2</th><th>Set&nbsp;3</th><th class="gcol"></th><th>Match</th><th>Set&nbsp;1</th><th>Set&nbsp;2</th><th>Set&nbsp;3</th></tr>
           </thead>
           <tbody>
             <tr>
@@ -452,8 +503,8 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
       <div class="standings">
         <h3 class="block-label">Week 1 seed &amp; standings</h3>
         <table class="standings-table">
-          <thead><tr><th>Captain</th><th>Code</th><th>Matches</th><th>Games</th><th>Points</th><th>Rank</th></tr></thead>
-          <tbody><tr><td>Stephanie Lam</td><td class="code">F1</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Anna Ma</td><td class="code">F2</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Akina Lam</td><td class="code">F3</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Vienna Cheng</td><td class="code">F4</td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td><td class="fill-cell"><span class="line"></span></td></tr></tbody>
+          <thead><tr><th>Captain</th><th>Code</th><th>Matches<br><span class="sub-h">W&nbsp;/&nbsp;L</span></th><th>Sets<br><span class="sub-h">W&nbsp;/&nbsp;L</span></th><th>Rank</th></tr></thead>
+          <tbody><tr><td>Stephanie Lam</td><td class="code">F1</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Anna Ma</td><td class="code">F2</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Akina Lam</td><td class="code">F3</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr><tr><td>Vienna Cheng</td><td class="code">F4</td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="frac-cell"><span class="box"></span><span class="slash">/</span><span class="box"></span></td><td class="fill-cell"><span class="line"></span></td></tr></tbody>
         </table>
       </div>
 
@@ -463,7 +514,7 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
         <table class="match-table">
           <thead>
             <tr><th colspan="4">Court 11</th><th class="gcol"></th><th colspan="4">Court 12</th></tr>
-            <tr><th>Match</th><th>G1</th><th>G2</th><th>G3</th><th class="gcol"></th><th>Match</th><th>G1</th><th>G2</th><th>G3</th></tr>
+            <tr><th>Match</th><th>Set&nbsp;1</th><th>Set&nbsp;2</th><th>Set&nbsp;3</th><th class="gcol"></th><th>Match</th><th>Set&nbsp;1</th><th>Set&nbsp;2</th><th>Set&nbsp;3</th></tr>
           </thead>
           <tbody>
             <tr>
@@ -605,6 +656,63 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
       </li>
     </ol>
     <div class="page-foot">Recommended: print this page once per season and post it at the venue, rather than reprinting it weekly.</div>
+    </div>
+  </section>
+
+  <section class="page grass-page">
+    <div class="page-pad">
+      <div class="letterhead">
+        <div>
+          <h2 class="display">FTLO Volleyball</h2>
+          <div class="subtitle">Outdoor Modified Grass Rules</div>
+        </div>
+        <span class="brand-box-outline">FTLO</span>
+      </div>
+
+      <ol class="grass-list">
+        <li>
+      <span class="grass-num">1.</span>
+      <div class="grass-body"><span class="grass-kw">Rally Point</span> scoring. Normally win by 2, sometimes capped.</div>
+    </li>
+<li>
+      <span class="grass-num">2.</span>
+      <div class="grass-body"><span class="grass-kw">Serves</span> that touch the net and over are considered live.<ul class="grass-sub"><li><span class="dot">&bull;</span><span>Players cannot touch the net at all.</span></li></ul></div>
+    </li>
+<li>
+      <span class="grass-num">3.</span>
+      <div class="grass-body"><span class="grass-kw">Rotation</span> of servers on each side-out is mandatory, not rotation of positions.</div>
+    </li>
+<li>
+      <span class="grass-num">4.</span>
+      <div class="grass-body"><span class="grass-kw">Receptions</span> of serves, attacks, or balls over the net can be taken in a volley (open hand pass). <span class="warn">Lifts are not permitted.</span></div>
+    </li>
+<li>
+      <span class="grass-num">5.</span>
+      <div class="grass-body"><span class="grass-kw">Attacks</span> may be a hit, roll-shot, closed-hand poke. Open hand tips not allowed.<ul class="grass-sub"><li><span class="dot">&bull;</span><span><span class="warn">NOT</span> allowed to attack the ball if it&rsquo;s entirely in the opponent&rsquo;s space.</span></li></ul></div>
+    </li>
+<li>
+      <span class="grass-num">6.</span>
+      <div class="grass-body"><span class="grass-kw">Volleys</span> made over the net must be done with shoulders and feet squared to the setting target, either forwards or backwards.<ul class="grass-sub"><li><span class="dot">&bull;</span><span>&ldquo;Double-Hit&rdquo; setting faults can only be called by your own team or referee.</span></li></ul></div>
+    </li>
+<li>
+      <span class="grass-num">7.</span>
+      <div class="grass-body"><span class="grass-kw">Blocks</span> do not count as a touch.<ul class="grass-sub"><li><span class="dot">&bull;</span><span>Are <span class="warn">illegal</span> if it clearly interferes with an opponent&rsquo;s 3rd contact attempt.</span></li><li><span class="dot">&bull;</span><span>i.e. Reaching over the net and blocking the ball before their 3rd contact is made.</span></li></ul></div>
+    </li>
+<li>
+      <span class="grass-num">8.</span>
+      <div class="grass-body"><span class="grass-kw">Male Specific Rules</span><ul class="grass-sub"><li><span class="dot">&bull;</span><span><span class="warn">Back row jump attacks</span> permitted if last point of foot contact was outside the 3m line.</span></li><li><span class="dot">&bull;</span><span><span class="warn">May only block males</span>, unless specific females allow it for each set.</span></li><li><span class="dot">&bull;</span><span>&ldquo;2-line rule&rdquo; &mdash; balls played over the net that do not cross the two lines (personal 3m and center line, OR center line and opponent&rsquo;s 3m) result in: point to opponent if left untouched, or play on if opponents touch the ball.</span></li><li><span class="dot">&bull;</span><span><span class="warn">Soft blocks on females</span> count as the team&rsquo;s first contact, or are a fault if the male&rsquo;s block goes back to the female&rsquo;s side.</span></li></ul></div>
+    </li>
+<li>
+      <span class="grass-num">9.</span>
+      <div class="grass-body"><span class="grass-kw">Skyball</span> encouraged when at set-point and with a large lead.<ul class="grass-sub"><li><span class="dot">&bull;</span><span>House rules for skyball re-serves. IYKYK.</span></li></ul></div>
+    </li>
+<li>
+      <span class="grass-num">10.</span>
+      <div class="grass-body"><span class="grass-kw">When In Doubt, Re-serve!</span></div>
+    </li>
+      </ol>
+
+      <div class="page-foot">Revised July 2023</div>
     </div>
   </section>
 
