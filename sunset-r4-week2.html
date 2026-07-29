@@ -140,14 +140,6 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
 .score-cell .box { display:inline-block; width:1.9rem; height:1.6rem; border-bottom:2px solid var(--line); }
 .score-cell .vs { display:inline-block; width:0.8rem; text-align:center; color: var(--ink-soft); }
 
-/* ---- Reference / reseed page ---- */
-.ref-table-wrap { overflow-x:auto; margin-top:1.25rem; }
-.ref-table { min-width:560px; }
-.ref-table th, .ref-table td { padding:0.6rem 0.7rem; border-bottom:1px solid var(--line-soft); text-align:left; font-size:0.88rem; vertical-align:top; }
-.ref-table th { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-soft); font-weight:700; }
-.rp-letter { font-family:"Barlow Condensed Local"; font-weight:900; color: var(--brand-ink); font-size:1.15rem; }
-.rp-preview { font-family:"Barlow Condensed Local"; font-weight:700; letter-spacing:0.04em; color: var(--gold-dark); }
-
 .note { font-size:0.9rem; color: var(--ink-soft); line-height:1.6; margin-top:0.9rem; }
 .note b { color: var(--ink); }
 
@@ -231,6 +223,7 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
 
       <hr class="divider">
 
+      <h2 class="rules-label">League Notice &amp; Reminders</h2>
       <div class="callout">
         <b>Always</b> check in with league coordinators for scores and schedules. (Don't be THAT team who played against the wrong team lol.)
       </div>
@@ -238,19 +231,13 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
         <b>Last match teardown help</b> &mdash; the losing team of the last match on each court takes down that court's net &amp; pole stands.
         Follow the setup/teardown walkthrough (<b>4:28&ndash;5:00</b>): <a href="https://youtu.be/jZ_6s4YcskM?si=OPHJe9febXFMgFV-&amp;t=268">youtu.be/jZ_6s4YcskM&nbsp;&middot;&nbsp;t=4:28</a>
       </div>
+      <div class="note" style="margin-top:0.85rem; font-style:italic;">No additional notices this week &mdash; check back closer to game night.</div>
 
       <h2 class="rules-label">Rules</h2>
       <ul class="rules-list">
         <li><span class="arrow">&rarr;</span><span>Best 2 out of 3 rally point games, <b>21, 21, 5</b>, all cap</span></li>
         <li><span class="arrow">&rarr;</span><span>Game 1 <b>6:10 PM</b> &middot; Game 2 <b>7:00 PM</b> &middot; Game 3 <b>7:45 PM</b> &middot; last serve by <b>8:27 PM</b></span></li>
       </ul>
-
-      <h2 class="rules-label">How pools work</h2>
-      <div class="note" style="margin-top:0.85rem">
-        24 teams are split into <b>6 pools of 4</b> (A&ndash;F), two courts per pool, three matches a night.
-        After each week, results reseed the pools: top finishers move up toward Pool A, bottom finishers move down toward Pool F.
-        Each pool page overleaf states exactly where its four teams go next week &mdash; see the full movement key on the reference page.
-      </div>
     </div>
   </section>
 
@@ -518,34 +505,6 @@ table { width:100%; border-collapse:collapse; font-size:0.9rem; }
     </div>
   </section>
 
-
-  <section class="page ref-page" id="reseed">
-    <div class="page-pad">
-      <h2 class="display" style="font-size:1.6rem; color:var(--brand-ink)">Reseed key &mdash; how movement works</h2>
-      <div class="note" style="margin-top:0.4rem">
-        Movement is a fixed lookup by pool &amp; finishing rank &mdash; not by margin of victory. Once a coordinator records each team's
-        rank (1st&ndash;4th) within its pool, next week's pool is fully determined. That determinism is exactly what makes this
-        reseeding automatable in a spreadsheet: one lookup table, no judgment calls.
-      </div>
-      <div class="ref-table-wrap">
-        <table class="ref-table">
-          <thead><tr><th>Pool</th><th>Courts</th><th>Ranked teams moving</th><th>Week 2 preview</th></tr></thead>
-          <tbody>
-            <tr><td class="rp-letter">A</td><td>1, 2</td><td>1st &amp; 2nd stay, 3rd move down 1 pool, 4th move down 2 pools</td><td class="rp-preview">A1&nbsp;A2&nbsp;B1&nbsp;C1</td></tr>
-<tr><td class="rp-letter">B</td><td>3, 4</td><td>1st go up 1, 2nd stay, 3rd move down 1, 4th move down 2</td><td class="rp-preview">A3&nbsp;B2&nbsp;C2&nbsp;D1</td></tr>
-<tr><td class="rp-letter">C</td><td>5, 6</td><td>1st go up 2, 2nd go up 1, 3rd move down 1, 4th move down 2</td><td class="rp-preview">A4&nbsp;B3&nbsp;D2&nbsp;E1</td></tr>
-<tr><td class="rp-letter">D</td><td>7, 8</td><td>1st go up 2, 2nd go up 1, 3rd move down 1, 4th move down 2</td><td class="rp-preview">B4&nbsp;C3&nbsp;E2&nbsp;F1</td></tr>
-<tr><td class="rp-letter">E</td><td>9, 10</td><td>1st go up 2, 2nd go up 1, 3rd stay, 4th move down 1</td><td class="rp-preview">C4&nbsp;D3&nbsp;E3&nbsp;F2</td></tr>
-<tr><td class="rp-letter">F</td><td>11, 12</td><td>1st go up 2, 2nd go up 1, 3rd &amp; 4th stay</td><td class="rp-preview">D4&nbsp;E4&nbsp;F3&nbsp;F4</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="note" style="margin-top:1rem">
-        <b>Preview on week 2</b> reads as: which slot from <i>this</i> week lands in that pool next week. E.g. Pool C next week = A's
-        4th, B's 3rd, D's 2nd, and E's 1st &mdash; the inflow side of the same rule that sends C's own 1st up two pools to A.
-      </div>
-    </div>
-  </section>
 
   <section class="page rules-page" id="league-rules">
     <div class="page-pad">
