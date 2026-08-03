@@ -1,0 +1,352 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Sunset R4 Week 2 — Printable Score Sheets</title>
+<style>
+* { box-sizing: border-box; }
+html, body { background:#e9e9e9; margin:0; padding:0; font-family: Arial, Helvetica, sans-serif; color:#000; }
+.wrap { display:flex; flex-direction:column; align-items:center; gap:1.5rem; padding:1.5rem 1rem 3rem; }
+.note-row { max-width: 11in; width:100%; display:flex; align-items:center; gap:0.75rem; }
+.note { flex:1; background:#fff8d8; border:1px solid #d8c840; border-radius:6px; padding:0.7rem 1rem; font-size:0.85rem; }
+.print-btn {
+  flex:none; background:#222; color:#fff; border:none; border-radius:6px;
+  font-size:0.9rem; font-weight:700; padding:0.7rem 1.3rem; cursor:pointer;
+}
+.print-btn:hover { opacity:0.85; }
+
+.sheet {
+  width: 11in; height: 8.5in;
+  background:#fff; border:1px solid #999; box-shadow:0 2px 10px rgba(0,0,0,0.15);
+  padding: 0.35in 0.4in;
+  display:flex; flex-direction:column; gap:0.18in;
+  overflow:hidden;
+}
+.sheet-head { font-size:9pt; color:#666; display:flex; justify-content:space-between; align-items:baseline; gap:0.3in; }
+.sheet-head .legend { font-style:italic; }
+
+.pool-block { flex:1; display:flex; flex-direction:column; gap:0.08in; border:1.5px solid #000; padding:0.1in; }
+.pool-title { font-size:13pt; font-weight:700; border-bottom:1.5px solid #000; padding-bottom:0.05in; margin-bottom:0.03in; }
+
+.name-row { display:flex; gap:0.1in; }
+.name-box { flex:1; border:1.3px solid #000; padding:0.06in 0.1in; font-size:9.5pt; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+.courts-row { display:flex; gap:0.15in; flex:1; }
+.court-table { flex:1; border-collapse:collapse; width:100%; height:100%; table-layout:fixed; }
+.court-table th, .court-table td { border:1px solid #000; text-align:center; font-size:9.5pt; }
+.court-table thead th { font-size:9.5pt; font-weight:700; padding:0.03in 0.05in; }
+.court-table th.time, .court-table td.time { width:11%; }
+.court-table th.match, .court-table td.match { width:26%; text-align:left; padding-left:0.08in; font-weight:600; }
+.court-table td.set { height:0.55in; padding:0.06in 0.05in 0; vertical-align:top; }
+.court-table td.set .ref {
+  display:block; text-align:center;
+  color:#c7c7c7; font-size:8.5pt; font-weight:600; letter-spacing:0.02em;
+}
+.court-table td.set .score-line {
+  display:flex; justify-content:center; align-items:flex-end; gap:0.12in;
+  margin-top:0.2in;
+}
+.court-table td.set .blank { display:inline-block; width:0.55in; border-bottom:1.3px solid #999; height:0.16in; }
+.court-table td.set .dash { color:#999; }
+
+@media print {
+  html, body { background:#fff; }
+  .note-row { display:none; }
+  .wrap { padding:0; gap:0; }
+  .sheet { box-shadow:none; border:none; width:11in; height:8.5in; break-after:page; page-break-after:always; }
+  @page { size: 11in 8.5in; margin:0; }
+}
+</style>
+<div class="wrap">
+  <div class="note-row">
+    <div class="note"><b>To print:</b> set Layout to <b>Landscape</b>, paper size <b>Letter</b>. 3 pages, 2 pools each &mdash; covers all 6 Week 2 pools.</div>
+    <button class="print-btn" onclick="window.print()" type="button">Print</button>
+  </div>
+  
+  <section class="sheet">
+    <div class="sheet-head">
+      <span class="legend">Gray label in each box = that box's teams, left&ndash;right &mdash; write each team's score on its own side.</span>
+      Sunset R4&rsquo;s League &mdash; Week 2 &mdash; Score Sheet 1 of 3
+    </div>
+    
+  <div class="pool-block">
+    <div class="pool-title">POOL A &mdash; Courts 1 &amp; 2</div>
+    <div class="name-row"><div class="name-box"><b>A1.</b> Kevin Nguyen (A1)</div><div class="name-box"><b>A2.</b> Aahron Sangalang (A2)</div><div class="name-box"><b>A3.</b> Danny Ly (B1)</div><div class="name-box"><b>A4.</b> Phil Majak (C1)</div></div>
+    <div class="courts-row">
+    <table class="court-table">
+      <thead>
+        <tr><th class="time">Time</th><th class="match">Court 1</th><th class="set">Set 1</th><th class="set">Set 2</th><th class="set">Set 3</th></tr>
+      </thead>
+      <tbody><tr>
+          <td class="time">6:10</td>
+          <td class="match">A1 vs A3</td>
+          <td class="set"><span class="ref">A1&ndash;A3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">A1&ndash;A3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">A1&ndash;A3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:00</td>
+          <td class="match">A1 vs A2</td>
+          <td class="set"><span class="ref">A1&ndash;A2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">A1&ndash;A2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">A1&ndash;A2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:45</td>
+          <td class="match">A1 vs A4</td>
+          <td class="set"><span class="ref">A1&ndash;A4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">A1&ndash;A4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">A1&ndash;A4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr></tbody>
+    </table>
+    
+    <table class="court-table">
+      <thead>
+        <tr><th class="time">Time</th><th class="match">Court 2</th><th class="set">Set 1</th><th class="set">Set 2</th><th class="set">Set 3</th></tr>
+      </thead>
+      <tbody><tr>
+          <td class="time">6:10</td>
+          <td class="match">A2 vs A4</td>
+          <td class="set"><span class="ref">A2&ndash;A4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">A2&ndash;A4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">A2&ndash;A4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:00</td>
+          <td class="match">A3 vs A4</td>
+          <td class="set"><span class="ref">A3&ndash;A4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">A3&ndash;A4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">A3&ndash;A4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:45</td>
+          <td class="match">A2 vs A3</td>
+          <td class="set"><span class="ref">A2&ndash;A3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">A2&ndash;A3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">A2&ndash;A3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr></tbody>
+    </table>
+    </div>
+  </div>
+  
+  <div class="pool-block">
+    <div class="pool-title">POOL B &mdash; Courts 3 &amp; 4</div>
+    <div class="name-row"><div class="name-box"><b>B1.</b> Vanna Nguyen (A3)</div><div class="name-box"><b>B2.</b> Matthew Mendoza (B2)</div><div class="name-box"><b>B3.</b> Daria Tai (C2)</div><div class="name-box"><b>B4.</b> Kyle Historillo (D1)</div></div>
+    <div class="courts-row">
+    <table class="court-table">
+      <thead>
+        <tr><th class="time">Time</th><th class="match">Court 3</th><th class="set">Set 1</th><th class="set">Set 2</th><th class="set">Set 3</th></tr>
+      </thead>
+      <tbody><tr>
+          <td class="time">6:10</td>
+          <td class="match">B1 vs B3</td>
+          <td class="set"><span class="ref">B1&ndash;B3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">B1&ndash;B3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">B1&ndash;B3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:00</td>
+          <td class="match">B1 vs B2</td>
+          <td class="set"><span class="ref">B1&ndash;B2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">B1&ndash;B2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">B1&ndash;B2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:45</td>
+          <td class="match">B1 vs B4</td>
+          <td class="set"><span class="ref">B1&ndash;B4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">B1&ndash;B4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">B1&ndash;B4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr></tbody>
+    </table>
+    
+    <table class="court-table">
+      <thead>
+        <tr><th class="time">Time</th><th class="match">Court 4</th><th class="set">Set 1</th><th class="set">Set 2</th><th class="set">Set 3</th></tr>
+      </thead>
+      <tbody><tr>
+          <td class="time">6:10</td>
+          <td class="match">B2 vs B4</td>
+          <td class="set"><span class="ref">B2&ndash;B4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">B2&ndash;B4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">B2&ndash;B4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:00</td>
+          <td class="match">B3 vs B4</td>
+          <td class="set"><span class="ref">B3&ndash;B4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">B3&ndash;B4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">B3&ndash;B4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:45</td>
+          <td class="match">B2 vs B3</td>
+          <td class="set"><span class="ref">B2&ndash;B3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">B2&ndash;B3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">B2&ndash;B3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr></tbody>
+    </table>
+    </div>
+  </div>
+  
+  </section>
+  
+  <section class="sheet">
+    <div class="sheet-head">
+      <span class="legend">Gray label in each box = that box's teams, left&ndash;right &mdash; write each team's score on its own side.</span>
+      Sunset R4&rsquo;s League &mdash; Week 2 &mdash; Score Sheet 2 of 3
+    </div>
+    
+  <div class="pool-block">
+    <div class="pool-title">POOL C &mdash; Courts 5 &amp; 6</div>
+    <div class="name-row"><div class="name-box"><b>C1.</b> Aj grape (A4)</div><div class="name-box"><b>C2.</b> Nina Chiang (B3)</div><div class="name-box"><b>C3.</b> Simon Shum (D2)</div><div class="name-box"><b>C4.</b> Cindy Ha (E1)</div></div>
+    <div class="courts-row">
+    <table class="court-table">
+      <thead>
+        <tr><th class="time">Time</th><th class="match">Court 5</th><th class="set">Set 1</th><th class="set">Set 2</th><th class="set">Set 3</th></tr>
+      </thead>
+      <tbody><tr>
+          <td class="time">6:10</td>
+          <td class="match">C1 vs C3</td>
+          <td class="set"><span class="ref">C1&ndash;C3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">C1&ndash;C3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">C1&ndash;C3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:00</td>
+          <td class="match">C1 vs C2</td>
+          <td class="set"><span class="ref">C1&ndash;C2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">C1&ndash;C2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">C1&ndash;C2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:45</td>
+          <td class="match">C1 vs C4</td>
+          <td class="set"><span class="ref">C1&ndash;C4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">C1&ndash;C4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">C1&ndash;C4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr></tbody>
+    </table>
+    
+    <table class="court-table">
+      <thead>
+        <tr><th class="time">Time</th><th class="match">Court 6</th><th class="set">Set 1</th><th class="set">Set 2</th><th class="set">Set 3</th></tr>
+      </thead>
+      <tbody><tr>
+          <td class="time">6:10</td>
+          <td class="match">C2 vs C4</td>
+          <td class="set"><span class="ref">C2&ndash;C4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">C2&ndash;C4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">C2&ndash;C4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:00</td>
+          <td class="match">C3 vs C4</td>
+          <td class="set"><span class="ref">C3&ndash;C4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">C3&ndash;C4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">C3&ndash;C4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:45</td>
+          <td class="match">C2 vs C3</td>
+          <td class="set"><span class="ref">C2&ndash;C3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">C2&ndash;C3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">C2&ndash;C3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr></tbody>
+    </table>
+    </div>
+  </div>
+  
+  <div class="pool-block">
+    <div class="pool-title">POOL D &mdash; Courts 7 &amp; 8</div>
+    <div class="name-row"><div class="name-box"><b>D1.</b> Alex Lu (B4)</div><div class="name-box"><b>D2.</b> Caleb Choo (C3)</div><div class="name-box"><b>D3.</b> Joshua Lee (E2)</div><div class="name-box"><b>D4.</b> Stephanie Lam (F1)</div></div>
+    <div class="courts-row">
+    <table class="court-table">
+      <thead>
+        <tr><th class="time">Time</th><th class="match">Court 7</th><th class="set">Set 1</th><th class="set">Set 2</th><th class="set">Set 3</th></tr>
+      </thead>
+      <tbody><tr>
+          <td class="time">6:10</td>
+          <td class="match">D1 vs D3</td>
+          <td class="set"><span class="ref">D1&ndash;D3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">D1&ndash;D3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">D1&ndash;D3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:00</td>
+          <td class="match">D1 vs D2</td>
+          <td class="set"><span class="ref">D1&ndash;D2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">D1&ndash;D2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">D1&ndash;D2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:45</td>
+          <td class="match">D1 vs D4</td>
+          <td class="set"><span class="ref">D1&ndash;D4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">D1&ndash;D4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">D1&ndash;D4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr></tbody>
+    </table>
+    
+    <table class="court-table">
+      <thead>
+        <tr><th class="time">Time</th><th class="match">Court 8</th><th class="set">Set 1</th><th class="set">Set 2</th><th class="set">Set 3</th></tr>
+      </thead>
+      <tbody><tr>
+          <td class="time">6:10</td>
+          <td class="match">D2 vs D4</td>
+          <td class="set"><span class="ref">D2&ndash;D4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">D2&ndash;D4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">D2&ndash;D4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:00</td>
+          <td class="match">D3 vs D4</td>
+          <td class="set"><span class="ref">D3&ndash;D4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">D3&ndash;D4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">D3&ndash;D4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:45</td>
+          <td class="match">D2 vs D3</td>
+          <td class="set"><span class="ref">D2&ndash;D3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">D2&ndash;D3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">D2&ndash;D3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr></tbody>
+    </table>
+    </div>
+  </div>
+  
+  </section>
+  
+  <section class="sheet">
+    <div class="sheet-head">
+      <span class="legend">Gray label in each box = that box's teams, left&ndash;right &mdash; write each team's score on its own side.</span>
+      Sunset R4&rsquo;s League &mdash; Week 2 &mdash; Score Sheet 3 of 3
+    </div>
+    
+  <div class="pool-block">
+    <div class="pool-title">POOL E &mdash; Courts 9 &amp; 10</div>
+    <div class="name-row"><div class="name-box"><b>E1.</b> An Tran (C4)</div><div class="name-box"><b>E2.</b> Phoebe Nahuman (D3)</div><div class="name-box"><b>E3.</b> David Chen (E3)</div><div class="name-box"><b>E4.</b> Vienna Cheng (F2)</div></div>
+    <div class="courts-row">
+    <table class="court-table">
+      <thead>
+        <tr><th class="time">Time</th><th class="match">Court 9</th><th class="set">Set 1</th><th class="set">Set 2</th><th class="set">Set 3</th></tr>
+      </thead>
+      <tbody><tr>
+          <td class="time">6:10</td>
+          <td class="match">E1 vs E3</td>
+          <td class="set"><span class="ref">E1&ndash;E3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">E1&ndash;E3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">E1&ndash;E3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:00</td>
+          <td class="match">E1 vs E2</td>
+          <td class="set"><span class="ref">E1&ndash;E2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">E1&ndash;E2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">E1&ndash;E2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:45</td>
+          <td class="match">E1 vs E4</td>
+          <td class="set"><span class="ref">E1&ndash;E4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">E1&ndash;E4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">E1&ndash;E4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr></tbody>
+    </table>
+    
+    <table class="court-table">
+      <thead>
+        <tr><th class="time">Time</th><th class="match">Court 10</th><th class="set">Set 1</th><th class="set">Set 2</th><th class="set">Set 3</th></tr>
+      </thead>
+      <tbody><tr>
+          <td class="time">6:10</td>
+          <td class="match">E2 vs E4</td>
+          <td class="set"><span class="ref">E2&ndash;E4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">E2&ndash;E4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">E2&ndash;E4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:00</td>
+          <td class="match">E3 vs E4</td>
+          <td class="set"><span class="ref">E3&ndash;E4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">E3&ndash;E4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">E3&ndash;E4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:45</td>
+          <td class="match">E2 vs E3</td>
+          <td class="set"><span class="ref">E2&ndash;E3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">E2&ndash;E3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">E2&ndash;E3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr></tbody>
+    </table>
+    </div>
+  </div>
+  
+  <div class="pool-block">
+    <div class="pool-title">POOL F &mdash; Courts 11 &amp; 12</div>
+    <div class="name-row"><div class="name-box"><b>F1.</b> Sherwin Catubig (D4)</div><div class="name-box"><b>F2.</b> Marissa Wong (E4)</div><div class="name-box"><b>F3.</b> Akina Lam (F3)</div><div class="name-box"><b>F4.</b> Anna Ma (F4)</div></div>
+    <div class="courts-row">
+    <table class="court-table">
+      <thead>
+        <tr><th class="time">Time</th><th class="match">Court 11</th><th class="set">Set 1</th><th class="set">Set 2</th><th class="set">Set 3</th></tr>
+      </thead>
+      <tbody><tr>
+          <td class="time">6:10</td>
+          <td class="match">F1 vs F3</td>
+          <td class="set"><span class="ref">F1&ndash;F3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">F1&ndash;F3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">F1&ndash;F3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:00</td>
+          <td class="match">F1 vs F2</td>
+          <td class="set"><span class="ref">F1&ndash;F2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">F1&ndash;F2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">F1&ndash;F2</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:45</td>
+          <td class="match">F1 vs F4</td>
+          <td class="set"><span class="ref">F1&ndash;F4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">F1&ndash;F4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">F1&ndash;F4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr></tbody>
+    </table>
+    
+    <table class="court-table">
+      <thead>
+        <tr><th class="time">Time</th><th class="match">Court 12</th><th class="set">Set 1</th><th class="set">Set 2</th><th class="set">Set 3</th></tr>
+      </thead>
+      <tbody><tr>
+          <td class="time">6:10</td>
+          <td class="match">F2 vs F4</td>
+          <td class="set"><span class="ref">F2&ndash;F4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">F2&ndash;F4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">F2&ndash;F4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:00</td>
+          <td class="match">F3 vs F4</td>
+          <td class="set"><span class="ref">F3&ndash;F4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">F3&ndash;F4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">F3&ndash;F4</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr><tr>
+          <td class="time">7:45</td>
+          <td class="match">F2 vs F3</td>
+          <td class="set"><span class="ref">F2&ndash;F3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">F2&ndash;F3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td><td class="set"><span class="ref">F2&ndash;F3</span><span class="score-line"><span class="blank"></span><span class="dash">&ndash;</span><span class="blank"></span></span></td>
+        </tr></tbody>
+    </table>
+    </div>
+  </div>
+  
+  </section>
+  
+</div>
